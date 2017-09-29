@@ -238,8 +238,13 @@ public class PlayController {
 	   return _progress;
    }
    
-   
-   
+   /**
+    * Returns the number currently showing
+    * @return
+    */
+   public String getNumber() {
+	   return _bh.translation(_number);
+   }
    
    
    

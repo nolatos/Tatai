@@ -40,6 +40,11 @@ public class RecordController {
 
     @FXML
     private Label _whoops;
+    
+    @FXML
+    private Label _answerWas;
+    
+    private boolean _retried = false; //Whether or not the person has already retried the number
 
     @FXML
     void retry(ActionEvent event) {
@@ -51,14 +56,28 @@ public class RecordController {
     void next(ActionEvent event) {
     	advance();
     	_playC.advance();
+    	_retried = false;
+    	
+    	
     }
     
     @FXML
     void seeCorrect(ActionEvent event) {
+    	_seeCorrect.setVisible(false);
+    	_next.setVisible(true);
+    	_retried = false;
+    	_youSaid.setVisible(false);
+    	_answerWas.setVisible(true);
+    	_whatYouSaid.setText( _playC.getNumber());
+    	
     	
     }
     
-    //Shows that either retry or next was pressed
+
+
+    /**
+     * Reverts the window back to its original state
+     */
     private void advance() {
     	_recording.setVisible(true);
     	_correct.setVisible(false);
@@ -69,6 +88,8 @@ public class RecordController {
 		_youSaid.setVisible(false);
 		_retry.setVisible(false);
 		_whatYouSaid.setVisible(false);
+		_answerWas.setVisible(false);
+		_whoops.setVisible(false);
     }
 
     /**
@@ -79,6 +100,10 @@ public class RecordController {
     	_playC = play;
     }
     
+    /**
+     * Shows that the recording has ended and decides what to do from there
+     * @param correct
+     */
     public void recordingEnded(boolean correct) {
     	_recording.setVisible(false);
     	//If it is correct, we display the "correct" screen
@@ -87,9 +112,10 @@ public class RecordController {
     		_next.setVisible(true);
     	}
     	else {
-    		_incorrect.setVisible(true);
+    		
+    		
     		_youSaid.setVisible(true);
-    		_retry.setVisible(true);
+    		
     		Platform.runLater(new Runnable() {
     			@Override
     			public void run() {
@@ -98,6 +124,16 @@ public class RecordController {
     		});
     		
     		_whatYouSaid.setVisible(true);
+    		
+    		if (_retried == false) {
+    			_incorrect.setVisible(true);
+    			_retried = true;
+    			_retry.setVisible(true);
+    		}
+    		else {
+    			_whoops.setVisible(true);
+    			_seeCorrect.setVisible(true);
+    		}
     	}
     }
     

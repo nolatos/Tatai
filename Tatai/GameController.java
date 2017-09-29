@@ -34,6 +34,7 @@ public class GameController {
     private WelcomeController _welcomeController;
     
     private boolean _hard;
+    private boolean _gameExists; //States whehter or not a game already exists
     private Stage _mainStage;
     
     @FXML
@@ -74,37 +75,47 @@ public class GameController {
     @FXML
     void startGame(ActionEvent event) throws Exception {
     	
-		Practice practice = new Practice(_hard);
-		
-		practice.getPlayController().setGameController(this);
-    	
-    	Stage stage = new Stage();
-    	practice.setStage(stage);
-    	stage.setScene(practice.getGame());
-    	stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-    		@Override
-    		public void handle(WindowEvent we) {
-    			
-    			if (practice.getPlayController().getProgress() == 11) {
-    				;
-    			}
-    			else {
-    				Alert alert = new Alert(AlertType.CONFIRMATION);
-            		alert.setTitle("Confirm Exit");
-            		alert.setHeaderText("Are you sure you want to quit?");
-            		alert.setContentText("Progress will be lost");
-            		Optional<ButtonType> result = alert.showAndWait();
-            		if (result.get() == ButtonType.OK) {
-            			
-            		}
-            		else {
-            			we.consume();
-            		}
-    			}
-    		}
-    	});
-    	stage.setResizable(false);
-    	stage.showAndWait();
+		if (!_gameExists) {
+			_gameExists = true;
+			Practice practice = new Practice(_hard);
+			
+			practice.getPlayController().setGameController(this);
+	    	
+	    	Stage stage = new Stage();
+	    	practice.setStage(stage);
+	    	stage.setScene(practice.getGame());
+	    	stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	    		@Override
+	    		public void handle(WindowEvent we) {
+	    			
+	    			if (practice.getPlayController().getProgress() == 11) {
+	    				_gameExists = false;
+	    			}
+	    			else {
+	    				Alert alert = new Alert(AlertType.CONFIRMATION);
+	            		alert.setTitle("Confirm Exit");
+	            		alert.setHeaderText("Are you sure you want to quit?");
+	            		alert.setContentText("Progress will be lost");
+	            		Optional<ButtonType> result = alert.showAndWait();
+	            		if (result.get() == ButtonType.OK) {
+	            			_gameExists = false;
+	            		}
+	            		else {
+	            			we.consume();
+	            		}
+	    			}
+	    		}
+	    	});
+	    	stage.setResizable(false);
+	    	stage.showAndWait();
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Cannot start new Game");
+    		alert.setHeaderText(null);
+    		alert.setContentText("You cannot start a new game if one exists");
+    		Optional<ButtonType> result = alert.showAndWait();
+		}
     	
     }
     

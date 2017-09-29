@@ -22,31 +22,13 @@ public abstract class Game {
 	}
 	
 	/**
-	 * TO BE CHANGED
+	 * Checks if it was correct
 	 * @param i
 	 * @param str
 	 * @return
 	 */
 	public boolean checkCorrect(int i, String str) {
-		if (i <= 10) {
-			return str.compareTo(_bh.translation(i)) == 0;
-		}
-		else {
-			String[] toTest = str.split("\n");
-			String[] correct = _bh.translation(i).split(" ");
-			if (toTest.length != correct.length) {
-				return false;
-			}
-			else {
-				for (int j = 0; j < toTest.length; j++) {
-					if (correct[j].compareTo(toTest[j]) != 0) {
-						return false;
-					}
-				}
-				return true;
-			}
-		}
-		
+			return str.compareTo(_bh.translation(i)) == 0;		
 		
 	}
 	
