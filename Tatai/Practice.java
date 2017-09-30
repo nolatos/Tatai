@@ -43,14 +43,17 @@ public class Practice extends Game {
 		int i;
 		if (_hard) {
 			
-			d = d * 100;
+			d = d * 90 + 10;
 			i = (int) d;
 			if (i > 99) {
 				i = 99;
 			}
+			else if (i < 10) {
+				i = 10;
+			}
 		}
 		else {
-			d = d * 11;
+			d = d * 10;
 			i = (int) d;
 			if (i >= 10) {
 				i = 9;

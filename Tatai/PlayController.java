@@ -171,8 +171,23 @@ public class PlayController {
     	_message.setVisible(true);
     	_moveOn.setVisible(true);
     	
+    	//Adding to the history list
+    	String stat = "" + score + "/10";
+    	if (_game.canLevelUp()) { //is easy
+    		stat = stat + "\tEASY";
+    	}
+    	else {
+    		stat = stat + "\tHARD";
+    	}
+    	
+    	_gameC.addToList(stat);
+
+    	
     	if (_game.getScore() >= 8 && _game.canLevelUp()) {
     		_nextLevel.setDisable(false);
+    	}
+    	else {
+    		_nextLevel.setDisable(true);
     	}
     }
    
@@ -295,6 +310,9 @@ public class PlayController {
 	   
 	   
    }
+   
+   
+   
 
 }
 

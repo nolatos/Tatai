@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import tatai.views.*;
 
 public class RecordController {
 
@@ -43,6 +44,9 @@ public class RecordController {
     
     @FXML
     private Label _answerWas;
+    
+    @FXML
+//    private RecordView _view;
     
     private boolean _retried = false; //Whether or not the person has already retried the number
 
@@ -138,10 +142,15 @@ public class RecordController {
     }
     
     
-    
+    /**
+     * 
+     * @param g
+     */
     public void setGameController(GameController g) {
     	_gameC = g;
     }
+    
+    
 
 }
 

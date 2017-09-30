@@ -2,6 +2,7 @@ package tatai;
 
 import java.util.Optional;
 
+import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
@@ -19,7 +20,7 @@ import javafx.stage.WindowEvent;
 public class GameController {
 
     @FXML
-    private ListView<?> _progressList;
+    private ListView<String> _progressList;
 
     @FXML
     private Button _start;
@@ -32,6 +33,8 @@ public class GameController {
     
     @FXML
     private WelcomeController _welcomeController;
+    
+    private ObservableList<String> _history = FXCollections.observableArrayList();
     
     private boolean _hard;
     private boolean _gameExists; //States whehter or not a game already exists
@@ -125,5 +128,12 @@ public class GameController {
      */
     public void setStage(Stage stage) {
     	_mainStage = stage;
+    }
+    
+    
+    
+    public void addToList(String str) {
+    	_history.add(str);
+    	_progressList.setItems(_history);
     }
 }

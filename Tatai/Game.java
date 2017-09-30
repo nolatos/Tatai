@@ -23,12 +23,12 @@ public abstract class Game {
 	
 	/**
 	 * Checks if it was correct
-	 * @param i
-	 * @param str
-	 * @return
+	 * @param i the number we are checking
+	 * @param str what the user said
+	 * @return whether or not the translation of the number i is the same as what the user said
 	 */
 	public boolean checkCorrect(int i, String str) {
-			return str.compareTo(_bh.translation(i)) == 0;		
+		return str.compareTo(_bh.translation(i)) == 0;		
 		
 	}
 	
