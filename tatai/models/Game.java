@@ -1,13 +1,18 @@
-package tatai;
+package tatai.models;
 
 import javafx.application.Application;
 import javafx.stage.*;
+import tatai.*;
 
 public abstract class Game {
 	
 	private int _score = 0;
 	private BashHandler _bh = new BashHandler();
 	private Stage _stage;
+	private int _progress = 1;
+	private int _number; //The number that is being displayed
+	private String _recognised;
+	
 	
 	
 	public void setStage(Stage stage) {
@@ -17,7 +22,7 @@ public abstract class Game {
 	
 	
 	
-	public void updateScore() {
+	public void increaseScore() {
 		_score++;
 	}
 	
@@ -39,14 +44,44 @@ public abstract class Game {
 	public Stage getStage() {
 		return _stage;
 	}
+	
+	public int getProgress() {
+		return _progress;
+	}
 
 	
 	public abstract int getNumber();
 	
 	public abstract boolean canLevelUp();
 	
+	public abstract String levelUp();
+	
 	public void reset() {
 		_score = 0;
-		
+		_progress = 1;
+	}
+	
+	/**
+	 * Advances the progress
+	 */
+	public void advance() {
+		_progress++;
+	}
+	
+	public void setNumber(int i) {
+		_number = i;
+	}
+	
+	public int getCurrentNumber() {
+		return _number;
+	}
+	
+	
+	public void setRecognised(String recognised) {
+		_recognised = recognised;
+	}
+	
+	public String getRecognised() {
+		return _recognised;
 	}
 }

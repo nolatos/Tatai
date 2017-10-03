@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.RecordController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.views.RecordView">
    <children>
       <Label fx:id="_recording" alignment="CENTER" layoutX="69.0" layoutY="21.0" text="Recording..." AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="21.0" />
       <Label fx:id="_correct" alignment="CENTER" layoutX="40.0" layoutY="48.0" prefHeight="45.0" prefWidth="224.0" text="CORRECT!" textFill="LIME" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="48.0">

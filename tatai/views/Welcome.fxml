@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="_welcomePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.WelcomeController">
+<Pane fx:id="_welcomePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.views.WelcomeController">
    <children>
       <ImageView fitHeight="419.0" fitWidth="616.0" opacity="0.2">
          <image>
@@ -36,10 +36,11 @@
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="_three" layoutX="269.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="THREE" visible="false" />
-      <Button fx:id="_four" layoutX="354.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="FOUR" visible="false" />
-      <Button fx:id="_five" layoutX="439.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="FIVE" visible="false" />
-      <Button fx:id="_two" layoutX="184.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="TWO" visible="false" />
-      <Button fx:id="_one" layoutX="99.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="ONE" visible="false" />
+      <Button fx:id="_three" layoutX="269.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="THREE" visible="false" />
+      <Button fx:id="_four" layoutX="354.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="FOUR" visible="false" />
+      <Button fx:id="_five" layoutX="439.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="FIVE" visible="false" />
+      <Button fx:id="_two" layoutX="184.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="TWO" visible="false" />
+      <Button fx:id="_one" layoutX="99.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="ONE" visible="false" />
+      <Button fx:id="_back2" layoutX="69.0" layoutY="325.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="25.0" prefWidth="61.0" text="Back" visible="false" />
    </children>
 </Pane>

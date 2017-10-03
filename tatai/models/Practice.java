@@ -1,13 +1,14 @@
-package tatai;
+package tatai.models;
 
 
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.layout.Pane;
+import tatai.*;
 
 public class Practice extends Game {
 
-	private final boolean _hard;
+	private boolean _hard;
 	private PlayController _practice; //What is now practice will later turn into play
 	private Scene _game;
 	
@@ -17,16 +18,16 @@ public class Practice extends Game {
 		//Initialising _practice
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("play.fxml"));		
 		Pane pane = (Pane)loader.load();		
-		_practice = loader.getController();
-		_practice.setGame(this);
-		_practice.setImage(getNumber());
-		loader = new FXMLLoader(getClass().getResource("record.fxml"));
-		
-		_practice.setLoader(loader); //Sets the _recordController class
-		
-		//Initialising the field _game so it can be passed to other stages
-		_game = new Scene(pane);
-		
+//		_practice = loader.getController();
+//		_practice.setGame(this);
+//		_practice.setImage(getNumber());
+//		loader = new FXMLLoader(getClass().getResource("record.fxml"));
+//		
+//		_practice.setLoader(loader); //Sets the _recordController class
+//		
+//		//Initialising the field _game so it can be passed to other stages
+//		_game = new Scene(pane);
+//		
 		
 	}
 	
@@ -76,5 +77,9 @@ public class Practice extends Game {
 		return _practice;
 	}
 	
+	public String levelUp() {
+		_hard = true;
+		return "HARD";
+	}
 	
 }

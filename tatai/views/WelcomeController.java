@@ -1,4 +1,4 @@
-package tatai;
+package tatai.views;
 
 import java.io.IOException;
 
@@ -17,6 +17,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import tatai.*;
 
 public class WelcomeController {
 
@@ -47,7 +48,7 @@ public class WelcomeController {
 	private Label _pick;
 
 	@FXML 
-	private GameController _gameController;
+	private StartController _startC;
 
 	@FXML
 	private Button _three;
@@ -63,11 +64,16 @@ public class WelcomeController {
 
 	@FXML
 	private Button _one;
+	
+	@FXML 
+	private Button _back2;
 
 	private Main _main;
 
 	private boolean _started = false;
 	private Scene _startScene;
+	
+	
 
 	@FXML
 	/**
@@ -92,13 +98,24 @@ public class WelcomeController {
 	}
 
 	@FXML
+	/**
+	 * Shows the "play" level buttons
+	 * @param event
+	 */
 	void playPressed(ActionEvent event) {
 
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Not available");
-		alert.setHeaderText(null);
-		alert.setContentText("Play is not available yet");
-		alert.showAndWait();
+		//Level buttons visible
+		_pick.setVisible(true);
+		_one.setVisible(true);
+		_two.setVisible(true);
+		_three.setVisible(true);
+		_four.setVisible(true);
+		_five.setVisible(true);
+		_back2.setVisible(true);
+		
+		//Menu buttons invisible
+		_practice.setVisible(false);
+		_play.setVisible(false);
 	}
 
 
@@ -114,6 +131,12 @@ public class WelcomeController {
 		_hard.setVisible(false);
 		_back.setVisible(false);
 		_pick.setVisible(false);
+		_one.setVisible(false);
+		_two.setVisible(false);
+		_three.setVisible(false);
+		_four.setVisible(false);
+		_five.setVisible(false);
+		_back2.setVisible(false);
 
 		//Menu buttons visible
 		_practice.setVisible(true);
@@ -122,7 +145,7 @@ public class WelcomeController {
 
 	@FXML
 	/**
-	 * A level is seleected
+	 * A level is selected
 	 * @param e
 	 * @throws Exception
 	 */
@@ -131,35 +154,55 @@ public class WelcomeController {
 		if (_started == false) {
 
 			_started = true;
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
-			Pane pane = (Pane) loader.load();
+			
 
-
-			_startScene = new Scene(pane);
-			_mainStage.setScene(_startScene);
-			_mainStage.setResizable(false);
-
-			_mainStage.show();
-			_gameController = loader.<GameController>getController();
-			_gameController.setWelcomeController(this);
-			_gameController.setStage(_mainStage);
+			
 			if (e.getSource().equals(_hard)) {
-				_gameController.setHard(true);
+				_startC = new StartController(true, _mainStage, null);
 			}
-			else {
-				_gameController.setHard(false);
+			else if (e.getSource().equals(_easy)){
+				_startC = new StartController(false, _mainStage, null);
 			}  
+			else if (e.getSource().equals(_five)) {
+				_startC = new StartController(null, _mainStage, Difficulty.FIVE);
+			}
+			else if (e.getSource().equals(_four)) {
+				_startC = new StartController(null, _mainStage, Difficulty.FOUR);
+			}
+			else if (e.getSource().equals(_three)) {
+				_startC = new StartController(null, _mainStage, Difficulty.THREE);
+			}
+			else if (e.getSource().equals(_two)) {
+				_startC = new StartController(null, _mainStage, Difficulty.TWO);
+			}
+			else if (e.getSource().equals(_one)) {
+				_startC = new StartController(null, _mainStage, Difficulty.ONE);
+			}
+			
 		}
 		else {
 			_mainStage.setScene(_startScene);
-			_gameController.setWelcomeController(this);
-			_gameController.setStage(_mainStage);
 			if (e.getSource().equals(_hard)) {
-				_gameController.setHard(true);
+				_startC.show(true);;
 			}
-			else {
-				_gameController.setHard(false);
-			} 
+			else if (e.getSource().equals(_easy)){
+				_startC.show(false);;
+			}  
+			else if (e.getSource().equals(_five)) {
+				_startC.show(Difficulty.FIVE);
+			}
+			else if (e.getSource().equals(_four)) {
+				_startC.show(Difficulty.FOUR);
+			}
+			else if (e.getSource().equals(_three)) {
+				_startC.show(Difficulty.THREE);
+			}
+			else if (e.getSource().equals(_two)) {
+				_startC.show(Difficulty.TWO);
+			}
+			else if (e.getSource().equals(_one)) {
+				_startC.show(Difficulty.ONE);
+			}
 		}
 	}
 

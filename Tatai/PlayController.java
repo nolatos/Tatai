@@ -3,6 +3,7 @@ package tatai;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.concurrent.*;
 import javafx.event.ActionEvent;
@@ -11,270 +12,234 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tatai.models.*;
+import tatai.views.*;
 
-public class PlayController {
+public class PlayController implements Controller {
 
-    @FXML
-    private Label _score;
-
-    @FXML
-    private Button _record;
-
-    @FXML
-    private ImageView _image;
-    
-    @FXML
-    private Label _tempLabel;
-    
-    @FXML
-    private Label _message;
-
-    @FXML
-    private Label _moveOn;
-    
-    @FXML
-    private Button _retry;
-
-    @FXML
-    private Button _nextLevel;
-    
-    @FXML
+	//Private fields
+	private Play _model;
+	private Background _background = new Background();
+	private BashHandler _bh = new BashHandler();
+    private Stage _recordStage; //Stage of record
     private RecordController _recordC;
+    private StartController _startC;
+    private Stage _playStage;
+	
+	
+	
     
-    @FXML
-    private GameController _gameC;
-    
-    private BashHandler _bh = new BashHandler();
-    
-    private int _number;
-    private int _progress = 1;
-    private Game _game;
-    private Background _background = new Background();
-    private String _recognised; //What GoSpeech Recognised
-    private Scene _recordScene;
-    private Stage _stage;
-    
-    @FXML
-    void nextLevel(ActionEvent event) {
+	@FXML
+	private PlayView _view;
+	
+	/**
+	 * Constructor that takes in a difficulty parameter
+	 * @param difficulty the difficulty of the game
+	 */
+	public PlayController(Difficulty difficulty, StartController startC) {
+		_startC = startC;
+		
+		//Initialising the model and viewer
+		_model = new Play(difficulty, this);
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("views/play.fxml"));	
+		try {
+			
+			
+			
+			//Have a stage with record at the ready
+			_recordC = new RecordController(this);
+			_recordStage = new Stage();
+			_recordStage.setScene(_recordC.RECORD_SCENE);
+			_recordStage.setResizable(false);
+			_recordStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent we) {
+					we.consume();
+				}
+			});
+			
+			//Setting up the play scene			
+	    	Pane pane = (Pane) loader.load();
+	    	_playStage = new Stage();
+	    	_playStage.setScene(new Scene(pane));
+	    	_view = loader.getController();
+	    	_view.setController(this);
+	    	_view.setModel(_model);
+	    	_playStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	    		@Override
+	    		public void handle(WindowEvent we) {
+	    			
+	    			if (_model.getProgress() == 11) {
+	    				_startC.deleteGame();
+	    			}
+	    			else {
+	    				Alert alert = new Alert(AlertType.CONFIRMATION);
+	            		alert.setTitle("Confirm Exit");
+	            		alert.setHeaderText("Are you sure you want to quit?");
+	            		alert.setContentText("Progress will be lost");
+	            		Optional<ButtonType> result = alert.showAndWait();
+	            		if (result.get() == ButtonType.OK) {
+	            			_startC.deleteGame();
+	            		}
+	            		else {
+	            			we.consume();
+	            		}
+	    			}
+	    		}
+	    	});
+	    	_playStage.setResizable(false);
+		} 
+		catch (IOException e) {
 
-    	try {
-    		_game = new Practice(true);
-    			
-    		
-    	}
-    	catch (Exception e) {
-    		
-    	}
-    	restart();
-    	
-    	
-    }
-    
-    @FXML
-    void retry(ActionEvent event) {
-
-    	restart();
-    }
-
-    @FXML
-    void record(ActionEvent event) {
-    	
-    	
-    	_record.setDisable(true);
-    	_stage.show();
-    	_background.set(event);
-    	_background.restart();
-    	
-    	
-    	
-    	
-    	
-    }
-    
-    /**
-     * Restarts the game
-     */
-    public void restart() {
-    	
-    	_record.setVisible(true);
-    	_retry.setVisible(false);
-    	_nextLevel.setVisible(false);
-    	_message.setVisible(false);
-    	_moveOn.setVisible(false);
-    	_progress = 1;
-    	_game.reset();
-    	setImage(_game.getNumber());
-    	_score.setText("1/10");
-    	updateMenuLabel();
-    }
-    
-    
-    public void setGame(Game g) {
-    	_game = g;
-    }
-    
-    /**
+		}		
+		
+		
+		
+	}
+	
+	
+	/**
+	 * Restarts a new game
+	 */
+	public void restart() {
+		_view.restart();
+		_model.reset();
+	}
+	
+	
+	/**
+	 * TO BE CHANGED
+	 */
+	public void nextLevel() {
+		_model.levelUp(); //TO BE CHANGED
+		
+	}
+	
+	
+	/**
      * Sets the image and the _number field
      * CHANGE LATER
      * @param i the image we are setting to
      */
     public void setImage(int i) {
+    	_view.setImage(i);
+    }
     	
-    	_number = i;
     	
-    	_tempLabel.setText("" + i);
+    /**
+     * Shows the game screen
+     */
+    public void show() throws IOException {
     	
+    	_playStage.show();
+    	_view.setImage(_model.getNumber());
     	
     }
+
+
     
+    
+    public void record() {
+    	
+    	_recordStage.show();
+    	_background.restart();
+    }
+	
     /**
      * Advances to next number
      */
-    public boolean updateScore() {
-    	
-    	if (_game.checkCorrect(_number, _recognised)) {
-    		_game.updateScore();
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    }
-    
     public void advance() {
-    	_progress++;
+    	_model.advance();
     	
-    	if (_progress > 10) {
+    	int progress = _model.getProgress();
+    	if (progress > 10) {
     		terminate();
     	}
     	else {
-    		_score.setText("" + _progress + "/10");
-    		setImage(_game.getNumber());
+    		_view.setLabel("" + progress + "/10");
+    		setImage(_model.getNumber());
     	}  	
+    }
+	
+    
+	
+	
+    
+    public boolean canLevelUp() {
+    	return _model.canLevelUp();
     }
     
     /**
      * Ends the game
      */
-    public void terminate() {
-    	int score = _game.getScore();
-    	_tempLabel.setText("" + score + "/10");
-    	_record.setVisible(false);
-    	_retry.setVisible(true);
-    	_nextLevel.setVisible(true);
-    	_message.setVisible(true);
-    	_moveOn.setVisible(true);
-    	
-    	//Adding to the history list
-    	String stat = "" + score + "/10";
-    	if (_game.canLevelUp()) { //is easy
-    		stat = stat + "\tEASY";
-    	}
-    	else {
-    		stat = stat + "\tHARD";
-    	}
-    	
-    	_gameC.addToList(stat);
-
-    	
-    	if (_game.getScore() >= 8 && _game.canLevelUp()) {
-    		_nextLevel.setDisable(false);
-    	}
-    	else {
-    		_nextLevel.setDisable(true);
-    	}
+    private void terminate() {
+    	 
+     	_view.terminate(_model.getScore());
+     	
+     	_startC.addToList("" + _model.getScore() + "/10\t" + String.valueOf(_model.getDifficulty()));
+     	_model.reset();
     }
+    
+    
+	
+	
+    
+ 
+    
+    
    
+    
+    
    /**
     * Reenables the "record" button
     */
    public void enableRecord() {
-	   _record.setDisable(false);
+	   _view.enableRecord();
    }
    
-   /**
-    * Allows the playcontroller to interact with the RecordController
-    * @param recorder
-    */
-   public void setLoader(FXMLLoader loader) {
-	   try {
-		   Pane pane = (Pane)loader.load();
-		   _recordScene = new Scene(pane);
-		   _recordC = loader.getController();
-		   _recordC.setPlay(this);
-		   _stage = new Stage();
-		   _stage.setScene(_recordScene);
-		   _stage.setResizable(false);
-		   _stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			   @Override
-			   public void handle(WindowEvent we) {
-				   we.consume();
-			   }
-		   });
-		   
-	   }
-	   catch (IOException e) {
-		   e.printStackTrace();
-	   }
-   }
+ 
    
    /**
     * Closes the recording stage
     */
    public void closeRecorderStage() {
-	   _stage.close();
+	   _recordStage.close();
    }
+   
    
    
    public String getRecognised() {
-	   return _recognised;
-   }
-   
-   /**
-    * Allows interaction
-    * @param g
-    */
-   public void setGameController(GameController g) {
-	   _gameC = g;
+	   return _model.getRecognised();
    }
    
    
-   public void updateMenuLabel() {
-	   _gameC.setHard(!_game.canLevelUp());
-   }
+   
+   
    
    public int getProgress() {
-	   return _progress;
+	   return _model.getProgress();
    }
    
    /**
-    * Returns the number currently showing
-    * @return
+    * Returns the number currently showing as a string
+    * @return 
     */
    public String getNumber() {
-	   return _bh.translation(_number);
+	   return _bh.translation(_model.getCurrentNumber());
    }
-   
-   
-   
    
    
    
    class Background extends Service<Void> {
 	   
-	   private ActionEvent _e;
 	   
-	   
-	   
-	   public void set(ActionEvent e) {
-		   _e = e;
-	   }
 	   
 	   
 	   public Task<Void> createTask() {
@@ -283,16 +248,16 @@ public class PlayController {
 			   @Override
 			   public Void call() {
 				   try {
-					   if (_e.getSource().equals(_record)) {
+					   
 						   
-						   //Showing the "recording" dialog		      
-						   _recognised = _bh.runVoiceRecognition();
-						   _recordC.recordingEnded(updateScore());
+					   //Showing the "recording" dialog		      
+					   _model.setRecognised(_bh.runVoiceRecognition());
+					   _recordC.recordingEnded(_model.updateScore());
 
 						   
 
 
-					   }
+					   
 				   }
 				   catch (Exception e) {
 					   e.printStackTrace();
