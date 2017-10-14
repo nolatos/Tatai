@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.*;
@@ -19,123 +20,148 @@ import tatai.views.*;
 
 public class StartController {
 
-	
+
 	private Controller _gameC;
-	
+
 	public final Stage MAIN_STAGE;
 	public final Scene START_SCENE;
 	public final Scene MENU_SCENE;
 	
+	private WelcomeController _welcomeC;
+
 	@FXML 
 	private StartView _view;
-	
+
 	private Start _model;
-	
+
 	/**
 	 * Constructor takes in a stage and a difficulty
 	 * @param hard
 	 * @param mainStage
 	 * @throws IOException 
 	 */
-	public StartController(Boolean hard, Stage mainStage, Difficulty difficulty) throws IOException {
+	public StartController(WelcomeController welcomeC, Difficulty difficulty) throws IOException {
+
+		_welcomeC = welcomeC;
+		
+		Stage mainStage = welcomeC.getMainStage();
 		
 		MAIN_STAGE = mainStage;
 		MENU_SCENE = mainStage.getScene();
-		
-		
-		
+
+
+
 		//Setting upu the START_SCENE field and the _view field
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("views/game.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("views/start.fxml"));
 		Pane pane = (Pane) loader.load();
-		_view = loader.getController();
+		_view = loader.getController(); 
 		_view.setController(this);
 		START_SCENE = new Scene(pane);
 		show();
-		
-		
+
+
 		//Setting up the menu
-		if (hard == null) {
+
+		if (difficulty == null) {
+			_model = new Start(this);
+
+		}
+		else{
 			_model = new Start(this, difficulty);
 			_view.setLevel(difficulty);
+			_view.setModel(_model);
 		}
-		else if (difficulty == null) {
-			_model = new Start(this, hard);
-			_view.setLevel(hard);
-		}
-		_view.setModel(_model);
-		
+
 	}
-	
+
 	/**
 	 * Goes back to the menu
 	 */
 	public void backToMenu() {
 		MAIN_STAGE.setScene(MENU_SCENE);
+		try {
+			_welcomeC.show();
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
+
 	
 	public void startGame() {
 		try {
-		
-		if (!_model.gameExists()) {
-			_model.createGame();
-	    	if (_model.isPractice()) {
-	    		boolean hard = _model.getHard();
-	    		_gameC = new PracticeController(hard, this);
-	    	}
-	    	else {
-	    		Difficulty difficulty = _model.getDifficulty();
-	    		_gameC = new PlayController(difficulty, this);
-	    	}
-	    	
-	    	try {
-				_gameC.show();
-			} 
-	    	catch (IOException e) {
+
+			if (!_model.gameExists()) {
+				_model.createGame();
 				
+				Difficulty difficulty = _model.getDifficulty();
+				_gameC = new PlayController(difficulty, this);
+
+				try {
+					_gameC.show();
+				} 
+				catch (IOException e) {
+
+				}
+
 			}
-	    	
-		}
-		else {
-			Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Cannot start new Game");
-    		alert.setHeaderText(null);
-    		alert.setContentText("You cannot start a new game if one exists");
-    		Optional<ButtonType> result = alert.showAndWait();
-		}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Cannot start new Game");
+				alert.setHeaderText(null);
+				alert.setContentText("You cannot start a new game if one exists");
+				Optional<ButtonType> result = alert.showAndWait();
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void createGame() {
 		_model.createGame();
 	}
-	
+
 	public void deleteGame() {
 		_model.deleteGame();
 	}
-	
+
 	public void addToList(String str) {
 		_view.addToList(_model.addToList(str));
 	}
+
 	
-	public void show(boolean hard) {
-		show();
-		_view.setLevel(hard);
-	}
-	
+
 	public void show(Difficulty difficulty) {
 		show();
 		_view.setLevel(difficulty);
 	}
-	
-	private void show() {
+
+	/**
+	 * Shows the scene
+	 */
+	public void show() {
 		MAIN_STAGE.setScene(START_SCENE);
 		
 	}
+
+	/**
+	 * Changes the colour of the button
+	 * @param event the source of which is the button
+	 */
+	public void changeColour(MouseEvent event) {
+		_welcomeC.changeColour(event);
+	}
 	
-	
+	/**
+	 * Changes the colour of the button back
+	 * @param event
+	 */
+	public void changeColourBack(MouseEvent event) {
+		_welcomeC.changeColourBack(event);
+	}
+
 
 }

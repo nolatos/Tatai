@@ -7,6 +7,8 @@ import tatai.*;
 
 public class Play extends Game {
 
+	public final int TOTAL_QUESTIONS;
+	
 	private  Difficulty _hard;
 	private PlayController _controller; //What is now practice will later turn into play
 //	private Scene _game;
@@ -14,19 +16,26 @@ public class Play extends Game {
 	public Play (Difficulty hard, PlayController controller) {
 		_hard = hard;
 		_controller = controller;
-//		//Initialising _practice
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("play.fxml"));		
-//		Pane pane = (Pane)loader.load();		
-//		_practice = loader.getController();
-//		_practice.setGame(this);
-//		_practice.setImage(getNumber());
-//		loader = new FXMLLoader(getClass().getResource("record.fxml"));
 		
-//		_practice.setLoader(loader); //Sets the _recordController class
-		
-		//Initialising the field _game so it can be passed to other stages
-//		_game = new Scene(pane);
-		
+		switch (_hard) {
+		case ONE:
+			TOTAL_QUESTIONS = 10;
+			break;
+		case TWO:
+			TOTAL_QUESTIONS = 15;
+			break;
+		case THREE:
+			TOTAL_QUESTIONS = 20;
+			break;
+		case FOUR:
+			TOTAL_QUESTIONS = 30;
+			break;			
+		case FIVE:
+			TOTAL_QUESTIONS = 50;
+			break;
+		default:
+			TOTAL_QUESTIONS = 10;
+		}
 		
 	}
 	
@@ -50,6 +59,10 @@ public class Play extends Game {
 		
 	}
 	
+	/**
+	 * Increases the score, if there is an increase. 
+	 * @return whether or not there was an increase
+	 */
 	public boolean updateScore() {
 		if (checkCorrect(getCurrentNumber(), getRecognised())) {
     		increaseScore();
@@ -67,6 +80,13 @@ public class Play extends Game {
 		double d = Math.random();
 		int i;
 		if (_hard == Difficulty.ONE) {
+			d = d * 10;
+			i = (int) d;
+			if (i >= 10) {
+				i = 9;
+			}
+		}
+		else {
 			
 			d = d * 90 + 10;
 			i = (int) d;
@@ -77,19 +97,57 @@ public class Play extends Game {
 				i = 10;
 			}
 		}
-		else {
-			d = d * 10;
-			i = (int) d;
-			if (i >= 10) {
-				i = 9;
-			}
-		}
 		
 		if (i == 0) {
 			i = 1;
 		}
 		setNumber(i);
 		return i;
+	}
+	
+	
+	public String getDisplayEquation() {
+		switch (_hard) {
+		//Between 1 and 10
+		case ONE:
+			double d = Math.random();
+			d = d * 10;
+			int i = (int) d;
+			if (i >= 10) {
+				i = 9;
+			}
+			else if (i == 0) {
+				i = 1;
+			}
+			setNumber(i);
+			return "" + i;
+		//Between 10 and 99
+		case TWO:
+			d = Math.random();
+			d = d * 90 + 10;
+			i = (int) d;
+			if (i > 99) {
+				i = 99;
+			}
+			else if (i < 10) {
+				i = 10;
+			}
+			setNumber(i);
+			return "" + i;
+		case THREE:
+			d = Math.random();
+			d = 100 * d;
+			i = (int) d;
+			if (i == 0) {
+				i = 1;
+			}
+			else if (i < 99) {
+				i = 99;
+			}
+			
+			
+		}
+		return null;
 	}
 	
 	

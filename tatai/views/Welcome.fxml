@@ -1,46 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="_welcomePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.views.WelcomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.views.WelcomeController">
    <children>
-      <ImageView fitHeight="419.0" fitWidth="616.0" opacity="0.2">
+      <ImageView fitHeight="600.0" fitWidth="900.0">
          <image>
-            <Image url="@background.jpg" />
+            <Image url="@TataiBackground.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="_practice" layoutX="185.0" layoutY="271.0" mnemonicParsing="false" onAction="#practicePressed" prefHeight="25.0" prefWidth="96.0" text="Practice!" />
-      <Button fx:id="_play" layoutX="320.0" layoutY="271.0" mnemonicParsing="false" onAction="#playPressed" prefHeight="25.0" prefWidth="96.0" text="Play!">
-         <tooltip>
-            <Tooltip text="Not available yet" />
-         </tooltip>
-      </Button>
-      <Label fx:id="_welcomeLabel" alignment="CENTER" layoutX="168.0" layoutY="100.0" text="Welcome to Tatai!" textAlignment="CENTER" visible="false">
+      <Pane fx:id="_mainPane" layoutX="286.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <children>
+            <ImageView fitHeight="88.0" fitWidth="360.0" layoutX="70.0" layoutY="46.0">
+               <image>
+                  <Image url="@TataiLogo.png" />
+               </image>
+            </ImageView>
+            <Button id="Buttons" fx:id="_play" layoutX="130.0" layoutY="218.0" mnemonicParsing="false" onAction="#playPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="82.0" prefWidth="241.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PLAY!" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="41.0" />
+               </font>
+            </Button>
+            <Button fx:id="_practice" layoutX="170.0" layoutY="349.0" mnemonicParsing="false" onAction="#practicePressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="161.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PRACTICE!" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="_stats" layoutX="170.0" layoutY="422.0" mnemonicParsing="false" onAction="#statsPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="161.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="STATISTICS" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="_one" layoutX="45.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="1" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="_three" layoutX="391.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="3" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="_two" layoutX="45.0" layoutY="422.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="2" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="_four" layoutX="391.0" layoutY="418.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="4" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="_five" layoutX="218.0" layoutY="477.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="5" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="_levels" fitHeight="35.0" fitWidth="130.0" layoutX="185.0" layoutY="242.0" visible="false">
+               <image>
+                  <Image url="@Levels.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Button fx:id="_back" layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#backToMenu" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="BACK" textFill="WHITE" visible="false">
          <font>
-            <Font size="33.0" />
+            <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
-      </Label>
-      <Button fx:id="_easy" layoutX="252.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="96.0" text="Easy" visible="false" />
-      <Button fx:id="_hard" layoutX="368.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="96.0" text="Hard" visible="false" />
-      <Button fx:id="_back" layoutX="136.0" layoutY="271.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="25.0" prefWidth="96.0" text="Back" visible="false" />
-      <Label fx:id="_pick" layoutX="269.0" layoutY="221.0" text="Pick a level!" visible="false" />
-      <Pane fx:id="_menuPane" layoutX="146.0" layoutY="6.0" prefHeight="408.0" prefWidth="308.0" visible="false" />
-      <ImageView fitHeight="73.0" fitWidth="200.0" layoutX="200.0" layoutY="113.0">
-         <image>
-            <Image url="@logo.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="_three" layoutX="269.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="THREE" visible="false" />
-      <Button fx:id="_four" layoutX="354.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="FOUR" visible="false" />
-      <Button fx:id="_five" layoutX="439.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="FIVE" visible="false" />
-      <Button fx:id="_two" layoutX="184.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="TWO" visible="false" />
-      <Button fx:id="_one" layoutX="99.0" layoutY="271.0" mnemonicParsing="false" onAction="#levelPressed" prefHeight="25.0" prefWidth="61.0" text="ONE" visible="false" />
-      <Button fx:id="_back2" layoutX="69.0" layoutY="325.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="25.0" prefWidth="61.0" text="Back" visible="false" />
+      </Button>
+      <Button fx:id="_logOut" layoutX="791.0" layoutY="540.0" mnemonicParsing="false" onAction="#logOut" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="27.0" prefWidth="65.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="LOGOUT" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="8.0" />
+         </font>
+      </Button>
    </children>
-</Pane>
+</AnchorPane>

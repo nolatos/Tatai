@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import tatai.*;
 import tatai.models.Start;
 
@@ -21,7 +22,9 @@ public class StartView {
     private Label _levelLabel;
 
     @FXML
-    private Button _backToMenu;
+    private Button _menu;
+    
+    
     
     private StartController _controller;
     private Start _model;
@@ -50,18 +53,7 @@ public class StartView {
     	_levelLabel.setText("" + difficulty);
     }
     
-    /**
-     * Sets the level label as "EASY" or "HARD"
-     * @param hard
-     */
-    public void setLevel(boolean hard) {
-    	if (hard) {
-    		_levelLabel.setText("HARD");
-    	}
-    	else {
-    		_levelLabel.setText("EASY");
-    	}
-    }
+  
 
     
     public void setController(StartController controller) {
@@ -75,5 +67,16 @@ public class StartView {
     
     public void addToList(ObservableList<String> list) {
     	_progressList.setItems(list);
+    }
+    
+    @FXML
+    void changeColour(MouseEvent event) {
+
+    	_controller.changeColour(event);
+    }
+
+    @FXML
+    void changeColourBack(MouseEvent event) {
+    	_controller.changeColourBack(event);
     }
 }

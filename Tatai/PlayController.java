@@ -15,10 +15,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tatai.models.*;
+import tatai.utils.SpeechRecognition;
 import tatai.views.*;
 
 public class PlayController implements Controller {
@@ -26,11 +28,10 @@ public class PlayController implements Controller {
 	//Private fields
 	private Play _model;
 	private Background _background = new Background();
-	private BashHandler _bh = new BashHandler();
     private Stage _recordStage; //Stage of record
     private RecordController _recordC;
     private StartController _startC;
-    private Stage _playStage;
+    private Scene _playScene;
 	
 	
 	
@@ -67,41 +68,24 @@ public class PlayController implements Controller {
 			
 			//Setting up the play scene			
 	    	Pane pane = (Pane) loader.load();
-	    	_playStage = new Stage();
-	    	_playStage.setScene(new Scene(pane));
+	    	_playScene = new Scene(pane);
+	    	
 	    	_view = loader.getController();
 	    	_view.setController(this);
 	    	_view.setModel(_model);
-	    	_playStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	    		@Override
-	    		public void handle(WindowEvent we) {
-	    			
-	    			if (_model.getProgress() == 11) {
-	    				_startC.deleteGame();
-	    			}
-	    			else {
-	    				Alert alert = new Alert(AlertType.CONFIRMATION);
-	            		alert.setTitle("Confirm Exit");
-	            		alert.setHeaderText("Are you sure you want to quit?");
-	            		alert.setContentText("Progress will be lost");
-	            		Optional<ButtonType> result = alert.showAndWait();
-	            		if (result.get() == ButtonType.OK) {
-	            			_startC.deleteGame();
-	            		}
-	            		else {
-	            			we.consume();
-	            		}
-	    			}
-	    		}
-	    	});
-	    	_playStage.setResizable(false);
+	    	
 		} 
 		catch (IOException e) {
-
+			e.printStackTrace();
 		}		
 		
 		
 		
+	}
+	
+	
+	public void backToStart() {
+		_startC.show();
 	}
 	
 	
@@ -138,7 +122,7 @@ public class PlayController implements Controller {
      */
     public void show() throws IOException {
     	
-    	_playStage.show();
+    	_startC.MAIN_STAGE.setScene(_playScene);
     	_view.setImage(_model.getNumber());
     	
     }
@@ -159,11 +143,11 @@ public class PlayController implements Controller {
     	_model.advance();
     	
     	int progress = _model.getProgress();
-    	if (progress > 10) {
+    	if (progress > _model.TOTAL_QUESTIONS) {
     		terminate();
     	}
     	else {
-    		_view.setLabel("" + progress + "/10");
+    		_view.progress();
     		setImage(_model.getNumber());
     	}  	
     }
@@ -183,17 +167,13 @@ public class PlayController implements Controller {
     	 
      	_view.terminate(_model.getScore());
      	
-     	_startC.addToList("" + _model.getScore() + "/10\t" + String.valueOf(_model.getDifficulty()));
+     	_startC.addToList("Score: " + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
+     			" Diffculty: " + String.valueOf(_model.getDifficulty()));
      	_model.reset();
     }
     
     
 	
-	
-    
- 
-    
-    
    
     
     
@@ -232,9 +212,16 @@ public class PlayController implements Controller {
     * @return 
     */
    public String getNumber() {
-	   return _bh.translation(_model.getCurrentNumber());
+	   return SpeechRecognition.translation(_model.getCurrentNumber());
    }
    
+   public void changeColour(MouseEvent event) {
+	   _startC.changeColour(event);
+   }
+   
+   public void changeColourBack(MouseEvent event) {
+	   _startC.changeColourBack(event);
+   }
    
    
    class Background extends Service<Void> {
@@ -251,7 +238,7 @@ public class PlayController implements Controller {
 					   
 						   
 					   //Showing the "recording" dialog		      
-					   _model.setRecognised(_bh.runVoiceRecognition());
+					   _model.setRecognised(SpeechRecognition.runVoiceRecognition());
 					   _recordC.recordingEnded(_model.updateScore());
 
 						   
@@ -275,6 +262,8 @@ public class PlayController implements Controller {
 	   
 	   
    }
+   
+   
    
    
    

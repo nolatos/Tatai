@@ -1,18 +1,26 @@
 package tatai.views;
 
+import java.util.Optional;
+import java.util.Timer;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import tatai.*;
 import tatai.models.Play;
 
 
 public class PlayView {
+	
 
     @FXML
-    private Label _score;
+    private ProgressBar _progress;
+    
+    @FXML
+    private Label _recordingLabel;
 
     @FXML
     private Button _record;
@@ -21,22 +29,33 @@ public class PlayView {
     private ImageView _image;
 
     @FXML
-    private Label _tempLabel;
-
-    @FXML
-    private Label _message;
-
-    @FXML
-    private Label _moveOn;
+    private Label _numberLabel;
 
     @FXML
     private Button _retry;
+    
+    @FXML
+    private Button _menu;
+    
+    @FXML
+    private Button _next;
 
     @FXML
     private Button _nextLevel;
+    
+    @FXML
+    private Button _retryLevel;
 
     private PlayController _controller;
     private Play _model;
+    
+    @FXML
+    private Button _playBack;
+    
+    @FXML
+    void retryLevel(ActionEvent event) {
+    	restart();
+    }
     
     @FXML
     void nextLevel(ActionEvent event) {
@@ -44,6 +63,11 @@ public class PlayView {
     	_controller.nextLevel();
     	restart();
 
+    }
+    
+    @FXML
+    void next(ActionEvent event) {
+    	_controller.advance();
     }
 
     @FXML
@@ -55,11 +79,31 @@ public class PlayView {
 
     @FXML
     void retry(ActionEvent event) {
-
-    	restart();
+    	
+    	
     }
     
+    @FXML
+    void checkAns(ActionEvent event) {
+    	
+    }
     
+    @FXML
+    /**
+     * Goes back to the start screen
+     * @param event
+     */
+    void back(ActionEvent event) {
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Confirm quit");
+    	alert.setHeaderText("Are you sure you want to go back?");
+    	alert.setContentText("Any unsaved progress will be lost");
+    	Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+	    	_controller.backToStart();
+		}
+		
+    }
     
     /**
      * Restarts the game
@@ -69,10 +113,9 @@ public class PlayView {
     	_record.setVisible(true);
     	_retry.setVisible(false);
     	_nextLevel.setVisible(false);
-    	_message.setVisible(false);
-    	_moveOn.setVisible(false);
     	setImage(_model.getNumber());
-    	_score.setText("1/10");
+    	_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
+    	_retryLevel.setVisible(false);
 //    	updateMenuLabel();
     }
     
@@ -81,31 +124,28 @@ public class PlayView {
     public void terminate(int score) {
     	
     	
-    	_tempLabel.setText("" + score + "/10");
+    	_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
     	_record.setVisible(false);
-    	_retry.setVisible(true);
+    	_retryLevel.setVisible(true);
     	_nextLevel.setVisible(true);
-    	_message.setVisible(true);
-    	_moveOn.setVisible(true);
+
+//    	_controller.canLevelUp();
+    	
+//    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
+//     		_nextLevel.setDisable(false);
+//     	}
+//     	else {
+//     		_nextLevel.setDisable(true);
+//     	}
     	
 
-    	_controller.canLevelUp();
-    	
-    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-     		_nextLevel.setDisable(false);
-     	}
-     	else {
-     		_nextLevel.setDisable(true);
-     	}
-    	
-
-    	
-    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-    		_nextLevel.setDisable(false);
-    	}
-    	else {
-    		_nextLevel.setDisable(true);
-    	}
+//    	
+//    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
+//    		_nextLevel.setDisable(false);
+//    	}
+//    	else {
+//    		_nextLevel.setDisable(true);
+//    	}
     	
     }
     
@@ -120,19 +160,43 @@ public class PlayView {
      * @param i the image we are setting to
      */
     public void setImage(int i) {
-    	_tempLabel.setText("" + i);
+    	_numberLabel.setText("" + i);
     }
 
-    
+    /**
+     * Enables the record button
+     * And turns off the recording label
+     */
     public void enableRecord() {
     	_record.setDisable(false);
+    	_recordingLabel.setVisible(false);
     }
     
-    public void setLabel(String label) {
-    	_score.setText(label);
+    /**
+     * Increases progress bar
+     */
+    public void progress() {
+    	_progress.setProgress((double)_model.getProgress() / _model.TOTAL_QUESTIONS);
     }
     
     public void setController(PlayController controller) {
     	_controller = controller;
+    }
+    
+    @FXML
+    void changeColour(MouseEvent event) {
+    	_controller.changeColour(event);
+    }
+    
+    @FXML
+    void changeColourBack(MouseEvent event) {
+    	_controller.changeColourBack(event);
+    }
+    
+    
+    
+    @FXML
+    void playBack(ActionEvent event) {
+
     }
 }
