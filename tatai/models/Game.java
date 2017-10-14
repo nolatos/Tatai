@@ -36,7 +36,7 @@ public abstract class Game {
 		return str.compareTo(SpeechRecognition.translation(i)) == 0;		
 		
 	}
-	
+	 
 	public int getScore() {
 		return _score;
 	}

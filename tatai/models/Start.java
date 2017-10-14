@@ -8,19 +8,10 @@ import tatai.StartController;
 public class Start {
 
 	private Difficulty _difficulty;
-	private boolean _gameExists = false; //States whehter or not a game already exists
 	private StartController _controller;
 	private ObservableList<String> _history = FXCollections.observableArrayList();
 	
-	/**
-	 * Constructor for practice mode
-	 * @param controller
-	 * @param hard
-	 */
-	public Start(StartController controller) {
-		_controller = controller;
-		
-	}
+	
 	
 	/**
 	 * Constructor for play mode
@@ -43,19 +34,7 @@ public class Start {
 		return _history;
 	}
 	
-	public boolean gameExists() {
-		return _gameExists;
-	}
 	
-	
-	
-	public void createGame() {
-		_gameExists = true;
-	}
-	
-	public void deleteGame() {
-		_gameExists = false;
-	}
 	
 	public Difficulty getDifficulty() {
 		return _difficulty;

@@ -26,7 +26,7 @@ public class StartController {
 	public final Stage MAIN_STAGE;
 	public final Scene START_SCENE;
 	public final Scene MENU_SCENE;
-	
+
 	private WelcomeController _welcomeC;
 
 	@FXML 
@@ -43,9 +43,9 @@ public class StartController {
 	public StartController(WelcomeController welcomeC, Difficulty difficulty) throws IOException {
 
 		_welcomeC = welcomeC;
-		
+
 		Stage mainStage = welcomeC.getMainStage();
-		
+
 		MAIN_STAGE = mainStage;
 		MENU_SCENE = mainStage.getScene();
 
@@ -62,15 +62,10 @@ public class StartController {
 
 		//Setting up the menu
 
-		if (difficulty == null) {
-			_model = new Start(this);
+		_model = new Start(this, difficulty);
+		_view.setLevel(difficulty);
+		_view.setModel(_model);
 
-		}
-		else{
-			_model = new Start(this, difficulty);
-			_view.setLevel(difficulty);
-			_view.setModel(_model);
-		}
 
 	}
 
@@ -89,54 +84,40 @@ public class StartController {
 	}
 
 
-	
+
 	public void startGame() {
 		try {
 
-			if (!_model.gameExists()) {
-				_model.createGame();
-				
-				Difficulty difficulty = _model.getDifficulty();
-				_gameC = new PlayController(difficulty, this);
 
-				try {
-					_gameC.show();
-				} 
-				catch (IOException e) {
 
-				}
+			Difficulty difficulty = _model.getDifficulty();
+			_gameC = new PlayController(difficulty, this);
+
+			try {
+				_gameC.show();
+			} 
+			catch (IOException e) {
 
 			}
-			else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Cannot start new Game");
-				alert.setHeaderText(null);
-				alert.setContentText("You cannot start a new game if one exists");
-				Optional<ButtonType> result = alert.showAndWait();
-			}
+
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void createGame() {
-		_model.createGame();
-	}
-
-	public void deleteGame() {
-		_model.deleteGame();
-	}
 
 	public void addToList(String str) {
 		_view.addToList(_model.addToList(str));
 	}
 
-	
+
 
 	public void show(Difficulty difficulty) {
 		show();
 		_view.setLevel(difficulty);
+		_model = new Start(this, difficulty);
 	}
 
 	/**
@@ -144,7 +125,7 @@ public class StartController {
 	 */
 	public void show() {
 		MAIN_STAGE.setScene(START_SCENE);
-		
+
 	}
 
 	/**
@@ -154,7 +135,7 @@ public class StartController {
 	public void changeColour(MouseEvent event) {
 		_welcomeC.changeColour(event);
 	}
-	
+
 	/**
 	 * Changes the colour of the button back
 	 * @param event

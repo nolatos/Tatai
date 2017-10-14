@@ -86,25 +86,25 @@ public class SpeechRecognition {
 	}
 	
 	public static void playback() {
-		try {
-			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
-			Process process = _play.start();
-			process.waitFor();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
+//			Process process = _play.start();
+//			process.waitFor();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
-        public static void removeAudioFile() {
-		try {
-			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
-			Process process = _play.start();
-			process.waitFor();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void removeAudioFile() {
+//		try {
+//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
+//			Process process = _play.start();
+//			process.waitFor();
+//			
+//		} catch (Exception e) { 
+//			e.printStackTrace();
+//		}
 	}
 
 	

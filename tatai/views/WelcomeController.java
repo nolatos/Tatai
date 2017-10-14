@@ -92,7 +92,7 @@ public class WelcomeController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 			_enterC.show();
-		}
+		} 
 
 	}
 

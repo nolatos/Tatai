@@ -34,7 +34,7 @@ public class StartView {
     void backToMenu(ActionEvent event) {
     	_controller.backToMenu();
 		_controller.MAIN_STAGE.setScene(_controller.MENU_SCENE);
-
+ 
     }
 
     @FXML

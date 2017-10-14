@@ -3,6 +3,7 @@ package tatai.views;
 import java.util.Optional;
 import java.util.Timer;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,192 +12,374 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import tatai.*;
 import tatai.models.Play;
+import tatai.utils.SpeechRecognition;
 
 
 public class PlayView {
-	
 
-    @FXML
-    private ProgressBar _progress;
-    
-    @FXML
-    private Label _recordingLabel;
 
-    @FXML
-    private Button _record;
+	@FXML
+	private ProgressBar _progress;
 
-    @FXML
-    private ImageView _image;
+	@FXML
+	private Label _recordingLabel;
 
-    @FXML
-    private Label _numberLabel;
+	@FXML
+	private Button _record;
 
-    @FXML
-    private Button _retry;
-    
-    @FXML
-    private Button _menu;
-    
-    @FXML
-    private Button _next;
+	@FXML
+	private ImageView _image;
 
-    @FXML
-    private Button _nextLevel;
-    
-    @FXML
-    private Button _retryLevel;
+	@FXML
+	private Label _numberLabel;
 
-    private PlayController _controller;
-    private Play _model;
-    
-    @FXML
-    private Button _playBack;
-    
-    @FXML
-    void retryLevel(ActionEvent event) {
-    	restart();
-    }
-    
-    @FXML
-    void nextLevel(ActionEvent event) {
+	@FXML
+	private Button _retry;
 
-    	_controller.nextLevel();
-    	restart();
+	@FXML
+	private Button _menu;
 
-    }
-    
-    @FXML
-    void next(ActionEvent event) {
-    	_controller.advance();
-    }
+	@FXML
+	private Button _next;
 
-    @FXML
-    void record(ActionEvent event) {
+	@FXML
+	private Button _nextLevel;
 
-    	_controller.record();
-    	_record.setDisable(true);
-    }
+	@FXML
+	private Button _retryLevel;
 
-    @FXML
-    void retry(ActionEvent event) {
-    	
-    	
-    }
-    
-    @FXML
-    void checkAns(ActionEvent event) {
-    	
-    }
-    
-    @FXML
-    /**
-     * Goes back to the start screen
-     * @param event
-     */
-    void back(ActionEvent event) {
-    	Alert alert = new Alert(AlertType.CONFIRMATION);
-    	alert.setTitle("Confirm quit");
-    	alert.setHeaderText("Are you sure you want to go back?");
-    	alert.setContentText("Any unsaved progress will be lost");
-    	Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) {
-	    	_controller.backToStart();
+	@FXML
+	private Button _check;
+
+	@FXML
+	private Button _skip;
+
+	@FXML
+	private Label _correct;
+
+	@FXML
+	private Label _tryAgain;
+
+	@FXML
+	private Label _sorry;
+
+	@FXML
+	private Label _tens;
+
+	@FXML
+	private Label _maa;
+
+	@FXML
+	private Label _ones;
+
+	@FXML
+	private Label _answerWas;
+
+	private PlayController _controller;
+	private Play _model;
+
+	@FXML
+	private Button _playBack;
+
+	@FXML
+	void retryLevel(ActionEvent event) {
+		_model.reset();
+		restart();
+	}
+
+	@FXML
+	void nextLevel(ActionEvent event) {
+
+		_controller.nextLevel();
+		restart();
+
+	}
+
+	@FXML
+	/**
+	 * Advances to next number. Turns off/on relevant components
+	 * @param event
+	 */
+	 void next(ActionEvent event) {
+		SpeechRecognition.removeAudioFile();
+		_model.setRetry(false);
+
+
+		_record.setVisible(true);
+		_skip.setVisible(true);
+		_numberLabel.setVisible(true);
+
+		_sorry.setVisible(false);
+		_correct.setVisible(false);
+		_tryAgain.setVisible(false);
+		_next.setVisible(false);
+		_controller.advance();
+		_tens.setVisible(false);
+		_maa.setVisible(false);
+		_ones.setVisible(false);
+		_answerWas.setVisible(false);
+
+	}
+
+	@FXML
+	void record(ActionEvent event) {
+		SpeechRecognition.removeAudioFile();
+		_controller.record();
+		_record.setDisable(true);
+		_recordingLabel.setVisible(true);
+	}
+
+	@FXML 
+	/**
+	 * Will act as if you got it wrong
+	 * @param event
+	 */
+	void skip(ActionEvent event) {
+		_model.setRetry(true);
+		_record.setVisible(false);
+		_check.setVisible(false);
+		_skip.setVisible(false);
+		_playBack.setVisible(false);
+		this.displayIncorrectScreen();
+	}
+
+	@FXML
+	/**
+	 * Retries the number. Turns
+	 * @param event
+	 */
+	void retry(ActionEvent event) {
+
+		SpeechRecognition.removeAudioFile();
+
+		_model.setRetry(true);
+
+		_record.setVisible(true);
+		_skip.setVisible(true);
+		_numberLabel.setVisible(true);
+		_correct.setVisible(false);
+		_next.setVisible(false);
+
+		_sorry.setVisible(false);
+		_tryAgain.setVisible(false);
+		_retry.setVisible(false);
+		_next.setVisible(false);
+
+	}
+
+	@FXML
+	/**
+	 * Checks the answer. Also turns relevant buttons on/off
+	 * @param event
+	 */
+	void checkAns(ActionEvent event) {
+		if (_model.updateScore()) {
+			displayCorrectScreen();
 		}
+		else {
+			displayIncorrectScreen();
+		}
+
+		_record.setVisible(false);
+		_check.setVisible(false);
+		_skip.setVisible(false);
+		_playBack.setVisible(false);
+
+
+
+	}
+
+	@FXML
+	/**
+	 * Goes back to the start screen
+	 * @param event
+	 */
+	void back(ActionEvent event) {
+		if (_model.getProgress() <= _model.TOTAL_QUESTIONS) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirm quit");
+			alert.setHeaderText("Are you sure you want to go back?");
+			alert.setContentText("Any unsaved progress will be lost");
+			System.out.println("" + _model.getProgress());
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				_controller.backToStart();
+
+			}			
+		}
+		else {
+			_controller.backToStart();
+		}
+
+	}
+
+	/**
+	 * Restarts the game
+	 */
+	public void restart() {
 		
-    }
-    
-    /**
-     * Restarts the game
-     */
-    public void restart() {
-    	
-    	_record.setVisible(true);
-    	_retry.setVisible(false);
-    	_nextLevel.setVisible(false);
-    	setImage(_model.getNumber());
-    	_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
-    	_retryLevel.setVisible(false);
-//    	updateMenuLabel();
-    }
-    
-    
-    
-    public void terminate(int score) {
-    	
-    	
-    	_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
-    	_record.setVisible(false);
-    	_retryLevel.setVisible(true);
-    	_nextLevel.setVisible(true);
+		_record.setVisible(true);
+		_retry.setVisible(false);
+		_nextLevel.setVisible(false);
+		setImage(_model.getNumber());
+		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
+		_retryLevel.setVisible(false);
+		_skip.setVisible(true);
+	}
 
-//    	_controller.canLevelUp();
-    	
-//    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-//     		_nextLevel.setDisable(false);
-//     	}
-//     	else {
-//     		_nextLevel.setDisable(true);
-//     	}
-    	
 
-//    	
-//    	if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-//    		_nextLevel.setDisable(false);
-//    	}
-//    	else {
-//    		_nextLevel.setDisable(true);
-//    	}
-    	
-    }
-    
-    public void setModel(Play play) {
-    	_model = play;
-    }
-    
-    
-    /**
-     * Sets the image and the _number field
-     * CHANGE LATER
-     * @param i the image we are setting to
-     */
-    public void setImage(int i) {
-    	_numberLabel.setText("" + i);
-    }
 
-    /**
-     * Enables the record button
-     * And turns off the recording label
-     */
-    public void enableRecord() {
-    	_record.setDisable(false);
-    	_recordingLabel.setVisible(false);
-    }
-    
-    /**
-     * Increases progress bar
-     */
-    public void progress() {
-    	_progress.setProgress((double)_model.getProgress() / _model.TOTAL_QUESTIONS);
-    }
-    
-    public void setController(PlayController controller) {
-    	_controller = controller;
-    }
-    
-    @FXML
-    void changeColour(MouseEvent event) {
-    	_controller.changeColour(event);
-    }
-    
-    @FXML
-    void changeColourBack(MouseEvent event) {
-    	_controller.changeColourBack(event);
-    }
-    
-    
-    
-    @FXML
-    void playBack(ActionEvent event) {
+	public void terminate(int score) {
 
-    }
+
+		_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
+		_record.setVisible(false);
+		_retryLevel.setVisible(true);
+		_nextLevel.setVisible(true);
+		_skip.setVisible(false);
+		_check.setVisible(false);
+
+		if (_model.getScore() >= 8 && _controller.canLevelUp()) {
+			_nextLevel.setDisable(false);
+		}
+		else {
+			_nextLevel.setDisable(true);
+		}
+
+
+
+		if (_model.getScore() >= 8 && _controller.canLevelUp()) {
+			_nextLevel.setDisable(false);
+		}
+		else {
+			_nextLevel.setDisable(true);
+		}
+
+	}
+
+	public void setModel(Play play) {
+		_model = play;
+	}
+
+
+	/**
+	 * Sets the image and the _number field
+	 * CHANGE LATER
+	 * @param i the image we are setting to
+	 */
+	public void setImage(int i) {
+		_numberLabel.setText("" + i);
+	}
+
+
+
+	/**
+	 * Increases progress bar
+	 */
+	public void progress() {
+		_progress.setProgress((double)_model.getProgress() / _model.TOTAL_QUESTIONS);
+	}
+
+	public void setController(PlayController controller) {
+		_controller = controller;
+	}
+
+	@FXML
+	void changeColour(MouseEvent event) {
+		_controller.changeColour(event);
+	}
+
+	@FXML
+	void changeColourBack(MouseEvent event) {
+		_controller.changeColourBack(event);
+	}
+
+
+
+	@FXML
+	/**
+	 * Plays back the sound on a new thread
+	 * @param event
+	 */
+	void playBack(ActionEvent event) {
+
+
+		Task<Void> task = new Task<Void>() {
+			@Override
+			public Void call() {
+				SpeechRecognition.playback();
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start(); 
+
+	}
+
+	/**
+	 * Enables the correct button and turns off the "recording" label.
+	 * Also sets the skip button to invisible
+	 * and sets the playback and check buttons to visible
+	 * @param correct
+	 */
+	public void recordingEnded() {
+		_record.setDisable(false);
+
+		_skip.setVisible(false);
+		_recordingLabel.setVisible(false);  
+
+		_playBack.setVisible(true);
+		_check.setVisible(true);
+	}
+
+
+	/**
+	 * Displays the "correct"
+	 */
+	private void displayCorrectScreen() {
+		_numberLabel.setVisible(false);
+		_correct.setVisible(true);
+		_next.setVisible(true);
+	}
+
+
+
+	private void displayIncorrectScreen() {
+		//Getting rid of the number Label
+		_numberLabel.setVisible(false);
+		if (_model.retried()) {
+			_sorry.setVisible(true);
+			_next.setVisible(true);
+
+			//Setting up the answer was part
+			if (_model.getCurrentNumber() <= 10) {
+				_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
+			}
+			else if (_model.getCurrentNumber() % 10 == 0){
+
+				_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
+			}
+			else {
+				int tens = _model.getCurrentNumber() / 10 * 10;
+				_tens.setText(SpeechRecognition.translation(tens));
+				_tens.setVisible(true);
+				_maa.setVisible(true);
+				_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber() % 10));
+			}
+			_ones.setVisible(true);
+			_answerWas.setVisible(true);
+		}
+		else {
+			_retry.setVisible(true);
+			_tryAgain.setVisible(true);
+		}
+
+
+
+	}
+
+
+
+
 }

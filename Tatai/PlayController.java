@@ -28,8 +28,8 @@ public class PlayController implements Controller {
 	//Private fields
 	private Play _model;
 	private Background _background = new Background();
-    private Stage _recordStage; //Stage of record
-    private RecordController _recordC;
+//    private Stage _recordStage; //Stage of record
+//    private RecordController _recordC;
     private StartController _startC;
     private Scene _playScene;
 	
@@ -54,17 +54,17 @@ public class PlayController implements Controller {
 			
 			
 			
-			//Have a stage with record at the ready
-			_recordC = new RecordController(this);
-			_recordStage = new Stage();
-			_recordStage.setScene(_recordC.RECORD_SCENE);
-			_recordStage.setResizable(false);
-			_recordStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent we) {
-					we.consume();
-				}
-			});
+//			//Have a stage with record at the ready
+//			_recordC = new RecordController(this);
+//			_recordStage = new Stage();
+//			_recordStage.setScene(_recordC.RECORD_SCENE);
+//			_recordStage.setResizable(false);
+//			_recordStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//				@Override
+//				public void handle(WindowEvent we) {
+//					we.consume();
+//				}
+//			});
 			
 			//Setting up the play scene			
 	    	Pane pane = (Pane) loader.load();
@@ -86,6 +86,7 @@ public class PlayController implements Controller {
 	
 	public void backToStart() {
 		_startC.show();
+		
 	}
 	
 	
@@ -102,7 +103,9 @@ public class PlayController implements Controller {
 	 * TO BE CHANGED
 	 */
 	public void nextLevel() {
-		_model.levelUp(); //TO BE CHANGED
+		Difficulty d = Difficulty.valueOf(_model.levelUp());
+    	_model = new Play(d, this);
+    	_view.setModel(_model);
 		
 	}
 	
@@ -127,12 +130,13 @@ public class PlayController implements Controller {
     	
     }
 
-
+    
+   
     
     
     public void record() {
     	
-    	_recordStage.show();
+    	
     	_background.restart();
     }
 	
@@ -155,7 +159,7 @@ public class PlayController implements Controller {
     
 	
 	
-    
+     
     public boolean canLevelUp() {
     	return _model.canLevelUp();
     }
@@ -169,29 +173,9 @@ public class PlayController implements Controller {
      	
      	_startC.addToList("Score: " + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
      			" Diffculty: " + String.valueOf(_model.getDifficulty()));
-     	_model.reset();
+     	
     }
-    
-    
-	
    
-    
-    
-   /**
-    * Reenables the "record" button
-    */
-   public void enableRecord() {
-	   _view.enableRecord();
-   }
-   
- 
-   
-   /**
-    * Closes the recording stage
-    */
-   public void closeRecorderStage() {
-	   _recordStage.close();
-   }
    
    
    
@@ -239,9 +223,8 @@ public class PlayController implements Controller {
 						   
 					   //Showing the "recording" dialog		      
 					   _model.setRecognised(SpeechRecognition.runVoiceRecognition());
-					   _recordC.recordingEnded(_model.updateScore());
 
-						   
+					   _view.recordingEnded();
 
 
 					   

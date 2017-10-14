@@ -33,13 +33,13 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="_skip" layoutX="300.0" layoutY="363.0" mnemonicParsing="false" onAction="#next" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="SKIP!" textFill="WHITE">
+            <Button fx:id="_skip" layoutX="300.0" layoutY="363.0" mnemonicParsing="false" onAction="#skip" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="SKIP!" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
             <ProgressBar fx:id="_progress" layoutX="67.0" layoutY="14.0" prefHeight="18.0" prefWidth="360.0" progress="0.0" />
-            <ImageView fitHeight="232.0" fitWidth="360.0" layoutX="131.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="_image" fitHeight="232.0" fitWidth="360.0" layoutX="131.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../../TataiFiles/Images/2.png" />
                </image>
@@ -90,6 +90,31 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
+            <Label fx:id="_sorry" alignment="CENTER" layoutX="79.0" layoutY="53.0" prefHeight="65.0" prefWidth="325.0" text="SORRY!" textFill="RED" visible="false">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Label>
+            <Label fx:id="_tens" alignment="CENTER" layoutX="38.0" layoutY="118.0" prefHeight="67.0" prefWidth="408.0" text="whitu tekau" textFill="#ed5f0c" visible="false">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="_maa" alignment="CENTER" layoutX="38.0" layoutY="161.0" prefHeight="67.0" prefWidth="408.0" text="maa" textFill="#ed5f0c" visible="false">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="_ones" alignment="CENTER" layoutX="38.0" layoutY="209.0" prefHeight="67.0" prefWidth="408.0" text="whitu tekau" textFill="#ed5f0c" visible="false">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="_answerWas" alignment="CENTER" layoutX="171.0" layoutY="118.0" prefHeight="17.0" prefWidth="152.0" text="ANSWER WAS:" textFill="WHITE" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

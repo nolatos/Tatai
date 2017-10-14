@@ -10,8 +10,8 @@ public class Play extends Game {
 	public final int TOTAL_QUESTIONS;
 	
 	private  Difficulty _hard;
-	private PlayController _controller; //What is now practice will later turn into play
-//	private Scene _game;
+	private PlayController _controller; 
+	private boolean _retried = false;
 	
 	public Play (Difficulty hard, PlayController controller) {
 		_hard = hard;
@@ -62,7 +62,7 @@ public class Play extends Game {
 	/**
 	 * Increases the score, if there is an increase. 
 	 * @return whether or not there was an increase
-	 */
+	 */ 
 	public boolean updateScore() {
 		if (checkCorrect(getCurrentNumber(), getRecognised())) {
     		increaseScore();
@@ -156,29 +156,20 @@ public class Play extends Game {
 	}
 	
 	
+	public boolean retried() {
+		return _retried;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void setRetry(boolean retry) {
+		_retried = retry;
+	}
 	
 	
 	public boolean canLevelUp() {
 		return !(_hard == Difficulty.FIVE);
 	}
 
+	
 	
 	
 }
