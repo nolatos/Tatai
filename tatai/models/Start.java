@@ -30,7 +30,12 @@ public class Start {
 	}
 	
 	
-	
+	/**
+	 * Adds the string to the list which is displayed in the
+	 * "start" screen
+	 * @param str the string to be added
+	 * @return the observableList, which make up the items
+	 */
 	public ObservableList<String> addToList(String str) {
 		_history.add(str);
 		return _history;

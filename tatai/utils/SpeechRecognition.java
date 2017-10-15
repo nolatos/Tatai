@@ -20,26 +20,20 @@ public class SpeechRecognition {
 	 */
 	public static String runVoiceRecognition() throws IOException, InterruptedException {
 
-//		try {
-//			ProcessBuilder _builder = new ProcessBuilder("/bin/bash","-c","./GoSpeech");
-//			Process process = _builder.start();
-//			process.waitFor();
-//
-//
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//
-//
-//		return getResults();
-		
-		int i = (int) (Math.random() * 10);
-		if (i == 0) {
-			i = 1;
+		try {
+			ProcessBuilder _builder = new ProcessBuilder("/bin/bash","-c","rm foo.wav; ./GoSpeech");
+			Process process = _builder.start();
+			process.waitFor();
+
+
 		}
-		return translation(i);
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+
+		return getResults();
 
 
 	}
@@ -86,26 +80,26 @@ public class SpeechRecognition {
 	}
 	
 	public static void playback() {
+		try {
+			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
+			Process process = _play.start();
+			process.waitFor();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+//        public static void removeAudioFile() {
 //		try {
-//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
+//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
 //			Process process = _play.start();
 //			process.waitFor();
 //			
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-	}
-
-	public static void removeAudioFile() {
-//		try {
-//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
-//			Process process = _play.start();
-//			process.waitFor();
-//			
-//		} catch (Exception e) { 
-//			e.printStackTrace();
-//		}
-	}
+//	}
 
 	
 	/**
