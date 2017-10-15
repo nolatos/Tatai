@@ -22,7 +22,7 @@ public class Play extends Game {
 			TOTAL_QUESTIONS = 10;
 			break;
 		case TWO:
-			TOTAL_QUESTIONS = 15;
+			TOTAL_QUESTIONS = 10;
 			break;
 		case THREE:
 			TOTAL_QUESTIONS = 20;
@@ -64,9 +64,9 @@ public class Play extends Game {
 	 * @return whether or not there was an increase
 	 */ 
 	public boolean updateScore() {
-		if (checkCorrect(getCurrentNumber(), getRecognised())) {
+		if (checkCorrect()) {
     		increaseScore();
-    		return true;
+    		return true; 
     	}
     	else {
     		return false;

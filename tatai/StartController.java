@@ -117,7 +117,7 @@ public class StartController {
 	public void show(Difficulty difficulty) {
 		show();
 		_view.setLevel(difficulty);
-		_model = new Start(this, difficulty);
+		_model.setDifficulty(difficulty);
 	}
 
 	/**

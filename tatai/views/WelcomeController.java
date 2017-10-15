@@ -263,7 +263,7 @@ public class WelcomeController {
 	 * @param scene
 	 */
 	public void setScene(Scene scene) {
-		_menuScene = scene;
+		_menuScene = scene; 
 	}
 
 	/**

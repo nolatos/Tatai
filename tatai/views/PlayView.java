@@ -3,20 +3,26 @@ package tatai.views;
 import java.util.Optional;
 import java.util.Timer;
 
+import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import tatai.*;
 import tatai.models.Play;
 import tatai.utils.SpeechRecognition;
 
 
 public class PlayView {
-
+	
+	@FXML
+	private Pane _mainPane;
 
 	@FXML
 	private ProgressBar _progress;
@@ -90,9 +96,18 @@ public class PlayView {
 	@FXML
 	void nextLevel(ActionEvent event) {
 
-		_controller.nextLevel();
-		restart();
-
+		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
+		ft.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				_controller.nextLevel();
+				restart(); 
+				_mainPane.setOpacity(1);
+			}
+		});
+		ft.setFromValue(1);
+		ft.setToValue(0);
+		ft.play();
 	}
 
 	@FXML
@@ -101,7 +116,6 @@ public class PlayView {
 	 * @param event
 	 */
 	 void next(ActionEvent event) {
-		SpeechRecognition.removeAudioFile();
 		_model.setRetry(false);
 
 
@@ -123,7 +137,6 @@ public class PlayView {
 
 	@FXML
 	void record(ActionEvent event) {
-		SpeechRecognition.removeAudioFile();
 		_controller.record();
 		_record.setDisable(true);
 		_recordingLabel.setVisible(true);
@@ -150,7 +163,6 @@ public class PlayView {
 	 */
 	void retry(ActionEvent event) {
 
-		SpeechRecognition.removeAudioFile();
 
 		_model.setRetry(true);
 

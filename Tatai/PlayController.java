@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import tatai.models.*;
 import tatai.utils.SpeechRecognition;
 import tatai.views.*;
@@ -103,10 +104,9 @@ public class PlayController implements Controller {
 	 * TO BE CHANGED
 	 */
 	public void nextLevel() {
-		Difficulty d = Difficulty.valueOf(_model.levelUp());
-    	_model = new Play(d, this);
-    	_view.setModel(_model);
-		
+		Difficulty difficulty = Difficulty.valueOf(_model.levelUp());
+    	_startC.show(difficulty);
+		 
 	}
 	
 	

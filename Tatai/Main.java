@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.*;
+import tatai.utils.Constants;
 import tatai.views.EnterController;
 import tatai.views.WelcomeController;
 

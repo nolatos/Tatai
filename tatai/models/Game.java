@@ -32,11 +32,13 @@ public abstract class Game {
 	 * @param str what the user said
 	 * @return whether or not the translation of the number i is the same as what the user said
 	 */
-	public boolean checkCorrect(int i, String str) {
-		return str.compareTo(SpeechRecognition.translation(i)) == 0;		
-		
+	public boolean checkCorrect() {
+		return _recognised.compareTo(SpeechRecognition.translation(_number)) == 0;
+//		return true;
 	}
 	 
+	
+	
 	public int getScore() {
 		return _score;
 	}
@@ -49,9 +51,6 @@ public abstract class Game {
 		return _progress;
 	}
 
-	
-	public abstract int getNumber();
-	
 	
 	
 	public void reset() {

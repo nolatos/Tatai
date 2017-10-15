@@ -26,7 +26,7 @@
             <Image url="@PlayLogo.png" />
          </image>
       </ImageView>
-      <Pane layoutX="209.0" layoutY="111.0" prefHeight="489.0" prefWidth="482.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="209.0">
+      <Pane fx:id="_mainPane" layoutX="209.0" layoutY="111.0" prefHeight="489.0" prefWidth="482.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="209.0">
          <children>
             <Button fx:id="_record" layoutX="68.0" layoutY="363.0" mnemonicParsing="false" onAction="#record" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="RECORD!" textFill="WHITE">
                <font>

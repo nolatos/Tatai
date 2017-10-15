@@ -22,17 +22,9 @@ public class Practice extends Game {
 	}
 	
 	
-	/**
-	 * Returns a random number
-	 */
-	public int getNumber() {
-		return _number;
-	}
 	
 	
-	public void setNumber(int i) {
-		_number = i;
-	}
+	
 
 	
 	

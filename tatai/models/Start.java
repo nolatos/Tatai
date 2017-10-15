@@ -17,7 +17,7 @@ public class Start {
 	 * Constructor for play mode
 	 * @param controller
 	 * @param difficulty
-	 */
+	 */ 
 	public Start(StartController controller, Difficulty difficulty) {
 		_difficulty = difficulty;
 		_controller = controller;
@@ -25,7 +25,9 @@ public class Start {
 				
 	}
 	
-	
+	public void setDifficulty(Difficulty difficulty) {
+		_difficulty = difficulty;
+	}
 	
 	
 	

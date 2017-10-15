@@ -1,6 +1,9 @@
 package tatai.views;
 
+import java.io.IOException;
+
 import javafx.animation.FadeTransition;
+import javafx.concurrent.Task;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -64,33 +67,118 @@ public class PracticeView {
     @FXML
     private Label _ones;
     
-    private int _number;
+    @FXML
+    private Button _playBack;
     
+    @FXML
+    private Button _checkAns;
+    
+    @FXML
+    private Label _correct;
+    
+    @FXML
+    private Label _whoops;
+    
+    @FXML
+    private Button _ok;
+    
+    @FXML
+    void playBack(ActionEvent event) {
+    	Task<Void> task = new Task<Void>() {
+    		@Override
+    		public Void call() {
+    			SpeechRecognition.playback();
+    			return null;
+    		}
+    	};
+    	Thread thread = new Thread(task);
+    	thread.setDaemon(true);
+    	
+    }
+    
+    @FXML
+    void checkAns(ActionEvent event) {
+    	_checkAns.setVisible(false);
+    	if (_model.checkCorrect()) {
+    		
+    		_correct.setVisible(true);
+    	}
+    	else {
+    		_whoops.setVisible(true);
+    	}
+    	_record.setVisible(false);
+    	_playBack.setVisible(false);
+    	_numberLabel.setVisible(false);
+    	_seeAns.setVisible(true);
+    }
+    
+    @FXML
+    void ok(ActionEvent event) {
+    	EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent e) {
+    			_choosePane.setVisible(true);
+    			revertToOriginal();
+    		}
+    	};
+    	fadeOut(eh, _recordPane);
+    	
+    }
     
     
     @FXML
     void record(ActionEvent event) {
 
+    	_recording.setVisible(true);
+    	_record.setDisable(true);
+    	Task<Void> task = new Task<Void>() {
+    		@Override
+    		public Void call() {
+    			try {
+					_model.setRecognised(SpeechRecognition.runVoiceRecognition());
+					
+				} 
+    			catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+    			catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			recordingEnded();
+    			
+    			return null;
+    		}
+    	};
+    	Thread thread = new Thread(task);
+    	thread.setDaemon(true);
+    	thread.start();
     }
 
     @FXML
     void seeAns(ActionEvent event) {
-    	if (_number <= 10) {
-    		_ones.setText(SpeechRecognition.translation(_number));
+    	if (_model.getCurrentNumber() <= 10) {
+    		_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
     	}
-    	else if (_number % 10 == 0){
+    	else if (_model.getCurrentNumber() % 10 == 0){
     		
-    		_ones.setText(SpeechRecognition.translation(_number));
+    		_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
     	}
     	else {
-    		int tens = _number / 10 * 10;
+    		int tens = _model.getCurrentNumber() / 10 * 10;
     		_tens.setText(SpeechRecognition.translation(tens));
     		_tens.setVisible(true);
     		_maa.setVisible(true);
-    		_ones.setText(SpeechRecognition.translation(_number % 10));
+    		_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber() % 10));
     	}
     	_ones.setVisible(true);
     	_numberLabel.setVisible(false);
+    	_seeAns.setVisible(false);
+    	_record.setVisible(false);
+    	_ok.setVisible(true);
+    	_whoops.setVisible(false);
+    	_correct.setVisible(false);
     }
     
     @FXML
@@ -146,7 +234,7 @@ public class PracticeView {
     			else {
     				
     				//Setting the text
-    				_number = i;
+    				_model.setNumber(i);
     				_numberLabel.setText("" + i);
     				
     				//Playing the animation
@@ -223,6 +311,7 @@ public class PracticeView {
      * panes are visible.
      */
     private void revertToOriginal() {
+    	_record.setVisible(true);
     	_recordPane.setOpacity(1);
     	_choosePane.setOpacity(1);
     	this._numberField.setText(null);
@@ -231,8 +320,25 @@ public class PracticeView {
     	_tens.setVisible(false);
     	this._recording.setVisible(false);
     	_numberLabel.setVisible(true);
-    	
+    	_playBack.setVisible(false);
+    	_checkAns.setVisible(false);
+    	_seeAns.setVisible(true);
+    	_ok.setVisible(false);
     }
+    
+    private void recordingEnded() {
+    	_record.setDisable(false);
+    	_recording.setVisible(false);
+    	_playBack.setVisible(true);
+    	_seeAns.setVisible(false);
+    	_checkAns.setVisible(true);
+    }
+    
+    
+    
+    
+    
+    
     
 
 }
