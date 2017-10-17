@@ -212,7 +212,6 @@ public class PlayView {
 			alert.setTitle("Confirm quit");
 			alert.setHeaderText("Are you sure you want to go back?");
 			alert.setContentText("Any unsaved progress will be lost");
-			System.out.println("" + _model.getProgress());
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
 				_controller.backToStart();

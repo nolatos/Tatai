@@ -93,7 +93,7 @@ public class PracticeView {
     	};
     	Thread thread = new Thread(task);
     	thread.setDaemon(true);
-    	
+    	thread.start();
     }
     
     @FXML
@@ -102,14 +102,16 @@ public class PracticeView {
     	if (_model.checkCorrect()) {
     		
     		_correct.setVisible(true);
+    		_ok.setVisible(true);
     	}
     	else {
     		_whoops.setVisible(true);
+    		_seeAns.setVisible(true);
     	}
     	_record.setVisible(false);
     	_playBack.setVisible(false);
     	_numberLabel.setVisible(false);
-    	_seeAns.setVisible(true);
+    	
     }
     
     @FXML
@@ -218,7 +220,7 @@ public class PracticeView {
      * Displays the number
      * @param event
      */
-    void go(ActionEvent event) {
+    void go(ActionEvent event) { 
     	
     	//Try block to catch the situation where the user puts in some bullshit
     	try {

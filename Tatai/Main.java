@@ -20,9 +20,10 @@ public class Main extends Application {
 
 
 	public static void main(String[] args) {
+		System.out.println("\u00B2");
 		launch(Main.class, args);
 		
-
+		
 	}
 
 	@Override

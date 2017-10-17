@@ -46,7 +46,7 @@
             </ImageView>
             <Label fx:id="_numberLabel" alignment="CENTER" layoutX="67.0" layoutY="85.0" prefHeight="240.0" prefWidth="360.0" style="-fx-background-color: purple;" text="9801 / 99" textFill="WHITE">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="52.0" />
+                  <Font name="Cambria Math" size="52.0" />
                </font>
             </Label>
             <Label fx:id="_recordingLabel" alignment="CENTER" layoutX="150.0" layoutY="43.0" prefHeight="30.0" prefWidth="194.0" text="RECORDING..." textFill="WHITE" visible="false" />
