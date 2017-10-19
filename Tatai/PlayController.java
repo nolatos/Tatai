@@ -118,6 +118,10 @@ public class PlayController implements Controller {
     public void setImage(int i) {
     	_view.setImage(i);
     }
+    
+    public void setImage(String url) {
+    	_view.setImage(url);
+    }
     	
     	
     /**
@@ -126,7 +130,7 @@ public class PlayController implements Controller {
     public void show() throws IOException {
     	
     	_startC.MAIN_STAGE.setScene(_playScene);
-    	_view.setImage(_model.getNumber());
+    	_model.setQuestion();
     	
     }
 
@@ -152,7 +156,7 @@ public class PlayController implements Controller {
     	}
     	else {
     		_view.progress();
-    		setImage(_model.getNumber());
+    		_model.setQuestion();
     	}  	
     }
 	
@@ -182,7 +186,6 @@ public class PlayController implements Controller {
    public String getRecognised() {
 	   return _model.getRecognised();
    }
-   
    
    
    

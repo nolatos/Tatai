@@ -1,14 +1,14 @@
-//package tatai.views;
-//
-//import javafx.application.Platform;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import tatai.*;
-//
-//public class RecordView {
-//
+package tatai.views;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import tatai.*;
+
+public class RecordView {
+
 //	private RecordController _controller;
 //	
 //    @FXML
@@ -137,5 +137,5 @@
 //    public void setController(RecordController controller) {
 //    	_controller = controller;
 //    }
-//
-//}
+
+}

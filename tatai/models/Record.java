@@ -1,9 +1,9 @@
-//package tatai.models;
-//
-//import tatai.*;
-//
-//public class Record {
-//
+package tatai.models;
+
+import tatai.*;
+
+public class Record {
+
 //	private boolean _retried = false; //Whether or not the person has already retried the number
 //	private RecordController _controller;
 //	
@@ -18,4 +18,4 @@
 //	public boolean getRetried() {
 //		return _retried; 
 //	}
-//}
+}

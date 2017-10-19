@@ -44,7 +44,7 @@
                   <Image url="@../../../../TataiFiles/Images/2.png" />
                </image>
             </ImageView>
-            <Label fx:id="_numberLabel" alignment="CENTER" layoutX="67.0" layoutY="85.0" prefHeight="240.0" prefWidth="360.0" style="-fx-background-color: purple;" text="9801 / 99" textFill="WHITE">
+            <Label fx:id="_numberLabel" alignment="CENTER" layoutX="67.0" layoutY="85.0" prefHeight="240.0" prefWidth="360.0" style="-fx-background-color: purple;" text="121213" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="52.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Label fx:id="_correct" alignment="CENTER" layoutX="98.0" layoutY="155.0" prefHeight="58.0" prefWidth="287.0" text="CORRECT!" textFill="LIME" visible="false">
+            <Label fx:id="_correct" alignment="CENTER" layoutX="98.0" layoutY="132.0" prefHeight="58.0" prefWidth="287.0" text="CORRECT!" textFill="LIME" visible="false">
                <font>
                   <Font size="40.0" />
                </font>
@@ -113,6 +113,11 @@
             <Label fx:id="_answerWas" alignment="CENTER" layoutX="171.0" layoutY="118.0" prefHeight="17.0" prefWidth="152.0" text="ANSWER WAS:" textFill="WHITE" visible="false">
                <font>
                   <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="_kaPai" alignment="CENTER" layoutX="98.0" layoutY="190.0" prefHeight="58.0" prefWidth="287.0" text="Ka Pai!" textFill="LIME" visible="false">
+               <font>
+                  <Font size="25.0" />
                </font>
             </Label>
          </children>

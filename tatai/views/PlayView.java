@@ -1,5 +1,6 @@
 package tatai.views;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.Timer;
 
@@ -10,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,6 +22,7 @@ import tatai.utils.SpeechRecognition;
 
 
 public class PlayView {
+	
 	
 	@FXML
 	private Pane _mainPane;
@@ -80,6 +83,9 @@ public class PlayView {
 
 	@FXML
 	private Label _answerWas;
+	
+	@FXML
+	private Label _kaPai;
 
 	private PlayController _controller;
 	private Play _model;
@@ -125,6 +131,7 @@ public class PlayView {
 
 		_sorry.setVisible(false);
 		_correct.setVisible(false);
+		_kaPai.setVisible(false);
 		_tryAgain.setVisible(false);
 		_next.setVisible(false);
 		_controller.advance();
@@ -140,6 +147,7 @@ public class PlayView {
 		_controller.record();
 		_record.setDisable(true);
 		_recordingLabel.setVisible(true);
+		_skip.setDisable(true);
 	}
 
 	@FXML 
@@ -170,6 +178,7 @@ public class PlayView {
 		_skip.setVisible(true);
 		_numberLabel.setVisible(true);
 		_correct.setVisible(false);
+		_kaPai.setVisible(false);
 		_next.setVisible(false);
 
 		_sorry.setVisible(false);
@@ -232,7 +241,7 @@ public class PlayView {
 		_record.setVisible(true);
 		_retry.setVisible(false);
 		_nextLevel.setVisible(false);
-		setImage(_model.getNumber());
+		_model.setQuestion();
 		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
 		_retryLevel.setVisible(false);
 		_skip.setVisible(true);
@@ -272,16 +281,30 @@ public class PlayView {
 		_model = play;
 	}
 
-
 	/**
 	 * Sets the image and the _number field
 	 * CHANGE LATER
 	 * @param i the image we are setting to
 	 */
 	public void setImage(int i) {
-		_numberLabel.setText("" + i);
+		setImage("" + i);
 	}
-
+	
+	/**
+	 * Sets the image
+	 * @param url
+	 */
+	public void setImage(String str) {
+		_numberLabel.setText(str);
+		_image.setVisible(false);
+		_numberLabel.setVisible(true);
+	}
+	
+	public void setImage(Image image) {
+		_image.setImage(image);
+		_image.setVisible(true);
+		_numberLabel.setVisible(false);
+	}
 
 
 	/**
@@ -336,7 +359,7 @@ public class PlayView {
 	 */
 	public void recordingEnded() {
 		_record.setDisable(false);
-
+		_skip.setDisable(false);
 		_skip.setVisible(false);
 		_recordingLabel.setVisible(false);  
 
@@ -351,6 +374,7 @@ public class PlayView {
 	private void displayCorrectScreen() {
 		_numberLabel.setVisible(false);
 		_correct.setVisible(true);
+		_kaPai.setVisible(true);
 		_next.setVisible(true);
 	}
 

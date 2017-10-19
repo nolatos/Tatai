@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,36 +37,38 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="_one" layoutX="45.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="1" textFill="WHITE" visible="false">
+            <Button fx:id="_one" layoutX="45.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="EASY (1)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_three" layoutX="391.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="3" textFill="WHITE" visible="false">
+            <Button fx:id="_three" layoutX="295.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="EASY (3)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_two" layoutX="45.0" layoutY="422.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="2" textFill="WHITE" visible="false">
+            <Button fx:id="_two" layoutX="45.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (2)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_four" layoutX="391.0" layoutY="418.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="4" textFill="WHITE" visible="false">
+            <Button fx:id="_four" layoutX="294.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (4)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_five" layoutX="218.0" layoutY="477.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="65.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="5" textFill="WHITE" visible="false">
+            <Button fx:id="_five" layoutX="130.0" layoutY="505.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="241.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="INSANE (5)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <ImageView fx:id="_levels" fitHeight="35.0" fitWidth="130.0" layoutX="185.0" layoutY="242.0" visible="false">
+            <ImageView fx:id="_levels" fitHeight="35.0" fitWidth="130.0" layoutX="186.0" layoutY="201.0" visible="false">
                <image>
                   <Image url="@Levels.png" />
                </image>
             </ImageView>
+            <Label fx:id="_pronunciationLabel" alignment="CENTER" layoutX="45.0" layoutY="283.0" prefHeight="17.0" prefWidth="161.0" text="PRONUNCIATION" textFill="#ff6400" visible="false" />
+            <Label fx:id="_mathLabel" alignment="CENTER" layoutX="295.0" layoutY="283.0" prefHeight="17.0" prefWidth="161.0" text="MATH" textFill="#ff6400" visible="false" />
          </children></Pane>
       <Button fx:id="_back" layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#backToMenu" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="BACK" textFill="WHITE" visible="false">
          <font>

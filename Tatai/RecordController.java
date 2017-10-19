@@ -1,20 +1,20 @@
-//package tatai;
-//
-//import java.io.IOException;
-//
-//import javafx.application.Platform;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import javafx.scene.layout.Pane;
-//import tatai.views.*;
-//import tatai.models.*;
-//
-//public class RecordController {
-//	
+package tatai;
+
+import java.io.IOException;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import tatai.views.*;
+import tatai.models.*;
+
+public class RecordController {
+	
 //	private Record _model;
 //	private final PlayController _playC;
 //	public final Scene RECORD_SCENE;
@@ -85,8 +85,8 @@
 //		_playC.closeRecorderStage();
 //	}
 //
-//
-//    
-//
-//}
-//
+
+    
+
+}
+

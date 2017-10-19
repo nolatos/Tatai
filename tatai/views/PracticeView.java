@@ -133,6 +133,8 @@ public class PracticeView {
 
     	_recording.setVisible(true);
     	_record.setDisable(true);
+    	
+    	//Running background task of recording
     	Task<Void> task = new Task<Void>() {
     		@Override
     		public Void call() {
@@ -159,6 +161,10 @@ public class PracticeView {
     }
 
     @FXML
+    /**
+     * Shows the correct answe
+     * @param event
+     */
     void seeAns(ActionEvent event) {
     	if (_model.getCurrentNumber() <= 10) {
     		_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
@@ -326,6 +332,8 @@ public class PracticeView {
     	_checkAns.setVisible(false);
     	_seeAns.setVisible(true);
     	_ok.setVisible(false);
+    	_back.setVisible(false);
+    	_menu.setVisible(true);
     }
     
     private void recordingEnded() {

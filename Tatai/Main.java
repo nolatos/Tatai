@@ -13,27 +13,30 @@ import javafx.stage.*;
 import tatai.utils.Constants;
 import tatai.views.EnterController;
 import tatai.views.WelcomeController;
+import tatai.math.*;
 
 
 public class Main extends Application {
- 
+
 
 
 	public static void main(String[] args) {
-		System.out.println("\u00B2");
+		System.out.println("\u03C0");
+
+
 		launch(Main.class, args);
-		
-		
+
+
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("views/enter.fxml"));
 		Pane pane = (Pane) loader.load();
 		EnterController controller = loader.getController();
 		controller.setEnterStage(stage);
-		
+
 		stage.setScene(new Scene(pane));
 		stage.setResizable(false);
 		stage.show();

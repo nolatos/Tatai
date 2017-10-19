@@ -42,6 +42,12 @@ public class WelcomeController {
 
 	@FXML
 	private ImageView _levels;
+	
+	@FXML
+	private Label _mathLabel;
+	
+	@FXML
+	private Label _pronunciationLabel;
 
 
 	@FXML
@@ -148,7 +154,9 @@ public class WelcomeController {
 		_five.setVisible(true);
 		_back.setVisible(true);
 		_levels.setVisible(true);
-
+		_mathLabel.setVisible(true);
+		_pronunciationLabel.setVisible(true);
+		
 		//Menu buttons invisible
 		_practice.setVisible(false);
 		_play.setVisible(false);
@@ -170,6 +178,8 @@ public class WelcomeController {
 		_four.setVisible(false);
 		_five.setVisible(false);
 		_levels.setVisible(false);
+		_mathLabel.setVisible(false);
+		_pronunciationLabel.setVisible(false);
 
 		//Menu buttons visible
 		_practice.setVisible(true);

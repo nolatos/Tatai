@@ -8,21 +8,16 @@ import tatai.utils.SpeechRecognition;
 public abstract class Game {
 	
 	private int _score = 0;
-	private Stage _stage;
 	private int _progress = 1;
 	private int _number; //The number that is being displayed
 	private String _recognised;
 	
 	
 	
-	public void setStage(Stage stage) {
-		_stage = stage;
-	}
 	
 	
 	
-	
-	public void increaseScore() {
+	protected void increaseScore() {
 		_score++;
 	}
 	
@@ -43,9 +38,7 @@ public abstract class Game {
 		return _score;
 	}
 	
-	public Stage getStage() {
-		return _stage;
-	}
+	
 	
 	public int getProgress() {
 		return _progress;

@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import tatai.*;
+import tatai.math.*;
+import tatai.views.PlayView;
 
 public class Play extends Game {
 
@@ -12,6 +14,8 @@ public class Play extends Game {
 	private  Difficulty _hard;
 	private PlayController _controller; 
 	private boolean _retried = false;
+	private MathGenerator _generator;
+	
 	
 	public Play (Difficulty hard, PlayController controller) {
 		_hard = hard;
@@ -72,44 +76,14 @@ public class Play extends Game {
     		return false;
     	}
 	}
-	
-	/**
-	 * Returns a random number
-	 */
-	public int getNumber() {
-		double d = Math.random();
-		int i;
-		if (_hard == Difficulty.ONE) {
-			d = d * 10;
-			i = (int) d;
-			if (i >= 10) {
-				i = 9;
-			}
-		}
-		else {
-			
-			d = d * 90 + 10;
-			i = (int) d;
-			if (i > 99) {
-				i = 99;
-			}
-			else if (i < 10) {
-				i = 10;
-			}
-		}
-		
-		if (i == 0) {
-			i = 1;
-		}
-		setNumber(i);
-		return i;
-	}
+
 	
 	
-	public String getDisplayEquation() {
+	public void setQuestion() {
 		switch (_hard) {
 		//Between 1 and 10
 		case ONE:
+//			System.out.println("hi");
 			double d = Math.random();
 			d = d * 10;
 			int i = (int) d;
@@ -120,7 +94,8 @@ public class Play extends Game {
 				i = 1;
 			}
 			setNumber(i);
-			return "" + i;
+			_controller.setImage(i);
+			break;
 		//Between 10 and 99
 		case TWO:
 			d = Math.random();
@@ -133,21 +108,24 @@ public class Play extends Game {
 				i = 10;
 			}
 			setNumber(i);
-			return "" + i;
+			_controller.setImage(i);
+			break;
 		case THREE:
-			d = Math.random();
-			d = 100 * d;
-			i = (int) d;
-			if (i == 0) {
-				i = 1;
-			}
-			else if (i < 99) {
-				i = 99;
-			}
-			
-			
+			_generator = new ArithmeticGenerator();
+			_controller.setImage(_generator.generateQuestion());
+			setNumber(_generator.getAnswer());
+			break;
+		case FOUR:
+			_generator = new AlgebraGenerator();
+			_controller.setImage(_generator.generateQuestion());
+			setNumber(_generator.getAnswer());
+			break;
+		case FIVE:
+			_generator = new AlgebraGenerator();
+			_controller.setImage(_generator.generateQuestion());
+			setNumber(_generator.getAnswer());
+			break;
 		}
-		return null;
 	}
 	
 	
@@ -169,7 +147,6 @@ public class Play extends Game {
 		return !(_hard == Difficulty.FIVE);
 	}
 
-	
 	
 	
 }
