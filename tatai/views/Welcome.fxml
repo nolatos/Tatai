@@ -15,7 +15,7 @@
             <Image url="@TataiBackground.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="_mainPane" layoutX="286.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <Pane fx:id="_mainPane" layoutX="286.0" opacity="0.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <ImageView fitHeight="88.0" fitWidth="360.0" layoutX="70.0" layoutY="46.0">
                <image>
@@ -75,10 +75,15 @@
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="_logOut" layoutX="791.0" layoutY="540.0" mnemonicParsing="false" onAction="#logOut" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="27.0" prefWidth="65.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="LOGOUT" textFill="WHITE">
+      <Button fx:id="_logOut" layoutX="791.0" layoutY="540.0" mnemonicParsing="false" onAction="#logOut" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="27.0" prefWidth="65.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="LOGOUT" textFill="WHITE" visible="false">
          <font>
             <Font name="Arial Rounded MT Bold" size="8.0" />
          </font>
       </Button>
+      <Label fx:id="_welcomeLabel" alignment="CENTER" layoutX="-35.0" layoutY="238.0" opacity="0.0" prefHeight="109.0" prefWidth="971.0" text="WELCOME TO TAATAI" textFill="#ff6400">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="73.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package tatai.views;
 import java.io.IOException;
 import java.util.Optional;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -65,7 +67,7 @@ public class EnterController {
 				controller.setStage(_mainStage);
 				controller.setEnterController(this);
 
-
+				//Setting up scene
 				_menu = new Scene(pane);
 				controller.setScene(_menu);
 				_mainStage.setScene(_menu);
@@ -89,6 +91,7 @@ public class EnterController {
 					}
 				});
 				_mainStage.show();
+				controller.start();
 			}
 			catch (Exception e) {
 				e.printStackTrace();

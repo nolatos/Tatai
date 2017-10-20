@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import javax.swing.JOptionPane;
 
-import javafx.animation.FadeTransition;
+import javafx.animation.*;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -42,10 +46,10 @@ public class WelcomeController {
 
 	@FXML
 	private ImageView _levels;
-	
+
 	@FXML
 	private Label _mathLabel;
-	
+
 	@FXML
 	private Label _pronunciationLabel;
 
@@ -75,6 +79,12 @@ public class WelcomeController {
 	@FXML
 	private Pane _mainPane;
 
+	@FXML
+	private Label _welcomeLabel;
+
+	private Thread _audioClipThread;
+	private MediaPlayer _clip  = new MediaPlayer(new Media(getClass().getResource("pokarekare.mp3").toString()));
+
 
 	private Scene _menuScene;
 
@@ -90,7 +100,7 @@ public class WelcomeController {
 	 * @param event
 	 */
 	void logOut(ActionEvent event) {
-
+		stopAudioClip();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirm Logout");
 		alert.setHeaderText("Are you sure you want to log out?");
@@ -109,6 +119,8 @@ public class WelcomeController {
 	 * @throws IOException
 	 */
 	void practicePressed(ActionEvent event) throws IOException {
+		//Stopping bgm
+		stopAudioClip();
 		WelcomeController w = this;
 		this.playFadeTransition(new EventHandler<ActionEvent>() {
 			@Override
@@ -133,6 +145,48 @@ public class WelcomeController {
 
 	}
 
+	/**
+	 * Starts the Welcome scene
+	 */
+	public void start() {
+
+		//Fading in the welcome label
+		FadeTransition ft = new FadeTransition(Duration.millis(1000), _welcomeLabel);
+		ft.setFromValue(0);
+		ft.setToValue(1);
+		ft.setOnFinished(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				//Start audio clip
+				startAudioClip();
+
+				//Fade out the label
+				FadeTransition ft = new FadeTransition(Duration.millis(1000), _welcomeLabel);
+				ft.setFromValue(1);
+				ft.setToValue(0);
+				ft.setOnFinished(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						//Setting up the menu
+						_welcomeLabel.setVisible(false);
+
+						//Fade in the main pane
+						FadeTransition ft = new FadeTransition(Duration.millis(100), _mainPane);
+						ft.setFromValue(0);
+						ft.setToValue(1);
+						ft.setOnFinished(new EventHandler<ActionEvent>() {
+							@Override 
+							public void handle(ActionEvent event) {
+								_logOut.setVisible(true);
+							}
+						});
+						ft.play();
+					}
+				});
+				ft.play();
+			}
+		});
+		ft.play();
+	}
 
 	public void setEnterController(EnterController e) {
 		_enterC = e;
@@ -144,7 +198,6 @@ public class WelcomeController {
 	 * @param event
 	 */
 	void playPressed(ActionEvent event) {
-
 		//Level buttons visible
 		//		_pick.setVisible(true);
 		_one.setVisible(true);
@@ -156,7 +209,7 @@ public class WelcomeController {
 		_levels.setVisible(true);
 		_mathLabel.setVisible(true);
 		_pronunciationLabel.setVisible(true);
-		
+
 		//Menu buttons invisible
 		_practice.setVisible(false);
 		_play.setVisible(false);
@@ -195,6 +248,8 @@ public class WelcomeController {
 	 * @throws Exception
 	 */
 	void levelPressed(ActionEvent e) throws Exception {
+		stopAudioClip();
+
 		WelcomeController c = this;
 
 		//So that the thing only happens after the animation finishes playing
@@ -258,14 +313,54 @@ public class WelcomeController {
 	}
 
 	/**
+	 * Stops the audio clip
+	 */
+	private void stopAudioClip() {
+		//Ensuring the clip stops playing
+		EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				_clip.stop();
+			}
+		};
+		//Fading it out
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), onFinished,
+				new KeyValue(_clip.volumeProperty(), 0)));
+		timeline.play();
+		
+	}
+	
+	
+	private void startAudioClip() {
+		
+		//Starting the audio clip
+		Task<Void> task = new Task<Void>() {
+			@Override
+			public Void call() {
+
+				_clip.setCycleCount(MediaPlayer.INDEFINITE);
+				_clip.setVolume(0.2);
+				_clip.play();
+				return null;
+			}
+		};
+		_audioClipThread = new Thread(task);
+		_audioClipThread.setDaemon(true);
+		_audioClipThread.start();
+	}
+
+	/**
 	 * Shows the menu scene
+	 * and starts the bgm
 	 * @throws Exception
 	 */
 	public void show() throws Exception {
+		startAudioClip();
 		_mainStage.setScene(_menuScene);
 
 		_mainPane.setOpacity(1);
 	}
+
 
 
 	/**
