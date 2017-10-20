@@ -75,7 +75,7 @@ public class EnterController {
 				_mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					@Override 
 					public void handle(WindowEvent we) {
-
+						we.consume();
 
 						Alert alert = new Alert(AlertType.CONFIRMATION);
 						alert.setTitle("Confirm Exit");
@@ -83,10 +83,7 @@ public class EnterController {
 						alert.setContentText("Any unsaved progress may be lost");
 						Optional<ButtonType> result = alert.showAndWait();
 						if (result.get() == ButtonType.OK) {
-							System.exit(0);
-						}
-						else {
-							we.consume();
+							controller.close();
 						}
 					}
 				});

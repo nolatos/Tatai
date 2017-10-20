@@ -53,6 +53,8 @@ public class WelcomeController {
 	@FXML
 	private Label _pronunciationLabel;
 
+	@FXML
+	private Button _instructions;
 
 	@FXML
 	private Button _back;
@@ -94,19 +96,40 @@ public class WelcomeController {
 	@FXML
 	private Button _stats;
 
+
+
+	@FXML
+	/**
+	 * Shows the instructions page
+	 * @param event
+	 */
+	void instructionsPressed(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("instructions.fxml"));
+			Pane pane = (Pane) loader.load();
+			_mainStage.setScene(new Scene(pane));
+			InstructionView instructionV = loader.getController();
+			instructionV.setWelcomeController(this);
+		}
+		catch (Exception e) {
+
+		}
+	}
+
 	@FXML
 	/**
 	 * Takes the user back to the enter Screen
 	 * @param event
 	 */
 	void logOut(ActionEvent event) {
-		stopAudioClip();
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirm Logout");
 		alert.setHeaderText("Are you sure you want to log out?");
 		alert.setContentText("Any unsaved progress may be lost");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
+			stopAudioClip();
 			_enterC.show();
 		} 
 
@@ -327,12 +350,12 @@ public class WelcomeController {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), onFinished,
 				new KeyValue(_clip.volumeProperty(), 0)));
 		timeline.play();
-		
+
 	}
-	
-	
+
+
 	private void startAudioClip() {
-		
+
 		//Starting the audio clip
 		Task<Void> task = new Task<Void>() {
 			@Override
@@ -412,7 +435,11 @@ public class WelcomeController {
 	 * @param handler determines what happens after animation finishes
 	 */
 	private void playFadeTransition(EventHandler<ActionEvent> handler) {
-		FadeTransition ft = new FadeTransition(Duration.millis(600), _mainPane);
+		playFadeTransition(handler, 600);
+	}
+
+	private void playFadeTransition(EventHandler<ActionEvent> handler, int milliSeconds) {
+		FadeTransition ft = new FadeTransition(Duration.millis(milliSeconds), _mainPane);
 
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
@@ -420,6 +447,19 @@ public class WelcomeController {
 
 		ft.play();
 		ft.setOnFinished(handler);
+	}
+
+	/**
+	 * Closes the application
+	 */
+	public void close() {
+		this.stopAudioClip();
+		this.playFadeTransition(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		}, 1300);
 	}
 
 
