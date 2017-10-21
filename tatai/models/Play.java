@@ -1,5 +1,8 @@
 package tatai.models;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -121,9 +124,16 @@ public class Play extends Game {
 			setNumber(_generator.getAnswer());
 			break;
 		case FIVE:
-			_generator = new AlgebraGenerator();
-			_controller.setImage(_generator.generateQuestion());
-			setNumber(_generator.getAnswer());
+			_generator = new AdvancedGenerator();
+			try {
+				URL url = new URL(_generator.generateQuestion());
+				_controller.setImage(url);
+				setNumber(_generator.getAnswer());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			break;
 		}
 	}

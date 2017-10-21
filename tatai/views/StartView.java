@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import tatai.*;
 import tatai.models.Start;
 
@@ -23,6 +24,9 @@ public class StartView {
 
     @FXML
     private Button _menu;
+    
+    @FXML
+    private Pane _mainPane;
     
     
     
@@ -78,5 +82,9 @@ public class StartView {
     @FXML
     void changeColourBack(MouseEvent event) {
     	_controller.changeColourBack(event);
+    }
+    
+    public Pane getMainPane() {
+    	return _mainPane;
     }
 }

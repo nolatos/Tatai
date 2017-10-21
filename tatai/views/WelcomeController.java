@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -84,9 +85,10 @@ public class WelcomeController {
 	@FXML
 	private Label _welcomeLabel;
 
-	private Thread _audioClipThread;
-	private MediaPlayer _clip  = new MediaPlayer(new Media(getClass().getResource("pokarekare.mp3").toString()));
+	private Pane _showingPane;
 
+	private Thread _audioClipThread;
+	private MediaPlayer _clip;
 
 	private Scene _menuScene;
 
@@ -95,6 +97,7 @@ public class WelcomeController {
 
 	@FXML
 	private Button _stats;
+
 
 
 
@@ -110,6 +113,7 @@ public class WelcomeController {
 			_mainStage.setScene(new Scene(pane));
 			InstructionView instructionV = loader.getController();
 			instructionV.setWelcomeController(this);
+			_showingPane = instructionV.getShowingPane();
 		}
 		catch (Exception e) {
 
@@ -144,17 +148,16 @@ public class WelcomeController {
 	void practicePressed(ActionEvent event) throws IOException {
 		//Stopping bgm
 		stopAudioClip();
+
 		WelcomeController w = this;
 		this.playFadeTransition(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
 					//Loading the practice
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("practice.fxml"));
-					Pane pane = (Pane) loader.load();
-					Scene scene = new Scene(pane);
 					PracticeController controller = new PracticeController(w);
 					controller.show();
+					_showingPane = controller.getShowingPane();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -233,10 +236,12 @@ public class WelcomeController {
 		_mathLabel.setVisible(true);
 		_pronunciationLabel.setVisible(true);
 
+
 		//Menu buttons invisible
 		_practice.setVisible(false);
 		_play.setVisible(false);
 		_stats.setVisible(false);
+		_instructions.setVisible(false);
 	}
 
 
@@ -257,11 +262,12 @@ public class WelcomeController {
 		_mathLabel.setVisible(false);
 		_pronunciationLabel.setVisible(false);
 
+
 		//Menu buttons visible
 		_practice.setVisible(true);
 		_play.setVisible(true);
 		_stats.setVisible(true);
-
+		_instructions.setVisible(true);
 	}
 
 	@FXML
@@ -325,6 +331,7 @@ public class WelcomeController {
 							_startC.show(Difficulty.ONE);
 						}
 					}
+					_showingPane = _startC.getShowingPane();
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -382,6 +389,7 @@ public class WelcomeController {
 		_mainStage.setScene(_menuScene);
 
 		_mainPane.setOpacity(1);
+		_showingPane = _mainPane;
 	}
 
 
@@ -439,14 +447,18 @@ public class WelcomeController {
 	}
 
 	private void playFadeTransition(EventHandler<ActionEvent> handler, int milliSeconds) {
-		FadeTransition ft = new FadeTransition(Duration.millis(milliSeconds), _mainPane);
+		playFadeTransition(handler, milliSeconds, _mainPane);
+	}
+
+	private void playFadeTransition(EventHandler<ActionEvent> handler, int milliSeconds, Node node) {
+		FadeTransition ft = new FadeTransition(Duration.millis(milliSeconds), node);
 
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
-
+		ft.setOnFinished(handler);
 
 		ft.play();
-		ft.setOnFinished(handler);
+
 	}
 
 	/**
@@ -459,8 +471,64 @@ public class WelcomeController {
 			public void handle(ActionEvent event) {
 				System.exit(0);
 			}
-		}, 1300);
+		}, 1300, _showingPane);
 	}
+
+
+	public void initialize() {
+		_clip = new MediaPlayer(new Media(getClass().getResource("pokarekare.mp3").toString()));
+
+		_showingPane = _mainPane;
+	}
+
+
+
+
+
+	public void setShowingPane(Pane pane) {
+		_showingPane = pane;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

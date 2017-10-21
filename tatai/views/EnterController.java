@@ -16,8 +16,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tatai.Controller;
 
-public class EnterController {
+public class EnterController implements Controller {
 
 	public final Stage _mainStage = new Stage();
 	private Scene _menu;
@@ -28,6 +29,9 @@ public class EnterController {
 
 	@FXML
 	private Button _enter;
+	
+	@FXML
+	private WelcomeController _welcomeC;
 
 	private boolean _started = false;
 
@@ -63,13 +67,13 @@ public class EnterController {
 
 				Pane pane = (Pane)loader.load();
 
-				WelcomeController controller = loader.<WelcomeController>getController();
-				controller.setStage(_mainStage);
-				controller.setEnterController(this);
+				_welcomeC = loader.<WelcomeController>getController();
+				_welcomeC.setStage(_mainStage);
+				_welcomeC.setEnterController(this);
 
 				//Setting up scene
 				_menu = new Scene(pane);
-				controller.setScene(_menu);
+				_welcomeC.setScene(_menu);
 				_mainStage.setScene(_menu);
 				_mainStage.setResizable(false);
 				_mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -83,12 +87,12 @@ public class EnterController {
 						alert.setContentText("Any unsaved progress may be lost");
 						Optional<ButtonType> result = alert.showAndWait();
 						if (result.get() == ButtonType.OK) {
-							controller.close();
+							_welcomeC.close();
 						}
 					}
 				});
 				_mainStage.show();
-				controller.start();
+				_welcomeC.start();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -111,6 +115,10 @@ public class EnterController {
 	public void show() {
 		_enterStage.show();
 		_mainStage.close();
+	}
+	
+	public Pane getShowingPane() {
+		return null; //Don't need it
 	}
 
 }

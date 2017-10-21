@@ -16,7 +16,7 @@
             <Image url="@TataiBackground.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="286.0" layoutY="96.0" prefHeight="511.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <Pane fx:id="_mainPane" layoutX="286.0" layoutY="96.0" prefHeight="511.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <ListView fx:id="_progressList" layoutX="-5.0" layoutY="67.0" prefHeight="189.0" prefWidth="510.0" style="-fx-background-color: black;" />
             <Label fx:id="_levelLabel" alignment="CENTER" layoutX="118.0" prefHeight="60.0" prefWidth="264.0" text="ONE" textFill="#ed5f0c">

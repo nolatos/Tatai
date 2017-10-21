@@ -1,6 +1,7 @@
 package tatai.views;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Optional;
 import java.util.Timer;
 
@@ -159,6 +160,7 @@ public class PlayView {
 	 */
 	void skip(ActionEvent event) {
 		_model.setRetry(true);
+		
 		_record.setVisible(false);
 		_check.setVisible(false);
 		_skip.setVisible(false);
@@ -294,7 +296,7 @@ public class PlayView {
 	
 	/**
 	 * Sets the image
-	 * @param url
+	 * @param str the equation we are displaying
 	 */
 	public void setImage(String str) {
 		_numberLabel.setText(str);
@@ -302,11 +304,12 @@ public class PlayView {
 		_numberLabel.setVisible(true);
 	}
 	
-	public void setImage(Image image) {
-		_image.setImage(image);
+	public void setImage(URL url) {
+		_image.setImage(new Image(url.toString()));
 		_image.setVisible(true);
 		_numberLabel.setVisible(false);
 	}
+	
 
 
 	/**
@@ -375,6 +378,7 @@ public class PlayView {
 	 */
 	private void displayCorrectScreen() {
 		_numberLabel.setVisible(false);
+		_image.setVisible(false);
 		_correct.setVisible(true);
 		_kaPai.setVisible(true);
 		_next.setVisible(true);
@@ -385,6 +389,7 @@ public class PlayView {
 	private void displayIncorrectScreen() {
 		//Getting rid of the number Label
 		_numberLabel.setVisible(false);
+		_image.setVisible(false);
 		if (_model.retried()) {
 			_sorry.setVisible(true);
 			_next.setVisible(true);
@@ -417,6 +422,8 @@ public class PlayView {
 	}
 
 
-
+	public Pane getMainPane() {
+		return _mainPane;
+	}
 
 }

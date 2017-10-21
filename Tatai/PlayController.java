@@ -3,6 +3,8 @@ package tatai;
 
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.Optional;
 
 import javafx.concurrent.*;
@@ -84,6 +86,12 @@ public class PlayController implements Controller {
 		
 	}
 	
+	/**
+	 * Returns the pane that is currently showing
+	 */
+	public Pane getShowingPane() {
+		return _view.getMainPane();
+	}
 	
 	public void backToStart() {
 		_startC.show();
@@ -119,7 +127,11 @@ public class PlayController implements Controller {
     	_view.setImage(i);
     }
     
-    public void setImage(String url) {
+    public void setImage(String equation) {
+    	_view.setImage(equation);
+    }
+    
+    public void setImage(URL url) {
     	_view.setImage(url);
     }
     	
@@ -128,7 +140,7 @@ public class PlayController implements Controller {
      * Shows the game screen
      */
     public void show() throws IOException {
-    	
+    	_startC.setShowingPane(getShowingPane());
     	_startC.MAIN_STAGE.setScene(_playScene);
     	_model.setQuestion();
     	

@@ -82,6 +82,8 @@ public class PracticeView {
     @FXML
     private Button _ok;
     
+    private Pane _showingPane = _choosePane; //The pane that is currently showing
+    
     @FXML
     void playBack(ActionEvent event) {
     	Task<Void> task = new Task<Void>() {
@@ -116,6 +118,7 @@ public class PracticeView {
     
     @FXML
     void ok(ActionEvent event) {
+    	_showingPane = _choosePane;
     	EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent e) {
@@ -197,16 +200,7 @@ public class PracticeView {
 		_menu.setVisible(true);
 		revertToOriginal();
 		_recordPane.setVisible(false);
-//    	EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
-//    		@Override
-//    		public void handle(ActionEvent e) {
-//    			
-//    		}
-//    	};
-//    	
-//    	this.fadeOut(eh, _recordPane);
-//    	
-    	
+		_showingPane = _choosePane;
     }
 
     @FXML
@@ -257,7 +251,7 @@ public class PracticeView {
     				};
     				
     				fadeOut(eh, _choosePane);
-    				
+    				_showingPane = _recordPane;
     			}
     		}
     		else {
@@ -345,10 +339,14 @@ public class PracticeView {
     }
     
     
+    public Pane getShowingPane() {
+    	return _showingPane;
+    }
     
     
-    
-    
+    public void initialize() {
+    	_showingPane = _choosePane; //The pane that is currently showing
+    }
     
 
 }

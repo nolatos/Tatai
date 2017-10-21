@@ -18,7 +18,7 @@ import javafx.stage.*;
 import tatai.models.*;
 import tatai.views.*;
 
-public class StartController {
+public class StartController implements Controller {
 
 
 	private Controller _gameC;
@@ -68,6 +68,10 @@ public class StartController {
 
 
 	}
+	
+	public Pane getShowingPane() {
+		return _view.getMainPane();
+	}
 
 	/**
 	 * Goes back to the menu
@@ -115,9 +119,14 @@ public class StartController {
 
 
 	public void show(Difficulty difficulty) {
+		_welcomeC.setShowingPane(getShowingPane());
 		show();
 		_view.setLevel(difficulty);
 		_model.setDifficulty(difficulty);
+	}
+	
+	public void setShowingPane(Pane pane) {
+		_welcomeC.setShowingPane(pane);
 	}
 
 	/**

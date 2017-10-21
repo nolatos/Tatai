@@ -4,11 +4,21 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import tatai.Controller;
 
-public class InstructionView {
+/**
+ * Faced unforseen consequences. Went with "view rather than "controller"
+ * @author olive
+ *
+ */
+public class InstructionView implements Controller {
 
     @FXML
     private Button _back;
+    
+    @FXML
+    private Pane _mainPane;
     
     private WelcomeController _welcomeC;
 
@@ -39,5 +49,12 @@ public class InstructionView {
     public void setWelcomeController(WelcomeController controller) {
     	_welcomeC = controller;
     }
+    
+    public Pane getShowingPane() {
+    	return _mainPane;
+    }
 
+    public void show() {
+    	
+    }
 }

@@ -54,6 +54,10 @@ public class PracticeController implements Controller {
 			e.printStackTrace();
 		}
 	}
+	
+	public Pane getShowingPane() {
+		return _view.getShowingPane();
+	}
 }
 
 

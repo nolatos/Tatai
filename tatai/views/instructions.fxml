@@ -17,7 +17,7 @@
             <Image url="@TataiBackground.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="286.0" layoutY="-4.0" prefHeight="611.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <Pane fx:id="_mainPane" layoutX="286.0" layoutY="-4.0" prefHeight="611.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <ImageView fitHeight="69.0" fitWidth="500.0" layoutY="29.0">
                <image>

@@ -39,9 +39,9 @@
                </font>
             </Button>
             <ProgressBar fx:id="_progress" layoutX="67.0" layoutY="14.0" prefHeight="18.0" prefWidth="360.0" progress="0.0" />
-            <ImageView fx:id="_image" fitHeight="232.0" fitWidth="360.0" layoutX="131.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="_image" fitHeight="292.0" fitWidth="360.0" layoutX="67.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../../../TataiFiles/Images/2.png" />
+                  <Image url="@../math/Capture.PNG" />
                </image>
             </ImageView>
             <Label fx:id="_numberLabel" alignment="CENTER" layoutX="67.0" layoutY="85.0" prefHeight="240.0" prefWidth="360.0" style="-fx-background-color: purple;" text="121213" textFill="WHITE">

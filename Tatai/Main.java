@@ -23,9 +23,6 @@ public class Main extends Application {
 
 
 	public static void main(String[] args) {
-		System.out.println("\u03C0");
-
-
 		launch(Main.class, args);
 
 
@@ -50,6 +47,7 @@ public class Main extends Application {
 		stage.setScene(new Scene(pane));
 		stage.setResizable(false);
 		stage.show();
+
 
 
 	}
