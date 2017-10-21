@@ -25,47 +25,47 @@ public class UserData {
 	 * @throws IOException 
 	 */
 	public static void login(String[] x){
-		String name = "";
-		for (int k = 0; k < x.length; k++) {
-			name = name + "_" + x[k];
-		}
-		_user = new File(Constants.getUserPath().concat("/" + name));
-		boolean exists = (_user.exists() && !_user.isDirectory());
-		if (!exists) {
-			try {
-				_user.createNewFile();
-				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
-				for (int j = 1; j < 6; j++) {
-					B.write("Times Scored in Level " + j + " ,0,0,0,0,0,0,0,0,0,0,0,");
-					B.newLine();
-				}
-				for (int i = 0; i < 10; i++) {
-					B.write("No Data");
-					B.newLine();
-				}
-				B.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			int counter = 1;
-			Scanner sc = new Scanner(new File(_user.toString()));
-			_history.clear();
-			_stats.clear();
-			while (sc.hasNextLine() && counter < 16) {
-				if (counter < 6) {
-					_stats.add(sc.nextLine());
-				}
-				if (counter > 5) {
-					_history.add(sc.nextLine());
-				}
-				counter++;
-			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("login method failed to create file");
-		}
+//		String name = "";
+//		for (int k = 0; k < x.length; k++) {
+//			name = name + "_" + x[k];
+//		}
+//		_user = new File(Constants.getUserPath().concat("/" + name));
+//		boolean exists = (_user.exists() && !_user.isDirectory());
+//		if (!exists) {
+//			try {
+//				_user.createNewFile();
+//				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
+//				for (int j = 1; j < 6; j++) {
+//					B.write("Times Scored in Level " + j + " ,0,0,0,0,0,0,0,0,0,0,0,");
+//					B.newLine();
+//				}
+//				for (int i = 0; i < 10; i++) {
+//					B.write("No Data");
+//					B.newLine();
+//				}
+//				B.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		try {
+//			int counter = 1;
+//			Scanner sc = new Scanner(new File(_user.toString()));
+//			_history.clear();
+//			_stats.clear();
+//			while (sc.hasNextLine() && counter < 16) {
+//				if (counter < 6) {
+//					_stats.add(sc.nextLine());
+//				}
+//				if (counter > 5) {
+//					_history.add(sc.nextLine());
+//				}
+//				counter++;
+//			}
+//			sc.close();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("login method failed to create file");
+//		}
 	}
 
 	/**

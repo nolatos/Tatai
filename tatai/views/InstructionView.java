@@ -9,7 +9,7 @@ import tatai.Controller;
 
 /**
  * Faced unforseen consequences. Went with "view rather than "controller"
- * @author olive
+ * @author oliver
  *
  */
 public class InstructionView implements Controller {

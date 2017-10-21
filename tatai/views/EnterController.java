@@ -44,14 +44,19 @@ public class EnterController implements Controller {
 	 */
 	void enter(ActionEvent event) throws IOException {
 
-		boolean correct = true;		
+		boolean correct = false;		
 		String user = _name.getText();		
 		char[] chars = user.toCharArray();
 		if (chars.length == 0) {
 			correct = false;
 		}
 		
+		
+		
 		for (char c : chars) {
+			if (Character.isLetter(c) || Character.isDigit(c)) {
+				correct = true;
+			}
 			if (!Character.isLetter(c) && !Character.isDigit(c) && !(c == ' ')) {
 				correct = false;
 				break;
@@ -101,7 +106,7 @@ public class EnterController implements Controller {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText(null);
-			alert.setContentText("Input must be either letters, numbers or spaces");
+			alert.setContentText("Input must be either letters, numbers or spaces, and can't be all spaces");
 			alert.show();
 		}
 

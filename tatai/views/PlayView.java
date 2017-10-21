@@ -23,8 +23,8 @@ import tatai.utils.SpeechRecognition;
 
 
 public class PlayView {
-	
-	
+
+
 	@FXML
 	private Pane _mainPane;
 
@@ -51,12 +51,12 @@ public class PlayView {
 
 	@FXML
 	private Button _next;
-
-	@FXML
-	private Button _nextLevel;
-
-	@FXML
-	private Button _retryLevel;
+//
+//	@FXML
+//	private Button _nextLevel;
+//
+//	@FXML
+//	private Button _retryLevel;
 
 	@FXML
 	private Button _check;
@@ -84,7 +84,7 @@ public class PlayView {
 
 	@FXML
 	private Label _answerWas;
-	
+
 	@FXML
 	private Label _kaPai;
 
@@ -93,38 +93,38 @@ public class PlayView {
 
 	@FXML
 	private Button _playBack;
-	
-	
 
-	@FXML
-	void retryLevel(ActionEvent event) {
-		_model.reset();
-		restart();
-	}
 
-	@FXML
-	void nextLevel(ActionEvent event) {
 
-		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
-		ft.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				_controller.nextLevel();
-				restart(); 
-				_mainPane.setOpacity(1);
-			}
-		});
-		ft.setFromValue(1);
-		ft.setToValue(0);
-		ft.play();
-	}
+//	@FXML
+//	void retryLevel(ActionEvent event) {
+//		_model.reset();
+//		restart();
+//	}
+
+//	@FXML
+//	void nextLevel(ActionEvent event) {
+//
+//		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
+//		ft.setOnFinished(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				_controller.nextLevel();
+//				restart(); 
+//				_mainPane.setOpacity(1);
+//			}
+//		});
+//		ft.setFromValue(1);
+//		ft.setToValue(0);
+//		ft.play();
+//	}
 
 	@FXML
 	/**
 	 * Advances to next number. Turns off/on relevant components
 	 * @param event
 	 */
-	 void next(ActionEvent event) {
+	void next(ActionEvent event) {
 		_model.setRetry(false);
 
 
@@ -160,7 +160,7 @@ public class PlayView {
 	 */
 	void skip(ActionEvent event) {
 		_model.setRetry(true);
-		
+
 		_record.setVisible(false);
 		_check.setVisible(false);
 		_skip.setVisible(false);
@@ -241,13 +241,13 @@ public class PlayView {
 	 * Restarts the game
 	 */
 	public void restart() {
-		
+
 		_record.setVisible(true);
 		_retry.setVisible(false);
-		_nextLevel.setVisible(false);
+//		_nextLevel.setVisible(false);
 		_model.setQuestion();
 		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
-		_retryLevel.setVisible(false);
+//		_retryLevel.setVisible(false);
 		_skip.setVisible(true);
 	}
 
@@ -258,26 +258,18 @@ public class PlayView {
 
 		_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
 		_record.setVisible(false);
-		_retryLevel.setVisible(true);
-		_nextLevel.setVisible(true);
+//		_retryLevel.setVisible(true);
+//		_nextLevel.setVisible(true);
 		_skip.setVisible(false);
 		_check.setVisible(false);
 
-		if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-			_nextLevel.setDisable(false);
-		}
-		else {
-			_nextLevel.setDisable(true);
-		}
+//		if (_model.getScore() >= 0.8 * _model.TOTAL_QUESTIONS && _controller.canLevelUp()) {
+//			_nextLevel.setDisable(false);
+//		}
+//		else {
+//			_nextLevel.setDisable(true);
+//		}
 
-
-
-		if (_model.getScore() >= 8 && _controller.canLevelUp()) {
-			_nextLevel.setDisable(false);
-		}
-		else {
-			_nextLevel.setDisable(true);
-		}
 
 	}
 
@@ -293,7 +285,7 @@ public class PlayView {
 	public void setImage(int i) {
 		setImage("" + i);
 	}
-	
+
 	/**
 	 * Sets the image
 	 * @param str the equation we are displaying
@@ -303,13 +295,13 @@ public class PlayView {
 		_image.setVisible(false);
 		_numberLabel.setVisible(true);
 	}
-	
+
 	public void setImage(URL url) {
 		_image.setImage(new Image(url.toString()));
 		_image.setVisible(true);
 		_numberLabel.setVisible(false);
 	}
-	
+
 
 
 	/**
@@ -421,6 +413,7 @@ public class PlayView {
 
 	}
 
+	
 
 	public Pane getMainPane() {
 		return _mainPane;

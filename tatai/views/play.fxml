@@ -75,17 +75,7 @@
                   <Font size="44.0" />
                </font>
             </Label>
-            <Button fx:id="_retryLevel" layoutX="68.0" layoutY="363.0" mnemonicParsing="false" onAction="#retryLevel" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="RETRY!" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Button>
             <Button fx:id="_next" layoutX="185.0" layoutY="363.0" mnemonicParsing="false" onAction="#next" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="NEXT!" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="_nextLevel" layoutX="300.0" layoutY="363.0" mnemonicParsing="false" onAction="#nextLevel" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="NEXT!" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
