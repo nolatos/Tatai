@@ -186,6 +186,7 @@ public class PlayController implements Controller {
 				_model.TOTAL_QUESTIONS, _model.getDifficulty());
 		
 		UserData.updateHistory(_model.getScore(), _model.getDifficulty());
+		UserData.updateStats(_model.getScore(), _model.getDifficulty());
 		try {
 			resultC.show();
 		} catch (IOException e) {

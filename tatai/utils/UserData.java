@@ -40,20 +40,19 @@ public class UserData {
 				_user.createNewFile();
 				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
 				for (int j = 1; j < 6; j++) {
-					String str = ",0,0,0,0,0,0,0,0,0,0";
+					String str = ",0,0,0,0,0";
 					if (j < 4) {
-						B.write("Times Scored in Level " + j + " ,0" + str);
-						B.newLine();
-					}
-					else if(j == 4) {
-						char n;
 						String repeated = new String(new char[2]).replace("\0", str);
 						B.write("Times Scored in Level " + j + " ,0" + repeated);
 						B.newLine();
 					}
-					else if(j == 5) {
-						char n;
+					else if(j == 4) {
 						String repeated = new String(new char[3]).replace("\0", str);
+						B.write("Times Scored in Level " + j + " ,0" + repeated);
+						B.newLine();
+					}
+					else if(j == 5) {
+						String repeated = new String(new char[4]).replace("\0", str);
 						B.write("Times Scored in Level " + j + " ,0" + repeated);
 						B.newLine();
 					}
@@ -95,11 +94,9 @@ public class UserData {
 	public static void updateHistory(int S, Difficulty D) {
 		int i = 10;
 		switch (D) {
-		case THREE: i = 15;
+		case FOUR : i = 20;
 		break;
-		case FOUR : i = 15;
-		break;
-		case FIVE : i = 20;
+		case FIVE : i = 30;
 		break;
 		default:
 		break;
@@ -186,7 +183,7 @@ public class UserData {
 	public static Difficulty highestDifficultyUnlocked() {
 		int P = -1;
 		Difficulty D = tatai.Difficulty.ONE;
-		for (int i = 0; i < getStats().size()-1; i++) {
+		for (int i = 0; i < getStats().size()-2; i++) {
 			String[] tmp = UserData.splitStatElement(i);
 			P = (int) Math.ceil((tmp.length-2) * 0.8);
 			for (int j = P+1; j < tmp.length; j++) {

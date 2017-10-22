@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import tatai.*;
+import tatai.utils.UserData;
 
 public class WelcomeController implements Controller {
 
@@ -169,6 +170,13 @@ public class WelcomeController implements Controller {
 	@FXML
 	void statsPressed(ActionEvent event) {
 
+		StatsController statsC = new StatsController(this);
+		try {
+			statsC.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -388,7 +396,7 @@ public class WelcomeController implements Controller {
 	public void show() throws IOException {
 		startAudioClip();
 		_mainStage.setScene(_menuScene);
-
+		setShowingController(this);
 		_mainPane.setOpacity(1);
 	}
 
@@ -466,13 +474,20 @@ public class WelcomeController implements Controller {
 	 */
 	public void close() {
 		this.stopAudioClip();
+		try {
+			UserData.storeUserData();
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.playFadeTransition(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.exit(0);
 			}
 		}, 1300, _showingController.getShowingPane());
-//		System.exit(0);
+		
 	}
 
 

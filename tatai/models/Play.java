@@ -59,7 +59,7 @@ public class Play extends Game {
 			break;
 		case FOUR:
 			_hard = Difficulty.FIVE;
-			break;			
+			break;	
 		}
 		
 		return String.valueOf(_hard);

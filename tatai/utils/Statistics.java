@@ -5,15 +5,15 @@ import tatai.Difficulty;
 public class Statistics {
 	/**
 	 * Returns the average score gotten for a given level, or the total number of games played at a given level.
-	 * By using "0" as the input for D, you will get the combined stats of all levels. 
 	 * Returns -1 if inputs are invalid.
 	 * @param D (difficulty level)
-	 * @param C ('A' to get average, 'T' to get Total Games)
+	 * @param C (true to get average, false to get Total Games)
 	 * @return
 	 */
-	public static  int average(Difficulty D, char C) {
+	public static int average(Difficulty D, boolean C) {
 		int totalScore = 0;
 		int totalGames = 0;
+		int average = 0;
 		int L = -1;
 		switch (D) {
 		case ONE: L = 0;
@@ -34,13 +34,15 @@ public class Statistics {
 			totalScore = totalScore + (Integer.valueOf(tmp[i]) * (i-1));
 		}
 		
-		int average = totalScore/totalGames;
+		if (totalGames != 0) {
+			average = Math.round(totalScore/totalGames);	
+		}
 
-		if (C == 'A') {
+		if (C) {
 			return average;
 		}
 		
-		else if (C == 'T') {
+		else if (!C) {
 			return totalGames;
 		}
 		
