@@ -94,31 +94,8 @@ public class PlayView {
 	@FXML
 	private Button _playBack;
 
-
-
-	//	@FXML
-	//	void retryLevel(ActionEvent event) {
-	//		_model.reset();
-	//		restart();
-	//	}
-
-	//	@FXML
-	//	void nextLevel(ActionEvent event) {
-	//
-	//		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
-	//		ft.setOnFinished(new EventHandler<ActionEvent>() {
-	//			@Override
-	//			public void handle(ActionEvent event) {
-	//				_controller.nextLevel();
-	//				restart(); 
-	//				_mainPane.setOpacity(1);
-	//			}
-	//		});
-	//		ft.setFromValue(1);
-	//		ft.setToValue(0);
-	//		ft.play();
-	//	}
-
+	
+	
 	@FXML
 	/**
 	 * Advances to next number. Turns off/on relevant components
@@ -151,6 +128,9 @@ public class PlayView {
 		_record.setDisable(true);
 		_recordingLabel.setVisible(true);
 		_skip.setDisable(true);
+		
+		_playBack.setDisable(true);
+		_check.setDisable(true);
 	}
 
 	@FXML 
@@ -343,12 +323,15 @@ public class PlayView {
 	 * @param event
 	 */
 	void playBack(ActionEvent event) {
-
+		_playBack.setDisable(true);
+		_record.setDisable(true);
 
 		Task<Void> task = new Task<Void>() {
 			@Override
 			public Void call() {
 				SpeechRecognition.playback();
+				_playBack.setDisable(false);
+				_record.setDisable(false);
 				return null;
 			}
 		};
@@ -371,6 +354,8 @@ public class PlayView {
 		_recordingLabel.setVisible(false);  
 
 		_playBack.setVisible(true);
+		_playBack.setDisable(false);
+		_check.setDisable(false);
 		_check.setVisible(true);
 	}
 
