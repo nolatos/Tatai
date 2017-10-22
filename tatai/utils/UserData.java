@@ -24,48 +24,48 @@ public class UserData {
 	 * @param x
 	 * @throws IOException 
 	 */
-	public static void login(String[] x){
-//		String name = "";
-//		for (int k = 0; k < x.length; k++) {
-//			name = name + "_" + x[k];
-//		}
-//		_user = new File(Constants.getUserPath().concat("/" + name));
-//		boolean exists = (_user.exists() && !_user.isDirectory());
-//		if (!exists) {
-//			try {
-//				_user.createNewFile();
-//				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
-//				for (int j = 1; j < 6; j++) {
-//					B.write("Times Scored in Level " + j + " ,0,0,0,0,0,0,0,0,0,0,0,");
-//					B.newLine();
-//				}
-//				for (int i = 0; i < 10; i++) {
-//					B.write("No Data");
-//					B.newLine();
-//				}
-//				B.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		try {
-//			int counter = 1;
-//			Scanner sc = new Scanner(new File(_user.toString()));
-//			_history.clear();
-//			_stats.clear();
-//			while (sc.hasNextLine() && counter < 16) {
-//				if (counter < 6) {
-//					_stats.add(sc.nextLine());
-//				}
-//				if (counter > 5) {
-//					_history.add(sc.nextLine());
-//				}
-//				counter++;
-//			}
-//			sc.close();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("login method failed to create file");
-//		}
+	public static void login(String[] x) {
+		String name = "";
+		for (int k = 0; k < x.length; k++) {
+			name = name + "_" + x[k];
+		}
+		_user = new File(Constants.getUserPath().concat("/" + name));
+		boolean exists = (_user.exists() && !_user.isDirectory());
+		if (!exists) {
+			try {
+				_user.createNewFile();
+				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
+				for (int j = 1; j < 6; j++) {
+					B.write("Times Scored in Level " + j + " ,0,0,0,0,0,0,0,0,0,0,0,");
+					B.newLine();
+				}
+				for (int i = 0; i < 10; i++) {
+					B.write("No Data");
+					B.newLine();
+				}
+				B.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			int counter = 1;
+			Scanner sc = new Scanner(new File(_user.toString()));
+			_history.clear();
+			_stats.clear();
+			while (sc.hasNextLine() && counter < 16) {
+				if (counter < 6) {
+					_stats.add(sc.nextLine());
+				}
+				if (counter > 5) {
+					_history.add(sc.nextLine());
+				}
+				counter++;
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("login method failed to create file");
+		}
 	}
 
 	/**
@@ -89,12 +89,22 @@ public class UserData {
 	public static void updateStats(int S, Difficulty N) {
 		int D = -1;
 		switch (N) {
-		case ONE: D = 0;
-		case TWO: D = 1;
-		case THREE: D = 2;
-		case FOUR: D = 3;
-		case FIVE: D = 4;
-			
+		case ONE: 
+			D = 0;
+			break;
+		case TWO:
+			D = 1;
+			break;
+		case THREE: 
+			D = 2;
+			break;
+		case FOUR: 
+			D = 3;
+			break;
+		case FIVE: 
+			D = 4;
+			break;
+
 		}
 		String[] tmp = splitStatElement(D);
 		int i = Integer.valueOf(tmp[S+1]);
@@ -109,9 +119,9 @@ public class UserData {
 		String updated = builder.toString();
 		_stats.set(D, updated);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Splits the List containing the statistics for ease of editing without using too many elements
 	 * @param i
@@ -131,9 +141,9 @@ public class UserData {
 	public static void storeUserData() throws IOException {
 		BufferedWriter Writer = new BufferedWriter(new FileWriter(_user));
 		for (String element : _stats) {
-					Writer.write(element);;
-					Writer.newLine();
-				}
+			Writer.write(element);;
+			Writer.newLine();
+		}
 		for (String element : _history) {
 			Writer.write(element);
 			Writer.newLine();
@@ -142,6 +152,7 @@ public class UserData {
 	}
 
 	public static List<String> getHistory() {
+		System.out.println(_history.size());
 		return _history;
 	}
 

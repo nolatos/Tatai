@@ -82,6 +82,7 @@ public class PracticeView {
     @FXML
     private Button _ok;
     
+    
     private Pane _showingPane = _choosePane; //The pane that is currently showing
     
     @FXML
@@ -327,6 +328,8 @@ public class PracticeView {
     	_seeAns.setVisible(true);
     	_ok.setVisible(false);
     	_back.setVisible(false);
+    	_correct.setVisible(false);
+    	_whoops.setVisible(false);
     	_menu.setVisible(true);
     }
     

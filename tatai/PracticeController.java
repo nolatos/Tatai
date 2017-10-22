@@ -19,6 +19,7 @@ public class PracticeController implements Controller {
 
 	public void show() {
 		_welcomeC.getMainStage().setScene(_menuScene);
+		WelcomeController.setShowingController(this);
 	}
 	
 	public PracticeController(WelcomeController welcomeC) throws IOException {

@@ -39,7 +39,7 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_next" layoutX="250.0" layoutY="343.0" mnemonicParsing="false" onAction="#next" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="NEXT!" textFill="WHITE" AnchorPane.rightAnchor="67.5">
+                  <Button fx:id="_next" disable="true" layoutX="250.0" layoutY="343.0" mnemonicParsing="false" onAction="#next" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="NEXT!" textFill="WHITE" AnchorPane.rightAnchor="67.5">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
@@ -68,7 +68,7 @@
             </Label>
             <Label fx:id="_numberLabel" alignment="CENTER" layoutX="69.0" layoutY="193.0" prefHeight="240.0" prefWidth="360.0" style="-fx-background-color: purple;" text="121213" textFill="WHITE">
                <font>
-                  <Font name="Cambria Math" size="52.0" />
+                  <Font name="Cambria Math" size="38.0" />
                </font>
             </Label>
          </children>

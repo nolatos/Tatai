@@ -17,6 +17,7 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tatai.Controller;
+import tatai.utils.UserData;
 
 public class EnterController implements Controller {
 
@@ -66,7 +67,11 @@ public class EnterController implements Controller {
 		if (correct) {
 			
 			//If the username is acceptable, then we proceed
+			//To login
 			_enterStage.close();
+			_name.setText("");
+			UserData.login(user.split(" "));
+			
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("welcome.fxml"));
 
@@ -92,6 +97,12 @@ public class EnterController implements Controller {
 						alert.setContentText("Any unsaved progress may be lost");
 						Optional<ButtonType> result = alert.showAndWait();
 						if (result.get() == ButtonType.OK) {
+							try {
+								UserData.storeUserData();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							_welcomeC.close();
 						}
 					}

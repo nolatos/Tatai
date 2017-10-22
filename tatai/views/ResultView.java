@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import tatai.Difficulty;
 import tatai.ResultController;
 import tatai.models.Result;
 
@@ -130,8 +131,23 @@ public class ResultView {
 		return _mainPane;
 	}
 
+	/**
+	 * 
+	 */
 	public void setScoreLabel() {
 		String str = "" + _model.getScore() + "/" + _model.getTotalQuestions();
 		_numberLabel.setText(str);
+		
+		if (_model.getScore() >= 0.8 * _model.getTotalQuestions()) {
+			_next.setDisable(false);
+		}
+		else {
+			_next.setDisable(true);
+		}
 	}
+	
+	public void setLevelLabel(Difficulty difficulty) {
+		_levelLabel.setText("" + difficulty);
+	}
+	
 }

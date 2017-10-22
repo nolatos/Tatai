@@ -23,7 +23,8 @@ public class ResultController implements Controller {
 	 * @param playC to get the results from
 	 * @param startC to switch scenes to
 	 */
-	public ResultController(PlayController playC, StartController startC, int score, int total) {
+	public ResultController(PlayController playC, StartController startC, 
+			int score, int total, Difficulty difficulty) {
 		_playC = playC;
 		_startC = startC;
 
@@ -35,7 +36,7 @@ public class ResultController implements Controller {
 			_resultScene = new Scene(pane);
 			_model = new Result(this, score, total);
 			_view.set(this, _model);
-
+			_view.setLevelLabel(difficulty);
 
 		}
 		catch (Exception e) {
@@ -49,7 +50,7 @@ public class ResultController implements Controller {
 
 	public void show() throws IOException {
 		//Setting up the showing Pane
-		_startC.setShowingPane(getShowingPane());
+		WelcomeController.setShowingController(this);
 
 		_startC.MAIN_STAGE.setScene(_resultScene);
 	}
@@ -80,6 +81,9 @@ public class ResultController implements Controller {
 		_startC.backToMenu();
 	}
 
+	/**
+	 * 
+	 */
 	public void retry() {
 		_playC.restart();
 		try {

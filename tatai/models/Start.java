@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tatai.Difficulty;
 import tatai.StartController;
+import tatai.utils.UserData;
 
 public class Start {
 
@@ -22,6 +23,9 @@ public class Start {
 		_difficulty = difficulty;
 		_controller = controller;
 		
+		for (String s : UserData.getHistory()) {
+			_history.add(s);
+		}
 				
 	}
 	
@@ -37,9 +41,13 @@ public class Start {
 	 * @return the observableList, which make up the items
 	 */
 	public ObservableList<String> addToList(String str) {
-		_history.add(str);
+		if (str != null) {
+			_history.add(str);
+		}
+		
 		return _history;
 	}
+	
 	
 	
 	

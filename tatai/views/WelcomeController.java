@@ -29,7 +29,7 @@ import javafx.stage.Window;
 import javafx.util.Duration;
 import tatai.*;
 
-public class WelcomeController {
+public class WelcomeController implements Controller {
 
 	@FXML
 	private EnterController _enterC;
@@ -85,8 +85,6 @@ public class WelcomeController {
 	@FXML
 	private Label _welcomeLabel;
 
-	private Pane _showingPane;
-
 	private Thread _audioClipThread;
 	private MediaPlayer _clip;
 
@@ -94,6 +92,8 @@ public class WelcomeController {
 
 	private boolean _started = false;
 	private Scene _startScene;
+	
+	private static Controller _showingController;
 
 	@FXML
 	private Button _stats;
@@ -113,7 +113,6 @@ public class WelcomeController {
 			_mainStage.setScene(new Scene(pane));
 			InstructionView instructionV = loader.getController();
 			instructionV.setWelcomeController(this);
-			_showingPane = instructionV.getShowingPane();
 		}
 		catch (Exception e) {
 
@@ -148,6 +147,8 @@ public class WelcomeController {
 	void practicePressed(ActionEvent event) throws IOException {
 		//Stopping bgm
 		stopAudioClip();
+		
+		
 
 		WelcomeController w = this;
 		this.playFadeTransition(new EventHandler<ActionEvent>() {
@@ -157,7 +158,6 @@ public class WelcomeController {
 					//Loading the practice
 					PracticeController controller = new PracticeController(w);
 					controller.show();
-					_showingPane = controller.getShowingPane();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -176,6 +176,8 @@ public class WelcomeController {
 	 */
 	public void start() {
 
+		_showingController = this;
+		
 		//Fading in the welcome label
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), _welcomeLabel);
 		ft.setFromValue(0);
@@ -186,7 +188,7 @@ public class WelcomeController {
 				startAudioClip();
 
 				//Fade out the label
-				FadeTransition ft = new FadeTransition(Duration.millis(1000), _welcomeLabel);
+				FadeTransition ft = new FadeTransition(Duration.millis(2000), _welcomeLabel);
 				ft.setFromValue(1);
 				ft.setToValue(0);
 				ft.setOnFinished(new EventHandler<ActionEvent>() {
@@ -331,7 +333,6 @@ public class WelcomeController {
 							_startC.show(Difficulty.ONE);
 						}
 					}
-					_showingPane = _startC.getShowingPane();
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -384,12 +385,11 @@ public class WelcomeController {
 	 * and starts the bgm
 	 * @throws Exception
 	 */
-	public void show() throws Exception {
+	public void show() throws IOException {
 		startAudioClip();
 		_mainStage.setScene(_menuScene);
 
 		_mainPane.setOpacity(1);
-		_showingPane = _mainPane;
 	}
 
 
@@ -471,24 +471,28 @@ public class WelcomeController {
 			public void handle(ActionEvent event) {
 				System.exit(0);
 			}
-		}, 1300, _showingPane);
+		}, 1300, _showingController.getShowingPane());
+//		System.exit(0);
 	}
 
 
 	public void initialize() {
 		_clip = new MediaPlayer(new Media(getClass().getResource("pokarekare.mp3").toString()));
 
-		_showingPane = _mainPane;
 	}
 
 
-
-
-
-	public void setShowingPane(Pane pane) {
-		_showingPane = pane;
+	public Pane getShowingPane() {
+		return _mainPane;
 	}
 
+//	public void setShowingPane(Pane pane) {
+//		_showingPane = pane;
+//	}
+
+	public static void setShowingController(Controller controller) {
+		_showingController = controller;
+	}
 
 
 

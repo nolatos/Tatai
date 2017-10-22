@@ -65,7 +65,7 @@ public class StartController implements Controller {
 		_model = new Start(this, difficulty);
 		_view.setLevel(difficulty);
 		_view.setModel(_model);
-
+		_view.addToList(_model.addToList(null));
 
 	}
 	
@@ -119,16 +119,13 @@ public class StartController implements Controller {
 
 
 	public void show(Difficulty difficulty) {
-		_welcomeC.setShowingPane(getShowingPane());
+		WelcomeController.setShowingController(this);
 		show();
 		_view.setLevel(difficulty);
 		_model.setDifficulty(difficulty);
 	}
 	
-	public void setShowingPane(Pane pane) {
-		_welcomeC.setShowingPane(pane);
-	}
-
+	
 	/**
 	 * Shows the scene
 	 */

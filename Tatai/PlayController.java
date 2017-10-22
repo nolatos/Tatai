@@ -24,6 +24,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import tatai.models.*;
 import tatai.utils.SpeechRecognition;
+import tatai.utils.UserData;
 import tatai.views.*;
 
 public class PlayController implements Controller {
@@ -128,7 +129,7 @@ public class PlayController implements Controller {
 	 * Shows the game screen
 	 */
 	public void show() throws IOException {
-		_startC.setShowingPane(getShowingPane());
+		WelcomeController.setShowingController(this);
 		_startC.MAIN_STAGE.setScene(_playScene);
 		_model.setQuestion();
 
@@ -174,13 +175,17 @@ public class PlayController implements Controller {
 	 * Ends the game
 	 */
 	private void terminate() {
-
+		
+		//Terminating the view
 		_view.terminate(_model.getScore());
 
-		_startC.addToList("Score: " + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
+		//Adding the stats
+		_startC.addToList("Score: ," + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
 				" Diffculty: " + String.valueOf(_model.getDifficulty()));
 		ResultController resultC = new ResultController(this, _startC, _model.getScore(),
-				_model.TOTAL_QUESTIONS);
+				_model.TOTAL_QUESTIONS, _model.getDifficulty());
+		
+		UserData.updateHistory(_model.getScore(), _model.getDifficulty(), _model.TOTAL_QUESTIONS);
 		try {
 			resultC.show();
 		} catch (IOException e) {

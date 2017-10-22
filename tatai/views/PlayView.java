@@ -51,12 +51,12 @@ public class PlayView {
 
 	@FXML
 	private Button _next;
-//
-//	@FXML
-//	private Button _nextLevel;
-//
-//	@FXML
-//	private Button _retryLevel;
+	//
+	//	@FXML
+	//	private Button _nextLevel;
+	//
+	//	@FXML
+	//	private Button _retryLevel;
 
 	@FXML
 	private Button _check;
@@ -96,28 +96,28 @@ public class PlayView {
 
 
 
-//	@FXML
-//	void retryLevel(ActionEvent event) {
-//		_model.reset();
-//		restart();
-//	}
+	//	@FXML
+	//	void retryLevel(ActionEvent event) {
+	//		_model.reset();
+	//		restart();
+	//	}
 
-//	@FXML
-//	void nextLevel(ActionEvent event) {
-//
-//		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
-//		ft.setOnFinished(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//				_controller.nextLevel();
-//				restart(); 
-//				_mainPane.setOpacity(1);
-//			}
-//		});
-//		ft.setFromValue(1);
-//		ft.setToValue(0);
-//		ft.play();
-//	}
+	//	@FXML
+	//	void nextLevel(ActionEvent event) {
+	//
+	//		FadeTransition ft = new FadeTransition(Duration.millis(800), _mainPane);
+	//		ft.setOnFinished(new EventHandler<ActionEvent>() {
+	//			@Override
+	//			public void handle(ActionEvent event) {
+	//				_controller.nextLevel();
+	//				restart(); 
+	//				_mainPane.setOpacity(1);
+	//			}
+	//		});
+	//		ft.setFromValue(1);
+	//		ft.setToValue(0);
+	//		ft.play();
+	//	}
 
 	@FXML
 	/**
@@ -180,7 +180,17 @@ public class PlayView {
 
 		_record.setVisible(true);
 		_skip.setVisible(true);
-		_numberLabel.setVisible(true);
+
+		if (_model.getDifficulty() == Difficulty.FIVE) {
+			_numberLabel.setVisible(false);
+			_image.setVisible(true);
+		}
+		else {
+			_numberLabel.setVisible(true);
+			_image.setVisible(false);
+
+		}
+
 		_correct.setVisible(false);
 		_kaPai.setVisible(false);
 		_next.setVisible(false);
@@ -244,10 +254,10 @@ public class PlayView {
 
 		_record.setVisible(true);
 		_retry.setVisible(false);
-//		_nextLevel.setVisible(false);
+		//		_nextLevel.setVisible(false);
 		_model.setQuestion();
 		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
-//		_retryLevel.setVisible(false);
+		//		_retryLevel.setVisible(false);
 		_skip.setVisible(true);
 	}
 
@@ -258,17 +268,17 @@ public class PlayView {
 
 		_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
 		_record.setVisible(false);
-//		_retryLevel.setVisible(true);
-//		_nextLevel.setVisible(true);
+		//		_retryLevel.setVisible(true);
+		//		_nextLevel.setVisible(true);
 		_skip.setVisible(false);
 		_check.setVisible(false);
 
-//		if (_model.getScore() >= 0.8 * _model.TOTAL_QUESTIONS && _controller.canLevelUp()) {
-//			_nextLevel.setDisable(false);
-//		}
-//		else {
-//			_nextLevel.setDisable(true);
-//		}
+		//		if (_model.getScore() >= 0.8 * _model.TOTAL_QUESTIONS && _controller.canLevelUp()) {
+		//			_nextLevel.setDisable(false);
+		//		}
+		//		else {
+		//			_nextLevel.setDisable(true);
+		//		}
 
 
 	}
@@ -413,7 +423,7 @@ public class PlayView {
 
 	}
 
-	
+
 
 	public Pane getMainPane() {
 		return _mainPane;
