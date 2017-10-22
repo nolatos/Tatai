@@ -180,12 +180,12 @@ public class PlayController implements Controller {
 		_view.terminate(_model.getScore());
 
 		//Adding the stats
-		_startC.addToList("Score: ," + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
-				" Diffculty: " + String.valueOf(_model.getDifficulty()));
+		_startC.addToList("Score: " + _model.getScore() + "/" + _model.TOTAL_QUESTIONS + 
+				", Diffculty: " + String.valueOf(_model.getDifficulty()));
 		ResultController resultC = new ResultController(this, _startC, _model.getScore(),
 				_model.TOTAL_QUESTIONS, _model.getDifficulty());
 		
-		UserData.updateHistory(_model.getScore(), _model.getDifficulty(), _model.TOTAL_QUESTIONS);
+		UserData.updateHistory(_model.getScore(), _model.getDifficulty());
 		try {
 			resultC.show();
 		} catch (IOException e) {

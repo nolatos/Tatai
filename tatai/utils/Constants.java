@@ -18,7 +18,7 @@ public class Constants {
 	
 	public static String getImagePath() {
 		return IMAGE_PATH;
-	} 
+	}
 	
 
 }

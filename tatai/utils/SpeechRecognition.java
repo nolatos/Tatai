@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SpeechRecognition {
-	
+
 	private static String _path = Constants.getWorkingDirectory();
-	
+
 	/**
 	 * Uses Bash terminal to execute the SpeechRecognition Script
 	 * @return
@@ -19,29 +19,25 @@ public class SpeechRecognition {
 	 * @throws InterruptedException
 	 */
 	public static String runVoiceRecognition() throws IOException, InterruptedException {
-//
-//		try {
-//			ProcessBuilder _builder = new ProcessBuilder("/bin/bash","-c","rm foo.wav; ./GoSpeech");
-//			Process process = _builder.start();
-//			process.waitFor();
-//
-//
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//
-//
-//		return getResults();
 
-		int i = (int) (10 * Math.random());
-		if (i == 0) {
-			i = 1;
+		try {
+			ProcessBuilder _builder = new ProcessBuilder("/bin/bash","-c","./GoSpeech");
+			Process process = _builder.start();
+			process.waitFor();
+
+
 		}
-		return translation(i);
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+
+		return getResults();
+
+
 	}
-	
+
 	/**
 	 * Returns the words recognised by GoSpeech
 	 * @return
@@ -82,30 +78,30 @@ public class SpeechRecognition {
 		sc.close();
 		return result;
 	}
-	
+
 	public static void playback() {
-//		try {
-//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
-//			Process process = _play.start();
-//			process.waitFor();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "aplay foo.wav");
+			Process process = _play.start();
+			process.waitFor();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-//        public static void removeAudioFile() {
-//		try {
-//			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
-//			Process process = _play.start();
-//			process.waitFor();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public static void removeAudioFile() {
+		try {
+			ProcessBuilder _play = new ProcessBuilder("/bin/bash", "-c", "rm foo.wav");
+			Process process = _play.start();
+			process.waitFor();
 
-	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	/**
 	 * Translates a number into the Maori spelling for said number for comparison when checking against the 
 	 * speech recognitions result.
