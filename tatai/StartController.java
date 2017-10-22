@@ -119,7 +119,7 @@ public class StartController implements Controller {
 
 
 	public void show(Difficulty difficulty) {
-		WelcomeController.setShowingController(this);
+		
 		show();
 		_view.setLevel(difficulty);
 		_model.setDifficulty(difficulty);
@@ -130,6 +130,7 @@ public class StartController implements Controller {
 	 * Shows the scene
 	 */
 	public void show() {
+		WelcomeController.setShowingController(this);
 		MAIN_STAGE.setScene(START_SCENE);
 
 	}

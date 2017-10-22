@@ -38,7 +38,7 @@ public class Play extends Game {
 			TOTAL_QUESTIONS = 15;
 			break;			
 		case FIVE:
-			TOTAL_QUESTIONS = 20;
+			TOTAL_QUESTIONS = 5;
 			break;
 		default:
 			TOTAL_QUESTIONS = 10;

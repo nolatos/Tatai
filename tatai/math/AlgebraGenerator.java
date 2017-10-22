@@ -56,45 +56,6 @@ public class AlgebraGenerator implements MathGenerator {
 			str = "" + a + "x\u00B2" + B + C + "=0";
 			return str;
 		}
-		else if (probability < 0.75) {
-			int number = (int) (10 * Math.random());
-			_answer = (int) (10 * Math.random());
-			filterAnswer();
-			int b = number - _answer;
-			int c = - number * _answer;
-			String B;
-			String C;
-			
-			//Filtering the coefficients
-			if (b < -1) {
-				B = "" + b + "x";
-			}
-			else if (b == 0) {
-				B = "";
-			}
-			else if (b == 1) {
-				B = "+x";
-			}
-			else if (b == -1) {
-				B = "-x";
-			}
-			else {
-				B = "+" + b + "x";
-			}
-			
-			if (c == 0) {
-				C = "";
-			}
-			else if (c > 0) {
-				C = "+" + c;
-			}
-			else {
-				C = "" + c;
-			}
-			
-			str = "x\u00B2" + B + C + "=0";
-			return str;
-		}
 		else {
 			int number = (int) (10 * Math.random());
 			_answer = (int) (10 * Math.random());

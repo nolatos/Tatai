@@ -94,9 +94,11 @@ public class UserData {
 	public static void updateHistory(int S, Difficulty D) {
 		int i = 10;
 		switch (D) {
-		case FOUR : i = 20;
+		case THREE: i = 15;
 		break;
-		case FIVE : i = 30;
+		case FOUR : i = 15;
+		break;
+		case FIVE : i = 5;
 		break;
 		default:
 		break;
