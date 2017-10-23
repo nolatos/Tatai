@@ -9,6 +9,7 @@ public class Stats {
 	private Difficulty _difficulty;
 	private int _totalGames;
 	private int _average;
+	private int _highScore;
 	private StatsController _controller;
 	
 	public Stats(StatsController controller) {
@@ -64,9 +65,13 @@ public class Stats {
 		setStats();
 	}
 	
+	/**
+	 * Sets the stats fields
+	 */
 	private void setStats() {
 		_totalGames = Statistics.average(_difficulty, false);
 		_average = Statistics.average(_difficulty, true);
+		_highScore = Statistics.highscore(_difficulty);
 	}
 	
 	
@@ -80,5 +85,14 @@ public class Stats {
 	
 	public int getAverage() {
 		return _average;
+	}
+	
+	public int getHighScore() {
+		return _highScore;
+	}
+	
+	public void update() {
+		setStats();
+		
 	}
 }

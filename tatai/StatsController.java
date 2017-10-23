@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import tatai.models.Stats;
+import tatai.utils.UserData;
 import tatai.views.*;
 
 public class StatsController implements Controller {
@@ -81,6 +82,14 @@ public class StatsController implements Controller {
 	}
 
 	private void setStatsLabels() {
-		_view.setLabels(_model.getDifficulty(), _model.getTotalGames(), _model.getAverage());
+		_view.setLabels(_model.getDifficulty(), _model.getTotalGames(), 
+				_model.getAverage(), _model.getHighScore());
+	}
+	
+	/**
+	 * Clears all statistics
+	 */
+	public void clearStats() {
+		UserData.clearStats();
 	}
 }

@@ -137,6 +137,12 @@ public class WelcomeController implements Controller {
 		if (result.get() == ButtonType.OK) {
 			stopAudioClip();
 			_enterC.show();
+			try {
+				UserData.storeUserData();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} 
 
 	}

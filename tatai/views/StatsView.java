@@ -1,9 +1,12 @@
 package tatai.views;
 
+import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import tatai.Difficulty;
@@ -32,6 +35,12 @@ public class StatsView {
 
     @FXML
     private Button _back;
+    
+    @FXML
+    private Label _highScore;
+
+    @FXML
+    private Button _clear;
     
     private StatsController _controller;
     private Stats _model;
@@ -62,6 +71,20 @@ public class StatsView {
     	_controller.previous();
     }
     
+    @FXML
+    void clearStats() {
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setHeaderText("Are you sure you want to clear all stats?");
+    	alert.setContentText("THIS CANNOT BE UNDONE");
+    	Optional<ButtonType> option = alert.showAndWait();
+    	if (option.get() == ButtonType.OK) {
+    		_controller.clearStats();
+    		_model.update();
+    		this.setLabels(_model.getDifficulty(), _model.getTotalGames(),
+    				_model.getAverage(), _model.getHighScore());
+    	}
+    }
+    
     /**
      * Sets the model and the controller
      * @param controller
@@ -78,10 +101,11 @@ public class StatsView {
      * @param totalGames
      * @param average
      */
-    public void setLabels(Difficulty difficulty, int totalGames, int average) {
+    public void setLabels(Difficulty difficulty, int totalGames, int average, int highScore) {
     	_levelLabel.setText("" + difficulty);
     	_totalGames.setText("" + totalGames);
     	_averageScore.setText("" + average);
+    	_highScore.setText("" + highScore);
     }
     
     /**
@@ -91,5 +115,7 @@ public class StatsView {
     public Pane getShowingPane() {
     	return _mainPane;
     }
+    
+    
 
 }
