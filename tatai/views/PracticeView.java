@@ -135,6 +135,10 @@ public class PracticeView {
     @FXML
     void record(ActionEvent event) {
 
+    	_seeAns.setDisable(true);
+    	_playBack.setDisable(true);
+    	_checkAns.setDisable(true);
+    	
     	_recording.setVisible(true);
     	_record.setDisable(true);
     	
@@ -334,6 +338,11 @@ public class PracticeView {
     }
     
     private void recordingEnded() {
+    	
+    	_seeAns.setDisable(false);
+    	_playBack.setDisable(false);
+    	_checkAns.setDisable(false);
+    	
     	_record.setDisable(false);
     	_recording.setVisible(false);
     	_playBack.setVisible(true);
