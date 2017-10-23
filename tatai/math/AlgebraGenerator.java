@@ -1,5 +1,7 @@
 package tatai.math;
 
+import tatai.Difficulty;
+
 /**
  * Generates linear and quadratic equations
  * @author olive
@@ -11,7 +13,7 @@ public class AlgebraGenerator implements MathGenerator {
 	
 	private int _answer;
 
-	public String generateQuestion() {
+	public Question generateQuestion() {
 		double probability = Math.random();
 		String str;
 		if (probability < 0.5) {
@@ -54,7 +56,8 @@ public class AlgebraGenerator implements MathGenerator {
 			}
 			
 			str = "" + a + "x\u00B2" + B + C + "=0";
-			return str;
+			Question question = new Question(_answer, str, Difficulty.FOUR);
+			return question;
 		}
 		else {
 			int number = (int) (10 * Math.random());
@@ -93,13 +96,12 @@ public class AlgebraGenerator implements MathGenerator {
 			}
 			
 			str = "x\u00B2" + B + C + "=0";
-			return str;
+			Question question = new Question(_answer, str, Difficulty.FOUR);
+			return question;
 		}
 	}
 	
-	public int getAnswer() {
-		return _answer;
-	}
+
 	
 	/**
 	 * Filters the answer so it is between 1 and 99 inclusive

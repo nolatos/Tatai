@@ -24,9 +24,9 @@
                   <Image url="@instructionLogo.png" />
                </image>
             </ImageView>
-            <TabPane layoutX="19.0" layoutY="150.0" prefHeight="404.0" prefWidth="467.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="_tabs" layoutX="19.0" layoutY="150.0" prefHeight="404.0" prefWidth="467.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Practice">
+                <Tab fx:id="_practice" text="Practice">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -35,7 +35,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Pronunciation">
+                <Tab fx:id="_pronunciation" text="Pronunciation">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -43,7 +43,7 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Math Easy">
+                  <Tab fx:id="_three" text="Math Easy">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -52,7 +52,7 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Math Hard">
+                  <Tab fx:id="_four" text="Math Hard">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -61,11 +61,11 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Math Insane">
+                  <Tab fx:id="_insane" text="Insane">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea editable="false" prefHeight="378.0" prefWidth="467.0" text="                                            LEVEL 5: ADVANCED MATHS&#10;&#10;WARNING!!!! THIS LEVEL IS INTENDED FOR PEOPLE WITH A GOOD BACKGROUND &#10;IN MATHEMATICS TO CHALLENGE THEIR MATHEMATICAL SKILLS WHILE &#10;PRACTICING TE REO MAORI. IF YOU HAVE MATHEMATICAL ANXIETY OR &#10;ANY RELATED CONDITION, DO NOT PROCEED BEYOND LEVEL 3.&#10;&#10;This level is designed to really test your mathematical skills and knowledge. Based&#10;on the NCEA Level 3 course of the New Zealand curriculum, this level will&#10;challenge those of you who have excelled in high school mathematics. As before,&#10;a math problem will be displayed. What the question requires will be displayed&#10;on the question, but there will always be exactly ONE answer between 1 and 99 &#10;inclusive. You are to record, yourself saying that number in Te Reo Maori. The &#10;rest is all the same as the previous levels.&#10;&#10;The total number of questions in this level is 20. &#10;&#10;Good luck!" />
+                              <TextArea editable="false" prefHeight="378.0" prefWidth="467.0" text="                                            LEVEL 5: ADVANCED MATHS&#10;&#10;WARNING!!!! THIS LEVEL IS INTENDED FOR PEOPLE WITH A GOOD BACKGROUND &#10;IN MATHEMATICS TO CHALLENGE THEIR MATHEMATICAL SKILLS WHILE &#10;PRACTICING TE REO MAORI. IF YOU HAVE MATHEMATICAL ANXIETY OR &#10;ANY RELATED CONDITION, DO NOT PROCEED BEYOND LEVEL 3.&#10;&#10;This level is designed to really test your mathematical skills and knowledge. Based&#10;on the NCEA Level 3 course and a bit of Scholarship Calculus of the New Zealand &#10;curriculum, this level will challenge those of you who have excelled in high school &#10;mathematics. As before, a math problem will be displayed. What the question&#10;requires will be displayed on the question, but there will always be exactly ONE &#10;answer between 1 and 99 inclusive. You are to record, yourself saying that number&#10;in Te Reo Maori. The rest is all the same as the previous levels.&#10;&#10;The total number of questions in this level is 5. &#10;&#10;Good luck!" />
                            </children>
                         </AnchorPane>
                     </content>

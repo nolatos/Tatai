@@ -5,14 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import tatai.Controller;
+import tatai.*;
 
 /**
  * Faced unforseen consequences. Went with "view rather than "controller"
  * @author oliver
  *
  */
-public class InstructionView implements Controller {
+public class InstructionView {
 
     @FXML
     private Button _back;
@@ -20,7 +20,25 @@ public class InstructionView implements Controller {
     @FXML
     private Pane _mainPane;
     
-    private WelcomeController _welcomeC;
+    @FXML
+    private Tab _practice;
+
+    @FXML
+    private Tab _pronunciation;
+
+    @FXML
+    private Tab _three;
+
+    @FXML
+    private Tab _four;
+
+    @FXML
+    private Tab _insane;
+    
+    @FXML
+    private TabPane _tabs;
+    
+    private InstructionController _controller;
 
     @FXML
     /**
@@ -28,33 +46,27 @@ public class InstructionView implements Controller {
      * @param event
      */
     void backToMenu(ActionEvent event) {
-    	try {
-			_welcomeC.show();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	_controller.backToMenu();
     }
 
     @FXML
     void changeColour(MouseEvent event) {
-    	_welcomeC.changeColour(event);
+    	_controller.changeColour(event);
     }
 
     @FXML
     void changeColourBack(MouseEvent event) {
-    	_welcomeC.changeColourBack(event);
+    	_controller.changeColourBack(event);
     }
     
-    public void setWelcomeController(WelcomeController controller) {
-    	_welcomeC = controller;
+
+    public void setController(InstructionController controller) {
+    	_controller = controller;
     }
     
     public Pane getShowingPane() {
     	return _mainPane;
     }
-
-    public void show() {
-    	
-    }
+    
+    
 }

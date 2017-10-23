@@ -2,10 +2,12 @@ package tatai;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import tatai.math.Question;
 import tatai.models.Result;
 import tatai.views.*;
 
@@ -47,10 +49,15 @@ public class ResultController implements Controller {
 
 
 	}
+	
+	public void setTableItems(ObservableList<Question> questions) {
+		_view.setTableItems(questions);
+	}
 
-	public void show() throws IOException {
+	public void show() {
 		//Setting up the showing Pane
 		WelcomeController.setShowingController(this);
+		_startC.getWelcomeController().startAudioClip();
 
 		_startC.MAIN_STAGE.setScene(_resultScene);
 	}
@@ -71,6 +78,7 @@ public class ResultController implements Controller {
 	 * Advances to the next Level
 	 */
 	public void nextLevel() {
+		
 		_playC.nextLevel();
 	}
 
@@ -85,6 +93,7 @@ public class ResultController implements Controller {
 	 * 
 	 */
 	public void retry() {
+		stopAudioClip();
 		_playC.restart();
 		try {
 			_playC.show();
@@ -92,5 +101,13 @@ public class ResultController implements Controller {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean canLevelUp() {
+		return _playC.canLevelUp();
+	}
+	
+	public void stopAudioClip() {
+		_startC.getWelcomeController().stopAudioClip();
 	}
 }

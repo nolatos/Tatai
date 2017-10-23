@@ -1,5 +1,6 @@
 package tatai.math;
 
+import tatai.Difficulty;
 import tatai.models.Play;
 
 /**
@@ -19,21 +20,22 @@ public class ArithmeticGenerator implements MathGenerator {
 	/**
 	 * Returns a String which represents an equation. 
 	 */
-	public String generateQuestion() {
+	public Question generateQuestion() {
 		_answer = (int) (99 * Math.random());
 		filterAnswer();
+		String str;
 		double probability = Math.random();
 		if (probability < 0.25) {
 			//Addition
 			int number1 = (int)(_answer * Math.random());
 			int number2 = _answer - number1;
-			return "" + number1 + " " + ADDITION_SYMBOL + " " + number2;
+			str =  "" + number1 + " " + ADDITION_SYMBOL + " " + number2;
 		}
 		else if (probability < 0.5) {
 			//Subtraction
 			int number1 = (int) (150 * Math.random());
 			int number2 = number1 + _answer;
-			return "" + number2 + " " + SUBTRACTION_SYMBOL + " " + number1;
+			str = "" + number2 + " " + SUBTRACTION_SYMBOL + " " + number1;
 		}
 		else if (probability < 0.75) {
 			//Multiplication
@@ -51,7 +53,7 @@ public class ArithmeticGenerator implements MathGenerator {
 			}
 			
 			_answer = number1 * number2;
-			return "" + number1 + " " + MULTIPLICATION_SYMBOL + " " + number2;
+			str = "" + number1 + " " + MULTIPLICATION_SYMBOL + " " + number2;
 		}
 		else {
 			
@@ -63,13 +65,13 @@ public class ArithmeticGenerator implements MathGenerator {
 				number1 = 1;
 			}
 			int number2 = number1 * _answer;
-			return "" + number2 + " " + DIVISION_SYMBOL + " " + number1;
+			str = "" + number2 + " " + DIVISION_SYMBOL + " " + number1;
 		}
+		Question question = new Question(_answer, str, Difficulty.THREE);
+		return question;
 	}
 	
-	public int getAnswer() {
-		return _answer;
-	}
+	
 	
 	/**
 	 * Filters the answer so it is between 1 and 99 inclusive

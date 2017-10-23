@@ -93,11 +93,13 @@ public class WelcomeController implements Controller {
 
 	private boolean _started = false;
 	private Scene _startScene;
-	
+
 	private static Controller _showingController;
 
+	private boolean _audioPlaying = false;;
+
 	@FXML
-	private Button _stats;
+	private Button _stats; 
 
 
 
@@ -108,16 +110,8 @@ public class WelcomeController implements Controller {
 	 * @param event
 	 */
 	void instructionsPressed(ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("instructions.fxml"));
-			Pane pane = (Pane) loader.load();
-			_mainStage.setScene(new Scene(pane));
-			InstructionView instructionV = loader.getController();
-			instructionV.setWelcomeController(this);
-		}
-		catch (Exception e) {
-
-		}
+		InstructionController controller = new InstructionController(this);
+		controller.show();
 	}
 
 	@FXML
@@ -148,8 +142,8 @@ public class WelcomeController implements Controller {
 	void practicePressed(ActionEvent event) throws IOException {
 		//Stopping bgm
 		stopAudioClip();
-		
-		
+
+
 
 		WelcomeController w = this;
 		this.playFadeTransition(new EventHandler<ActionEvent>() {
@@ -185,7 +179,9 @@ public class WelcomeController implements Controller {
 	public void start() {
 
 		_showingController = this;
-		
+
+
+		enableButtons();
 		//Fading in the welcome label
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), _welcomeLabel);
 		ft.setFromValue(0);
@@ -196,7 +192,7 @@ public class WelcomeController implements Controller {
 				startAudioClip();
 
 				//Fade out the label
-				FadeTransition ft = new FadeTransition(Duration.millis(2000), _welcomeLabel);
+				FadeTransition ft = new FadeTransition(Duration.millis(1800), _welcomeLabel);
 				ft.setFromValue(1);
 				ft.setToValue(0);
 				ft.setOnFinished(new EventHandler<ActionEvent>() {
@@ -354,38 +350,45 @@ public class WelcomeController implements Controller {
 	/**
 	 * Stops the audio clip
 	 */
-	private void stopAudioClip() {
-		//Ensuring the clip stops playing
-		EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				_clip.stop();
-			}
-		};
-		//Fading it out
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), onFinished,
-				new KeyValue(_clip.volumeProperty(), 0)));
-		timeline.play();
+	public void stopAudioClip() {
+//		if (_audioPlaying) {
+//			_audioPlaying = false;
+			//Ensuring the clip stops playing
+			EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					_clip.stop();
+				}
+			};
+			//Fading it out
+			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.8), onFinished,
+					new KeyValue(_clip.volumeProperty(), 0)));
+			timeline.play();
+//		}
 
 	}
 
+	/**
+	 * Starts the bgm
+	 */
+	public void startAudioClip() {
+//		if (!_audioPlaying) {
+//			_audioPlaying = true;
+			//Starting the audio clip
+			Task<Void> task = new Task<Void>() {
+				@Override
+				public Void call() {
 
-	private void startAudioClip() {
-
-		//Starting the audio clip
-		Task<Void> task = new Task<Void>() {
-			@Override
-			public Void call() {
-
-				_clip.setCycleCount(MediaPlayer.INDEFINITE);
-				_clip.setVolume(0.2);
-				_clip.play();
-				return null;
-			}
-		};
-		_audioClipThread = new Thread(task);
-		_audioClipThread.setDaemon(true);
-		_audioClipThread.start();
+					_clip.setCycleCount(MediaPlayer.INDEFINITE);
+					_clip.setVolume(0.2);
+					_clip.play();
+					return null;
+				}
+			};
+			_audioClipThread = new Thread(task);
+			_audioClipThread.setDaemon(true);
+			_audioClipThread.start();
+//		}
 	}
 
 	/**
@@ -451,7 +454,7 @@ public class WelcomeController implements Controller {
 	 * @param handler determines what happens after animation finishes
 	 */
 	private void playFadeTransition(EventHandler<ActionEvent> handler) {
-		playFadeTransition(handler, 600);
+		playFadeTransition(handler, 1200);
 	}
 
 	private void playFadeTransition(EventHandler<ActionEvent> handler, int milliSeconds) {
@@ -487,7 +490,7 @@ public class WelcomeController implements Controller {
 				System.exit(0);
 			}
 		}, 1300, _showingController.getShowingPane());
-		
+
 	}
 
 
@@ -501,14 +504,31 @@ public class WelcomeController implements Controller {
 		return _mainPane;
 	}
 
-//	public void setShowingPane(Pane pane) {
-//		_showingPane = pane;
-//	}
+	//	public void setShowingPane(Pane pane) {
+	//		_showingPane = pane;
+	//	}
 
 	public static void setShowingController(Controller controller) {
 		_showingController = controller;
 	}
 
+
+	private void enableButtons() {
+		Difficulty difficulty = UserData.highestDifficultyUnlocked();
+		System.out.println(difficulty);
+		switch (difficulty) {
+		case FIVE:
+			_five.setDisable(false);
+		case FOUR:
+			_four.setDisable(false);
+		case THREE:
+			_three.setDisable(false);
+		case TWO:
+			_two.setDisable(false);
+		default:
+			break;
+		}
+	}
 
 
 }

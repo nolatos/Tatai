@@ -151,5 +151,8 @@ public class StartController implements Controller {
 		_welcomeC.changeColourBack(event);
 	}
 
+	public WelcomeController getWelcomeController() {
+		return this._welcomeC;
+	}
 
 }

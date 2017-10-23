@@ -3,6 +3,8 @@ package tatai.models;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -18,7 +20,8 @@ public class Play extends Game {
 	private PlayController _controller; 
 	private boolean _retried = false;
 	private MathGenerator _generator;
-	
+	private ObservableList<Question> _questions = FXCollections.observableArrayList();
+	private Question _currentQuestion;
 	
 	public Play (Difficulty hard, PlayController controller) {
 		_hard = hard;
@@ -86,7 +89,6 @@ public class Play extends Game {
 		switch (_hard) {
 		//Between 1 and 10
 		case ONE:
-//			System.out.println("hi");
 			double d = Math.random();
 			d = d * 10;
 			int i = (int) d;
@@ -97,7 +99,9 @@ public class Play extends Game {
 				i = 1;
 			}
 			setNumber(i);
+			
 			_controller.setImage(i);
+			_currentQuestion = new Question(i, Difficulty.ONE);
 			break;
 		//Between 10 and 99
 		case TWO:
@@ -112,23 +116,28 @@ public class Play extends Game {
 			}
 			setNumber(i);
 			_controller.setImage(i);
+			_currentQuestion = new Question(i, Difficulty.TWO);
 			break;
 		case THREE:
 			_generator = new ArithmeticGenerator();
-			_controller.setImage(_generator.generateQuestion());
-			setNumber(_generator.getAnswer());
+			_currentQuestion = _generator.generateQuestion();
+			
+			_controller.setImage(_currentQuestion.getQuestion());
+			setNumber(_currentQuestion.getAnswer());
 			break;
 		case FOUR:
 			_generator = new AlgebraGenerator();
-			_controller.setImage(_generator.generateQuestion());
-			setNumber(_generator.getAnswer());
+			_currentQuestion = _generator.generateQuestion();
+			_controller.setImage(_currentQuestion.getQuestion());
+			setNumber(_currentQuestion.getAnswer());
 			break;
 		case FIVE:
 			_generator = new AdvancedGenerator();
+			_currentQuestion = _generator.generateQuestion();
 			try {
-				URL url = new URL(_generator.generateQuestion());
+				URL url = new URL(_currentQuestion.getQuestion());
 				_controller.setImage(url);
-				setNumber(_generator.getAnswer());
+				setNumber(_currentQuestion.getAnswer());
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -136,6 +145,9 @@ public class Play extends Game {
 			
 			break;
 		}
+		
+		//Adding the question to the list
+		_questions.add(_currentQuestion);
 	}
 	
 	
@@ -157,6 +169,12 @@ public class Play extends Game {
 		return !(_hard == Difficulty.FIVE);
 	}
 
+	public Question getCurrentQuestion() {
+		return _currentQuestion;
+	}
 	
+	public ObservableList<Question> getQuestions() {
+		return _questions;
+	}
 	
 }

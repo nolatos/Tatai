@@ -143,8 +143,9 @@ public class PlayController implements Controller {
 	 */
 	public void record() {
 
-
+		
 		_background.restart();
+		_model.getCurrentQuestion().setRecognisedString(_model.getRecognised());
 	}
 
 	/**
@@ -184,15 +185,10 @@ public class PlayController implements Controller {
 				", Diffculty: " + String.valueOf(_model.getDifficulty()));
 		ResultController resultC = new ResultController(this, _startC, _model.getScore(),
 				_model.TOTAL_QUESTIONS, _model.getDifficulty());
-		
+		resultC.setTableItems(_model.getQuestions());
 		UserData.updateHistory(_model.getScore(), _model.getDifficulty());
 		UserData.updateStats(_model.getScore(), _model.getDifficulty());
-		try {
-			resultC.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		resultC.show();
 	}
 
 

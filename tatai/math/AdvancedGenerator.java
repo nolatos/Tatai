@@ -2,6 +2,8 @@ package tatai.math;
 
 import java.util.*;
 
+import tatai.Difficulty;
+
 public class AdvancedGenerator implements MathGenerator {
 	
 	private int _answer;
@@ -15,16 +17,14 @@ public class AdvancedGenerator implements MathGenerator {
 	/**
 	 * Returns a String representing a URL of an image to be displayed
 	 */
-	public String generateQuestion() {
+	public Question generateQuestion() {
 		int i = (int)(_possibleAnswers.size() * Math.random());
 		_answer = _possibleAnswers.get(i);
 		String str = getClass().getResource("" + _answer + ".png").toString();
-		return str;
+		Question question = new Question(_answer, str, Difficulty.FIVE);
+		return question;
 	}
 
-	@Override
-	public int getAnswer() {
-		return _answer;
-	}
+	
 
 }

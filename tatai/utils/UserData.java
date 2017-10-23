@@ -41,18 +41,18 @@ public class UserData {
 				BufferedWriter B = new BufferedWriter(new FileWriter(_user));
 				for (int j = 1; j < 6; j++) {
 					String str = ",0,0,0,0,0";
-					if (j < 4) {
+					if (j < 3) {
 						String repeated = new String(new char[2]).replace("\0", str);
 						B.write("Times Scored in Level " + j + " ,0" + repeated);
 						B.newLine();
 					}
-					else if(j == 4) {
+					else if(j == 3 || j == 4) {
 						String repeated = new String(new char[3]).replace("\0", str);
 						B.write("Times Scored in Level " + j + " ,0" + repeated);
 						B.newLine();
 					}
 					else if(j == 5) {
-						String repeated = new String(new char[4]).replace("\0", str);
+						String repeated = str;
 						B.write("Times Scored in Level " + j + " ,0" + repeated);
 						B.newLine();
 					}
@@ -130,6 +130,7 @@ public class UserData {
 		break;
 		}
 		String[] tmp = UserData.splitStatElement(D);
+		System.out.println(tmp.length);
 		int i = Integer.valueOf(tmp[S+1]);
 		i++;
 		String newElement = "" + i;

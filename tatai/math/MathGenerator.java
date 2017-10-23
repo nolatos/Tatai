@@ -4,8 +4,7 @@ import tatai.models.Play;
 
 public interface MathGenerator {
 
-	public String generateQuestion();
+	public Question generateQuestion();
 	
-	public int getAnswer();
 	
 }
