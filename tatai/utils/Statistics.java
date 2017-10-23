@@ -50,6 +50,35 @@ public class Statistics {
 			return -1;
 		}
 	}
+	
+	/**
+	 * Returns the highest score attained at a Level D
+	 * @param D (difficulty)
+	 * @return int 
+	 */
+	public static int highscore(Difficulty D) {
+		int highscore = 0;
+		int L = -1;
+		switch (D) {
+		case ONE: L = 0;
+		break;
+		case TWO: L = 1;
+		break;
+		case THREE: L = 2;
+		break;
+		case FOUR: L = 3;
+		break;
+		case FIVE: L = 4;
+		break;
+		}
+		String tmp[] = UserData.splitStatElement(L);
+		for (int i = 1; i < tmp.length; i++) {
+			if (Integer.valueOf(tmp[i]) > 0) {
+				highscore = i-1;
+			}
+		}
+		return highscore;
+	}
 
 
 }

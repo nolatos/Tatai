@@ -234,10 +234,8 @@ public class PlayView {
 
 		_record.setVisible(true);
 		_retry.setVisible(false);
-		//		_nextLevel.setVisible(false);
 		_model.setQuestion();
 		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
-		//		_retryLevel.setVisible(false);
 		_skip.setVisible(true);
 	}
 
@@ -248,17 +246,8 @@ public class PlayView {
 
 		_numberLabel.setText("" + score + "/" + _model.TOTAL_QUESTIONS);
 		_record.setVisible(false);
-		//		_retryLevel.setVisible(true);
-		//		_nextLevel.setVisible(true);
 		_skip.setVisible(false);
 		_check.setVisible(false);
-
-		//		if (_model.getScore() >= 0.8 * _model.TOTAL_QUESTIONS && _controller.canLevelUp()) {
-		//			_nextLevel.setDisable(false);
-		//		}
-		//		else {
-		//			_nextLevel.setDisable(true);
-		//		}
 
 
 	}

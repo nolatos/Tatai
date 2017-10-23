@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.views.AboutView">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="900.0">
+         <image>
+            <Image url="@TataiBackground.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="_mainPane" layoutX="286.0" layoutY="-4.0" prefHeight="611.0" prefWidth="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <children>
+            <ImageView fitHeight="77.0" fitWidth="305.0" layoutX="98.0" layoutY="32.0">
+               <image>
+                  <Image url="@aboutLogo.png" />
+               </image>
+            </ImageView>
+            <TextArea layoutX="23.0" layoutY="138.0" prefHeight="448.0" prefWidth="456.0" text="Taatai! is an application developed to be an educational tool, to help users&#10;improve their pronunciation of Te Reo Maori, while practicing their mathematical&#10;skills at the same time. &#10;&#10;&#10;                                                     DISCLAIMER:&#10;&#10;No copyright infringement was intended in this application. All images and &#10;resources were, to the best of the knowledge of the developers, public domain.&#10;If copyrighted material belonging to you was inadvertently used, please contact&#10;the developers and we will do our best to rectify to all parties.&#10;&#10;&#10;Logos: generated in cooltext.com&#10;&#10;Pictures: taken from https://pixabay.com/&#10;&#10;Music: &quot;Pokarekare Ana&quot;, original by Paraire Tomoana, piano arrangement by&#10;Oliver Li. Special thanks to Alex Chen for providing the audio." />
+         </children>
+      </Pane>
+      <Button fx:id="_back" layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#backToMenu" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="BACK" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

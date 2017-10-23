@@ -2,11 +2,11 @@ package tatai.utils;
 
 import java.nio.file.Paths;
 
-public class Constants {
+public class UserConstants {
 	
 	public static final String PATH = Paths.get("").toAbsolutePath().normalize().toString();
 	public static final String USER_PATH = PATH.concat("/TataiFiles/Users");
-	public static final String IMAGE_PATH = PATH.concat("/TataiFiles/Images");
+	public static final String FACTS_PATH = PATH.concat("/TataiFiles/MaoriFacts/Maori.txt");
 	
 	public static String getWorkingDirectory() {
 		return PATH;
@@ -16,8 +16,8 @@ public class Constants {
 		return USER_PATH;
 	}
 	
-	public static String getImagePath() {
-		return IMAGE_PATH;
+	public static String getFactsPath() {
+		return FACTS_PATH;
 	}
 	
 

@@ -14,7 +14,7 @@ public class InstructionController implements Controller {
 	private InstructionView _view;
 
 	private StartController _startC;
-	
+
 	private boolean _fromWelcome;
 
 	//Don't need model because no data
@@ -29,7 +29,7 @@ public class InstructionController implements Controller {
 		initialise();
 
 	}
-	
+
 	public InstructionController(StartController startC) {
 		_startC = startC;
 		_fromWelcome = false;
@@ -52,13 +52,7 @@ public class InstructionController implements Controller {
 	 */
 	public void backToMenu() {
 		if (_fromWelcome) {
-			try {
-				_welcomeC.show();
-			} 
-			catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			_welcomeC.show();
 		}
 		else {
 			_startC.show();

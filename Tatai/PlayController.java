@@ -145,7 +145,7 @@ public class PlayController implements Controller {
 
 		
 		_background.restart();
-		_model.getCurrentQuestion().setRecognisedString(_model.getRecognised());
+		
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class PlayController implements Controller {
 
 						//Showing the "recording" dialog		      
 						_model.setRecognised(SpeechRecognition.runVoiceRecognition());
-
+						_model.getCurrentQuestion().setRecognisedString(_model.getRecognised());
 						_view.recordingEnded();
 
 

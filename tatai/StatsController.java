@@ -28,12 +28,12 @@ public class StatsController implements Controller {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("views/stats.fxml"));
 			Pane pane = (Pane) loader.load();
 			_statsScene = new Scene(pane);
-			
+
 			//Setting up the model and view
 			_view = loader.getController();
 			_model = new Stats(this);
 			_view.set(this, _model);
-			
+
 			//Setting up the correct stats
 			setStatsLabels();
 		}
@@ -41,7 +41,7 @@ public class StatsController implements Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Gets the model to the next level then updates stats;
 	 */
@@ -49,7 +49,7 @@ public class StatsController implements Controller {
 		_model.next();
 		setStatsLabels();
 	}
-	
+
 	/**
 	 * Gets the model to the previous level then updates stats
 	 */
@@ -62,25 +62,20 @@ public class StatsController implements Controller {
 		_welcomeC.getMainStage().setScene(_statsScene);
 		WelcomeController.setShowingController(this);
 	}
-	
+
 	public Pane getShowingPane() {
 		return _view.getShowingPane();
 	}
-	
+
 	public void backToMenu() {
-		try {
-			_welcomeC.show();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		_welcomeC.show();
+
 	}
-	
+
 	public void changeColour(MouseEvent event) {
 		_welcomeC.changeColour(event);
 	}
-	
+
 	public void changeColourBack(MouseEvent event) {
 		_welcomeC.changeColourBack(event);
 	}

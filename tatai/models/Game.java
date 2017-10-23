@@ -28,8 +28,8 @@ public abstract class Game {
 	 * @return whether or not the translation of the number i is the same as what the user said
 	 */
 	public boolean checkCorrect() {
-//		return _recognised.compareTo(SpeechRecognition.translation(_number)) == 0;
-		return true;
+		return _recognised.compareTo(SpeechRecognition.translation(_number)) == 0;
+//		return true;
 	}
 	 
 	

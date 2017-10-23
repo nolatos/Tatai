@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import tatai.Difficulty;
@@ -33,7 +34,7 @@ public class UserData {
 		for (int k = 1; k < x.length; k++) {
 			name = name + "_" + x[k];
 		}
-		_user = new File(Constants.getUserPath().concat("/" + name + ".txt"));
+		_user = new File(UserConstants.getUserPath().concat("/" + name + ".txt"));
 		boolean exists = (_user.exists() && !_user.isDirectory());
 		if (!exists) {
 			try {
@@ -130,7 +131,6 @@ public class UserData {
 		break;
 		}
 		String[] tmp = UserData.splitStatElement(D);
-		System.out.println(tmp.length);
 		int i = Integer.valueOf(tmp[S+1]);
 		i++;
 		String newElement = "" + i;
@@ -183,10 +183,14 @@ public class UserData {
 		return _stats;
 	}
 
+	/**
+	 * Returns the highest level unlocked by the user
+	 * @return
+	 */
 	public static Difficulty highestDifficultyUnlocked() {
 		int P = -1;
 		Difficulty D = tatai.Difficulty.ONE;
-		for (int i = 0; i < getStats().size()-2; i++) {
+		for (int i = 0; i < getStats().size(); i++) {
 			String[] tmp = UserData.splitStatElement(i);
 			P = (int) Math.ceil((tmp.length-2) * 0.8);
 			for (int j = P+1; j < tmp.length; j++) {
@@ -207,7 +211,53 @@ public class UserData {
 		}
 		return D;
 	}
-	public static String[] getLogin() {
-		return _login;
+	
+	/**
+	 * returns a random fact(line) from a file
+	 * @return
+	 */
+	public static String maoriFacts() {
+		String path = UserConstants.FACTS_PATH;
+		String fact = "";
+		try {
+			Scanner scanner = new Scanner(new File(path));
+			Random R = new Random();
+			int low = 0;
+			int high = 10;
+			int Result = R.nextInt(high-low) + low;
+			for (int i = 0; i < Result + 1; i++) {
+				fact = scanner.nextLine();
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File containing facts is not present");
+		}
+		return fact;
+	}
+	
+	/**
+	 * Resets the stats of the user i.e clears all game previously played
+	 */
+	public static void clearStats() {
+		String[] tmp;
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < UserData._stats.size(); i++) {
+			tmp = UserData.splitStatElement(i);
+			for (int j = 1; j < tmp.length; j++) {
+				tmp[j] = "0";
+			}
+			for (String element : tmp) {
+				builder.append(element);
+				builder.append(",");
+			}
+			String updated = builder.toString();
+			_stats.set(i, updated);
+			builder.setLength(0);
+			try {
+				UserData.storeUserData();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class SpeechRecognition {
 	
-	private static String _path = Constants.getWorkingDirectory();
+	private static String _path = UserConstants.getWorkingDirectory();
 	
 	/**
 	 * Uses Bash terminal to execute the SpeechRecognition Script
@@ -34,6 +34,14 @@ public class SpeechRecognition {
 
 
 		return getResults();
+		
+//		
+//		int i = (int) (10 * Math.random());
+//		if (i == 0) {
+//			i = 1;
+//			
+//		}
+//		return translation(i);
 
 
 	}

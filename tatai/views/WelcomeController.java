@@ -101,7 +101,15 @@ public class WelcomeController implements Controller {
 	@FXML
 	private Button _stats; 
 
+	@FXML
+	private Button _about;
 
+	
+	@FXML
+	void aboutPressed(ActionEvent event) {
+		AboutController aboutC = new AboutController(this);
+		aboutC.show();
+	}
 
 
 	@FXML
@@ -192,7 +200,7 @@ public class WelcomeController implements Controller {
 				startAudioClip();
 
 				//Fade out the label
-				FadeTransition ft = new FadeTransition(Duration.millis(1800), _welcomeLabel);
+				FadeTransition ft = new FadeTransition(Duration.millis(1600), _welcomeLabel);
 				ft.setFromValue(1);
 				ft.setToValue(0);
 				ft.setOnFinished(new EventHandler<ActionEvent>() {
@@ -248,6 +256,7 @@ public class WelcomeController implements Controller {
 		_play.setVisible(false);
 		_stats.setVisible(false);
 		_instructions.setVisible(false);
+		_about.setVisible(false);
 	}
 
 
@@ -274,6 +283,7 @@ public class WelcomeController implements Controller {
 		_play.setVisible(true);
 		_stats.setVisible(true);
 		_instructions.setVisible(true);
+		_about.setVisible(true);
 	}
 
 	@FXML
@@ -351,20 +361,20 @@ public class WelcomeController implements Controller {
 	 * Stops the audio clip
 	 */
 	public void stopAudioClip() {
-//		if (_audioPlaying) {
-//			_audioPlaying = false;
-			//Ensuring the clip stops playing
-			EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					_clip.stop();
-				}
-			};
-			//Fading it out
-			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.8), onFinished,
-					new KeyValue(_clip.volumeProperty(), 0)));
-			timeline.play();
-//		}
+		//		if (_audioPlaying) {
+		//			_audioPlaying = false;
+		//Ensuring the clip stops playing
+		EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				_clip.stop();
+			}
+		};
+		//Fading it out
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.8), onFinished,
+				new KeyValue(_clip.volumeProperty(), 0)));
+		timeline.play();
+		//		}
 
 	}
 
@@ -372,23 +382,23 @@ public class WelcomeController implements Controller {
 	 * Starts the bgm
 	 */
 	public void startAudioClip() {
-//		if (!_audioPlaying) {
-//			_audioPlaying = true;
-			//Starting the audio clip
-			Task<Void> task = new Task<Void>() {
-				@Override
-				public Void call() {
+		//		if (!_audioPlaying) {
+		//			_audioPlaying = true;
+		//Starting the audio clip
+		Task<Void> task = new Task<Void>() {
+			@Override
+			public Void call() {
 
-					_clip.setCycleCount(MediaPlayer.INDEFINITE);
-					_clip.setVolume(0.2);
-					_clip.play();
-					return null;
-				}
-			};
-			_audioClipThread = new Thread(task);
-			_audioClipThread.setDaemon(true);
-			_audioClipThread.start();
-//		}
+				_clip.setCycleCount(MediaPlayer.INDEFINITE);
+				_clip.setVolume(0.2);
+				_clip.play();
+				return null;
+			}
+		};
+		_audioClipThread = new Thread(task);
+		_audioClipThread.setDaemon(true);
+		_audioClipThread.start();
+		//		}
 	}
 
 	/**
@@ -396,7 +406,7 @@ public class WelcomeController implements Controller {
 	 * and starts the bgm
 	 * @throws Exception
 	 */
-	public void show() throws IOException {
+	public void show() {
 		startAudioClip();
 		_mainStage.setScene(_menuScene);
 		setShowingController(this);
@@ -409,7 +419,7 @@ public class WelcomeController implements Controller {
 	 * Sets the field _menuScene
 	 * @param scene
 	 */
-	public void setScene(Scene scene) {
+	void setScene(Scene scene) {
 		_menuScene = scene; 
 	}
 
@@ -504,9 +514,6 @@ public class WelcomeController implements Controller {
 		return _mainPane;
 	}
 
-	//	public void setShowingPane(Pane pane) {
-	//		_showingPane = pane;
-	//	}
 
 	public static void setShowingController(Controller controller) {
 		_showingController = controller;
@@ -515,7 +522,6 @@ public class WelcomeController implements Controller {
 
 	private void enableButtons() {
 		Difficulty difficulty = UserData.highestDifficultyUnlocked();
-		System.out.println(difficulty);
 		switch (difficulty) {
 		case FIVE:
 			_five.setDisable(false);
@@ -530,5 +536,27 @@ public class WelcomeController implements Controller {
 		}
 	}
 
+	/**
+	 * Unlocks the level
+	 * @param difficulty
+	 */
+	public void unlockLevel(Difficulty difficulty) {
+		switch (difficulty) {
+		case ONE:
+			break;
+		case TWO:
+			_two.setDisable(false);
+			break;
+		case THREE:
+			_three.setDisable(false);
+			break;
+		case FOUR:
+			_four.setDisable(false);
+			break;
+		case FIVE:
+			_five.setDisable(false);
+			break;
+		}
+	}
 
 }

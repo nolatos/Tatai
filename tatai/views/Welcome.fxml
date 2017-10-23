@@ -22,17 +22,17 @@
                   <Image url="@TataiLogo.png" />
                </image>
             </ImageView>
-            <Button id="Buttons" fx:id="_play" layoutX="115.0" layoutY="219.0" mnemonicParsing="false" onAction="#playPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="82.0" prefWidth="272.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PLAY!" textFill="WHITE">
+            <Button id="Buttons" fx:id="_play" layoutX="115.0" layoutY="210.0" mnemonicParsing="false" onAction="#playPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="82.0" prefWidth="272.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PLAY!" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="41.0" />
                </font>
             </Button>
-            <Button fx:id="_practice" layoutX="163.0" layoutY="349.0" mnemonicParsing="false" onAction="#practicePressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PRACTICE!" textFill="WHITE">
+            <Button fx:id="_practice" layoutX="162.0" layoutY="328.0" mnemonicParsing="false" onAction="#practicePressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="PRACTICE!" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="_stats" layoutX="163.0" layoutY="491.0" mnemonicParsing="false" onAction="#statsPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="STATISTICS" textFill="WHITE">
+            <Button fx:id="_stats" layoutX="163.0" layoutY="451.0" mnemonicParsing="false" onAction="#statsPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="STATISTICS" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
@@ -42,22 +42,22 @@
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_three" layoutX="295.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="EASY (3)" textFill="WHITE" visible="false">
+            <Button fx:id="_three" disable="true" layoutX="295.0" layoutY="315.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="EASY (3)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_two" layoutX="45.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (2)" textFill="WHITE" visible="false">
+            <Button fx:id="_two" disable="true" layoutX="45.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (2)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_four" layoutX="294.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (4)" textFill="WHITE" visible="false">
+            <Button fx:id="_four" disable="true" layoutX="294.0" layoutY="409.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="161.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="HARD (4)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Button>
-            <Button fx:id="_five" layoutX="130.0" layoutY="505.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="241.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="INSANE (5)" textFill="WHITE" visible="false">
+            <Button fx:id="_five" disable="true" layoutX="130.0" layoutY="505.0" mnemonicParsing="false" onAction="#levelPressed" onMouseDragEntered="#changeColour" onMouseDragExited="#changeColourBack" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="55.0" prefWidth="241.0" style="-fx-position-shape: circle; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="INSANE (5)" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
@@ -69,7 +69,12 @@
             </ImageView>
             <Label fx:id="_pronunciationLabel" alignment="CENTER" layoutX="45.0" layoutY="283.0" prefHeight="17.0" prefWidth="161.0" text="PRONUNCIATION" textFill="#ff6400" visible="false" />
             <Label fx:id="_mathLabel" alignment="CENTER" layoutX="295.0" layoutY="283.0" prefHeight="17.0" prefWidth="161.0" text="MATH" textFill="#ff6400" visible="false" />
-            <Button fx:id="_instructions" layoutX="162.0" layoutY="421.0" mnemonicParsing="false" onAction="#instructionsPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="INSTRUCTIONS" textFill="WHITE">
+            <Button fx:id="_instructions" layoutX="163.0" layoutY="389.0" mnemonicParsing="false" onAction="#instructionsPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="INSTRUCTIONS" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="_about" layoutX="162.0" layoutY="512.0" mnemonicParsing="false" onAction="#aboutPressed" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="177.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="ABOUT" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>

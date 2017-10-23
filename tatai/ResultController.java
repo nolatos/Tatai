@@ -36,7 +36,7 @@ public class ResultController implements Controller {
 			Pane pane = (Pane) loader.load();
 			_view = loader.getController();
 			_resultScene = new Scene(pane);
-			_model = new Result(this, score, total);
+			_model = new Result(this, score, total, difficulty);
 			_view.set(this, _model);
 			_view.setLevelLabel(difficulty);
 
@@ -49,7 +49,7 @@ public class ResultController implements Controller {
 
 
 	}
-	
+
 	public void setTableItems(ObservableList<Question> questions) {
 		_view.setTableItems(questions);
 	}
@@ -78,7 +78,7 @@ public class ResultController implements Controller {
 	 * Advances to the next Level
 	 */
 	public void nextLevel() {
-		
+
 		_playC.nextLevel();
 	}
 
@@ -102,12 +102,22 @@ public class ResultController implements Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean canLevelUp() {
 		return _playC.canLevelUp();
 	}
-	
+
 	public void stopAudioClip() {
 		_startC.getWelcomeController().stopAudioClip();
+	}
+
+	/**
+	 * Undisables the relevant button
+	 */
+	public void unlockLevel() {
+		Difficulty difficulty = _model.getDifficulty().levelUp();
+		if (difficulty != null) {
+			_startC.getWelcomeController().unlockLevel(difficulty);
+		}
 	}
 }

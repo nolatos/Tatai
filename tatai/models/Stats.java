@@ -66,9 +66,7 @@ public class Stats {
 	
 	private void setStats() {
 		_totalGames = Statistics.average(_difficulty, false);
-		System.out.println(_totalGames);
 		_average = Statistics.average(_difficulty, true);
-		System.out.println(_average);
 	}
 	
 	

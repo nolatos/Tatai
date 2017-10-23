@@ -12,7 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.stage.*;
-import tatai.utils.Constants;
+import tatai.utils.*;
 import tatai.views.EnterController;
 import tatai.views.WelcomeController;
 import tatai.math.*;

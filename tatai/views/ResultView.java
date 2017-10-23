@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,12 +20,16 @@ import tatai.Difficulty;
 import tatai.ResultController;
 import tatai.math.Question;
 import tatai.models.Result;
+import tatai.utils.UserData;
 
 public class ResultView {
 
 	@FXML
 	private Pane _mainPane;
 
+	@FXML
+	private Button _back;
+	
 	@FXML
 	private Label _numberLabel;
 
@@ -75,10 +80,48 @@ public class ResultView {
 
 	@FXML
 	private Button _continue;
+	
+	@FXML
+    private AnchorPane _factPane;
+
+    @FXML
+    private TextArea _factArea;
+
+    @FXML
+    private Button _funFact;
 
 
 	private ResultController _controller;
 	private Result _model;
+	
+	@FXML
+    void back(ActionEvent event) {
+		_numberLabel.setVisible(true);
+		_congratsLogo.setVisible(true);
+		_seeResults.setVisible(true);
+		_finishingLabel.setVisible(true);
+		_menu.setVisible(true);
+		_funFact.setVisible(true);
+		
+		_factPane.setVisible(false);
+		_back.setVisible(false);
+    }
+	
+	@FXML
+	/**
+	 * Displays a random fact
+	 * @param event
+	 */
+    void seeFact(ActionEvent event) {
+		_numberLabel.setVisible(false);
+		_seeResults.setVisible(false);
+		_finishingLabel.setVisible(false);
+		_menu.setVisible(false);
+		_funFact.setVisible(false);
+		
+		_back.setVisible(true);
+		_factPane.setVisible(true);
+    }
 
 	@FXML
 	void backToMenu(ActionEvent event) {
@@ -146,9 +189,9 @@ public class ResultView {
 
 		//Making relevant things invisible
 		_numberLabel.setVisible(false);
-		_congratsLogo.setVisible(false);
 		_seeResults.setVisible(false);
 		_finishingLabel.setVisible(false);
+		_funFact.setVisible(false);
 
 		_resultLogo.setVisible(true);
 		_resultPane.setVisible(true);
@@ -174,6 +217,7 @@ public class ResultView {
 
 		if (_model.getScore() >= 0.8 * _model.getTotalQuestions()) {
 			_next.setDisable(false);
+			_controller.unlockLevel();
 		}
 		else {
 			_next.setDisable(true);
@@ -199,14 +243,27 @@ public class ResultView {
 		this._greatJob.setVisible(true);
 	}
 	
-	
+	/**
+	 * Sets the table values
+	 * @param questions
+	 */
 	public void setTableItems(ObservableList<Question> questions) {
-		System.out.println("hi");
 		_questionCol.setCellValueFactory(new PropertyValueFactory<Question,String>("questionString"));
 		_weHeardCol.setCellValueFactory(new PropertyValueFactory<Question, String>("recognisedString"));
 		_correctCol.setCellValueFactory(new PropertyValueFactory<Question, String>("answerString"));
-//		System.out.println(new PropertyValueFactory<Question, String>("_answerString").call());
 		_resultsTable.setItems(questions);
+	}
+	
+	/**
+	 * Sets up the facts
+	 */
+	public void initialize() {
+		String[] strings = UserData.maoriFacts().split("//");
+		String str = "";
+		for (String s : strings) {
+			str += s + "\n";
+		}
+		_factArea.setText(str);
 	}
 
 }

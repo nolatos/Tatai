@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -86,9 +87,33 @@
                   <Image url="@well_done.jpg" />
                </image>
             </ImageView>
+            <AnchorPane fx:id="_factPane" layoutX="19.0" layoutY="127.0" prefHeight="441.0" prefWidth="462.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="94.0" layoutY="15.0" prefHeight="60.0" prefWidth="264.0" text="FACT!" textFill="#ed5f0c">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="_factArea" layoutX="18.0" layoutY="87.0" prefHeight="331.0" prefWidth="423.0" text="The Maori are believed to have arrived in several different">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="13.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+            <Button fx:id="_funFact" layoutX="183.0" layoutY="538.0" mnemonicParsing="false" onAction="#seeFact" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="133.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="FUN FACT" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="_menu" layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#backToMenu" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="MENU" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="_back" layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#back" onMouseEntered="#changeColour" onMouseExited="#changeColourBack" prefHeight="42.0" prefWidth="115.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 10, 10); -fx-background-color: orange;" text="BACK" textFill="WHITE" visible="false">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
