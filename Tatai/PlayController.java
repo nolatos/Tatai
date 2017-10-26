@@ -128,7 +128,7 @@ public class PlayController implements Controller {
 	/**
 	 * Shows the game screen
 	 */
-	public void show() throws IOException {
+	public void show(){
 		WelcomeController.setShowingController(this);
 		_startC.MAIN_STAGE.setScene(_playScene);
 		_model.setQuestion();
@@ -139,7 +139,7 @@ public class PlayController implements Controller {
 
 
 	/**
-	 * Starts the recording in the background
+	 * Starts the recording in the background 
 	 */
 	public void record() {
 
@@ -220,6 +220,10 @@ public class PlayController implements Controller {
 		_startC.changeColourBack(event);
 	}
 
+	
+	public Stage getMainStage() {
+		return _startC.getMainStage();
+	}
 
 	class Background extends Service<Void> {
 

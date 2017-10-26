@@ -75,7 +75,7 @@ public class StatsView {
     void clearStats() {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setHeaderText("Are you sure you want to clear all stats?");
-    	alert.setContentText("THIS CANNOT BE UNDONE");
+    	alert.setContentText("THIS CANNOT BE UNDONE. ALL LEVELS UNLOCKED WILL LOCK AGAIN");
     	Optional<ButtonType> option = alert.showAndWait();
     	if (option.get() == ButtonType.OK) {
     		_controller.clearStats();

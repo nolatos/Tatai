@@ -19,7 +19,7 @@ import javafx.stage.WindowEvent;
 import tatai.Controller;
 import tatai.utils.UserData;
 
-public class EnterController implements Controller {
+public class EnterController {
 
 	public final Stage _mainStage = new Stage();
 	private Scene _menu;

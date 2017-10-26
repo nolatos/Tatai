@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import tatai.models.Stats;
 import tatai.utils.UserData;
 import tatai.views.*;
@@ -59,7 +60,7 @@ public class StatsController implements Controller {
 		setStatsLabels();
 	}
 
-	public void show() throws IOException {
+	public void show() {
 		_welcomeC.getMainStage().setScene(_statsScene);
 		WelcomeController.setShowingController(this);
 	}
@@ -91,5 +92,10 @@ public class StatsController implements Controller {
 	 */
 	public void clearStats() {
 		UserData.clearStats();
+		_welcomeC.disableLevels();
+	}
+	
+	public Stage getMainStage() {
+		return _welcomeC.getMainStage();
 	}
 }

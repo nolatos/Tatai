@@ -104,7 +104,7 @@ public class WelcomeController implements Controller {
 	@FXML
 	private Button _about;
 
-	
+
 	@FXML
 	void aboutPressed(ActionEvent event) {
 		AboutController aboutC = new AboutController(this);
@@ -179,12 +179,7 @@ public class WelcomeController implements Controller {
 	void statsPressed(ActionEvent event) {
 
 		StatsController statsC = new StatsController(this);
-		try {
-			statsC.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		statsC.show();
 	}
 
 	/**
@@ -565,4 +560,12 @@ public class WelcomeController implements Controller {
 		}
 	}
 
+
+	public void disableLevels() {
+		_two.setDisable(true);
+		_three.setDisable(true);
+		_four.setDisable(true);
+		_five.setDisable(true);
+
+	}
 }

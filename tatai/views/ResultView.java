@@ -192,6 +192,7 @@ public class ResultView {
 		_seeResults.setVisible(false);
 		_finishingLabel.setVisible(false);
 		_funFact.setVisible(false);
+		_congratsLogo.setVisible(false);
 
 		_resultLogo.setVisible(true);
 		_resultPane.setVisible(true);

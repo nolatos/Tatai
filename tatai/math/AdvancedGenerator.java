@@ -10,7 +10,7 @@ public class AdvancedGenerator implements MathGenerator {
 	private List<Integer> _possibleAnswers = new ArrayList<Integer>();
 	
 	public AdvancedGenerator() {
-		_possibleAnswers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 13, 27));
+		_possibleAnswers.addAll(Arrays.asList(1, 10, 12, 13, 2, 27, 3, 4, 5, 56, 6, 7, 8, 9));
 	}
 
 	@Override

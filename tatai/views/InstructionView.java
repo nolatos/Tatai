@@ -8,7 +8,6 @@ import javafx.scene.layout.Pane;
 import tatai.*;
 
 /**
- * Faced unforseen consequences. Went with "view rather than "controller"
  * @author oliver
  *
  */
@@ -66,6 +65,25 @@ public class InstructionView {
     
     public Pane getShowingPane() {
     	return _mainPane;
+    }
+    
+    public void chooseTab(Difficulty difficulty) {
+    	switch (difficulty) {
+    	case ONE:
+    		//Let it fall to step two
+    	case TWO:
+    		_tabs.getSelectionModel().select(_pronunciation);
+    		break;
+    	case THREE:
+    		_tabs.getSelectionModel().select(_three);
+    		break;
+    	case FOUR:
+    		_tabs.getSelectionModel().select(_four);
+    		break;
+    	case FIVE:
+    		_tabs.getSelectionModel().select(_insane);
+    		break;
+    	}
     }
     
     

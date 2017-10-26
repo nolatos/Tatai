@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import tatai.models.Practice;
 import tatai.views.*;
 
@@ -58,6 +59,10 @@ public class PracticeController implements Controller {
 	
 	public Pane getShowingPane() {
 		return _view.getShowingPane();
+	}
+	
+	public Stage getMainStage() {
+		return _welcomeC.getMainStage();
 	}
 }
 

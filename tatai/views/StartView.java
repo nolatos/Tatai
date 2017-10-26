@@ -28,16 +28,23 @@ public class StartView {
     @FXML
     private Pane _mainPane;
     
+    @FXML
+    private Button _instructions;
+    
     
     
     private StartController _controller;
     private Start _model;
+    
+    @FXML
+    void showInstructions(ActionEvent event) {
+    	_controller.showInstructions();
+    }
 
     
     @FXML
     void backToMenu(ActionEvent event) {
     	_controller.backToMenu();
-		_controller.MAIN_STAGE.setScene(_controller.MENU_SCENE);
  
     }
 

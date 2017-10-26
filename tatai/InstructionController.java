@@ -6,16 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import tatai.views.*;
 
 public class InstructionController implements Controller {
 
-	private WelcomeController _welcomeC;
+	private Controller _controller;
 	private InstructionView _view;
-
-	private StartController _startC;
-
-	private boolean _fromWelcome;
 
 	//Don't need model because no data
 
@@ -23,23 +20,24 @@ public class InstructionController implements Controller {
 
 
 
-	public InstructionController(WelcomeController welcomeC) {
-		_welcomeC = welcomeC;
-		_fromWelcome = true;
-		initialise();
-
-	}
-
-	public InstructionController(StartController startC) {
-		_startC = startC;
-		_fromWelcome = false;
+	public InstructionController(Controller welcomeC) {
+		_controller = welcomeC;
 		initialise();
 
 	}
 
 	public void show() {
 		WelcomeController.setShowingController(this);
-		_welcomeC.getMainStage().setScene(_instructionScene);
+		_controller.getMainStage().setScene(_instructionScene);
+	}
+	
+	/**
+	 * Shows based on the difficulty
+	 * @param difficulty
+	 */
+	public void show(Difficulty difficulty) {
+		show();
+		_view.chooseTab(difficulty);
 	}
 
 	@Override
@@ -51,22 +49,21 @@ public class InstructionController implements Controller {
 	 * Goes back to Menu
 	 */
 	public void backToMenu() {
-		if (_fromWelcome) {
-			_welcomeC.show();
-		}
-		else {
-			_startC.show();
-		}
+		_controller.show();
+		
 	}
 
 	public void changeColour(MouseEvent event) {
-		_welcomeC.changeColour(event);
+		_controller.changeColour(event);
 	}
 
 	public void changeColourBack(MouseEvent event) {
-		_welcomeC.changeColourBack(event);
+		_controller.changeColourBack(event);
 	}
 
+	/**
+	 * Loads the fxml
+	 */
 	private void initialise() {
 		//Loading the view
 		try {
@@ -79,6 +76,10 @@ public class InstructionController implements Controller {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Stage getMainStage() {
+		return _controller.getMainStage();
 	}
 }
 

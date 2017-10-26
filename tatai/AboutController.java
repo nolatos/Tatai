@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import tatai.views.AboutView;
 import tatai.views.WelcomeController;
 
@@ -59,5 +60,12 @@ public class AboutController implements Controller {
 	public void backToMenu() {
 		
 		_welcomeC.show();
+	}
+	
+	/**
+	 * Returns the mainStage
+	 */
+	public Stage getMainStage() {
+		return _welcomeC.getMainStage();
 	}
 }

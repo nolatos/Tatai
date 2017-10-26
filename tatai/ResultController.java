@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import tatai.math.Question;
 import tatai.models.Result;
 import tatai.views.*;
@@ -119,5 +120,9 @@ public class ResultController implements Controller {
 		if (difficulty != null) {
 			_startC.getWelcomeController().unlockLevel(difficulty);
 		}
+	}
+	
+	public Stage getMainStage() {
+		return _startC.getMainStage();
 	}
 }

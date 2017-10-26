@@ -25,7 +25,6 @@ public class StartController implements Controller {
 
 	public final Stage MAIN_STAGE;
 	public final Scene START_SCENE;
-	public final Scene MENU_SCENE;
 
 	private WelcomeController _welcomeC;
 
@@ -47,7 +46,6 @@ public class StartController implements Controller {
 		Stage mainStage = welcomeC.getMainStage();
 
 		MAIN_STAGE = mainStage;
-		MENU_SCENE = mainStage.getScene();
 
 
 
@@ -68,7 +66,7 @@ public class StartController implements Controller {
 		_view.addToList(_model.addToList(null));
 
 	}
-	
+
 	public Pane getShowingPane() {
 		return _view.getMainPane();
 	}
@@ -77,7 +75,6 @@ public class StartController implements Controller {
 	 * Goes back to the menu
 	 */
 	public void backToMenu() {
-		MAIN_STAGE.setScene(MENU_SCENE);
 		try {
 			_welcomeC.show();
 		} 
@@ -96,13 +93,7 @@ public class StartController implements Controller {
 
 			Difficulty difficulty = _model.getDifficulty();
 			_gameC = new PlayController(difficulty, this);
-
-			try {
-				_gameC.show();
-			} 
-			catch (IOException e) {
-
-			}
+			_gameC.show();
 
 
 		}
@@ -119,13 +110,13 @@ public class StartController implements Controller {
 
 
 	public void show(Difficulty difficulty) {
-		
+
 		show();
 		_view.setLevel(difficulty);
 		_model.setDifficulty(difficulty);
 	}
-	
-	
+
+
 	/**
 	 * Shows the scene
 	 */
@@ -153,6 +144,18 @@ public class StartController implements Controller {
 
 	public WelcomeController getWelcomeController() {
 		return this._welcomeC;
+	}
+
+	public Stage getMainStage() {
+		return _welcomeC.getMainStage();
+	}
+	
+	/**
+	 * Shows instructions based on the difficulty
+	 */
+	public void showInstructions() {
+		InstructionController instructionC = new InstructionController(this);
+		instructionC.show(_model.getDifficulty());
 	}
 
 }

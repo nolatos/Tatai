@@ -23,9 +23,10 @@ public class Question {
 		_answer = answer;
 		_question = question;
 
+		//Makoing the String equal to "advanced", because otherwise too hard to determine
 		answerString = new SimpleStringProperty(SpeechRecognition.translation(_answer));
 		if (difficulty == Difficulty.FIVE) {
-			questionString = new SimpleStringProperty("");
+			questionString = new SimpleStringProperty("advanced");
 		}
 		else {
 			questionString = new SimpleStringProperty(_question);
