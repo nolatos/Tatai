@@ -10,7 +10,7 @@ public class AdvancedGenerator implements MathGenerator {
 	private List<Integer> _possibleAnswers = new ArrayList<Integer>();
 	
 	public AdvancedGenerator() {
-		_possibleAnswers.addAll(Arrays.asList(1, 10, 12, 13, 2, 27, 3, 4, 5, 56, 6, 7, 8, 9));
+		_possibleAnswers.addAll(Arrays.asList(1, 10, 11, 12, 13, 2, 27, 3, 4, 5, 56, 6, 7, 8, 9));
 	}
 
 	@Override
@@ -25,6 +25,9 @@ public class AdvancedGenerator implements MathGenerator {
 		return question;
 	}
 
-	
+	public String getWorking() {
+		String str = getClass().getResource("working/" + _answer + ".png").toString();
+		return str;
+	}
 
 }

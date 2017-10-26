@@ -6,5 +6,6 @@ public interface MathGenerator {
 
 	public Question generateQuestion();
 	
+	public String getWorking();
 	
 }

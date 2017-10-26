@@ -142,6 +142,7 @@ public class Play extends Game {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			_controller.setWorkingImage(_generator.getWorking());
 			
 			break;
 		}

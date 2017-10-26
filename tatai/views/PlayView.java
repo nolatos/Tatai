@@ -88,13 +88,39 @@ public class PlayView {
 	@FXML
 	private Label _kaPai;
 
+	@FXML
+	private Button _working;
+	
+	@FXML
+	private Pane _workingPane;
+	
+	@FXML
+	private ImageView _workingImage;
+	
+	@FXML
+	private Button _ok;
+	
 	private PlayController _controller;
 	private Play _model;
 
 	@FXML
 	private Button _playBack;
-
 	
+	private Pane _showingPane;
+
+	@FXML
+	void showWorking(ActionEvent event) {
+		_workingPane.setVisible(true);
+		_mainPane.setVisible(false);
+		_showingPane = _workingPane;
+	}
+	
+	@FXML
+	void workingSeen(ActionEvent event) {
+		_workingPane.setVisible(false);
+		_mainPane.setVisible(true);
+		_showingPane = _mainPane;
+	}
 	
 	@FXML
 	/**
@@ -119,7 +145,7 @@ public class PlayView {
 		_maa.setVisible(false);
 		_ones.setVisible(false);
 		_answerWas.setVisible(false);
-
+		_working.setVisible(false);
 	}
 
 	@FXML
@@ -174,7 +200,7 @@ public class PlayView {
 		_correct.setVisible(false);
 		_kaPai.setVisible(false);
 		_next.setVisible(false);
-
+		_working.setVisible(false);
 		_sorry.setVisible(false);
 		_tryAgain.setVisible(false);
 		_retry.setVisible(false);
@@ -237,6 +263,7 @@ public class PlayView {
 		_model.setQuestion();
 		_progress.setProgress((double) 1 / _model.TOTAL_QUESTIONS);
 		_skip.setVisible(true);
+		_working.setVisible(false);
 	}
 
 
@@ -358,6 +385,7 @@ public class PlayView {
 		_correct.setVisible(true);
 		_kaPai.setVisible(true);
 		_next.setVisible(true);
+		
 	}
 
 
@@ -369,7 +397,11 @@ public class PlayView {
 		if (_model.retried()) {
 			_sorry.setVisible(true);
 			_next.setVisible(true);
+			if (_model.getDifficulty().equals(Difficulty.FIVE)) {
+				_working.setVisible(true);
+			}
 
+			
 			//Setting up the answer was part
 			if (_model.getCurrentNumber() <= 10) {
 				_ones.setText(SpeechRecognition.translation(_model.getCurrentNumber()));
@@ -393,14 +425,22 @@ public class PlayView {
 			_tryAgain.setVisible(true);
 		}
 
-
+		
 
 	}
 
 
 
 	public Pane getMainPane() {
-		return _mainPane;
+		return _showingPane;
 	}
 
+	
+	public void setWorkingImage(String url) {
+		_workingImage.setImage(new Image(url));
+	}
+	
+	public void initialize() {
+		_showingPane = _mainPane;
+	}
 }

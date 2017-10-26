@@ -224,6 +224,10 @@ public class PlayController implements Controller {
 	public Stage getMainStage() {
 		return _startC.getMainStage();
 	}
+	
+	public void setWorkingImage(String url) {
+		_view.setWorkingImage(url);
+	}
 
 	class Background extends Service<Void> {
 

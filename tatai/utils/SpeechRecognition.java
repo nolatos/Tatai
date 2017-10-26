@@ -42,7 +42,7 @@ public class SpeechRecognition {
 //			
 //		}
 //		return translation(i);
-
+//
 
 	}
 	

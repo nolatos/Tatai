@@ -154,4 +154,8 @@ public class AlgebraGenerator implements MathGenerator {
 			_answer = 99;
 		}
 	}
+	
+	public String getWorking() {
+		return null;
+	}
 }
